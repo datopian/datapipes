@@ -1,7 +1,10 @@
+var fs = require('fs');
+
 var express = require('express');
 var csv = require('csv');
 var Stream = require('stream');
 var request = require('request');
+var path = require('path');
 
 var app = express();
 
@@ -11,7 +14,7 @@ app.configure(function(){
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  // app.use(express.static(path.join(__dirname, 'public')));
+  app.use(express.static(path.join(__dirname, 'public')));
 });
 
 function convert(instream, outstream, mapfunc) {
@@ -24,15 +27,18 @@ function convert(instream, outstream, mapfunc) {
     ;
 }
 
+// var url = 'http://static.london.gov.uk/gla/expenditure/docs/2012-13-P12-250.csv';
+// var url = 'http://data.openspending.org/datasets/gb-local-gla/data/2013-jan.csv';
 app.get('/', function(req, res) {
   var url = req.query.url;
   if (!url) {
-    res.send('<p>Hey there, we were missing an essential piece of info</p>' +
-      '<p>Please provide a ?url= parameter</p>'
-      );
+    res.sendfile(__dirname + '/templates/index.html');
+  } else {
+    handleIt(url, res);
   }
-  // var url = 'http://static.london.gov.uk/gla/expenditure/docs/2012-13-P12-250.csv';
-  // var url = 'http://data.openspending.org/datasets/gb-local-gla/data/2013-jan.csv';
+});
+
+function handleIt(url, res) {
   var instream = request(url);
   var outstream = res;
   mapfunc = function(row, idx) {
@@ -44,7 +50,7 @@ app.get('/', function(req, res) {
     }
   }
   convert(instream, outstream, mapfunc);
-});
+}
 
 app.listen(app.get('port'), function() {
   console.log("Listening on " + app.get('port'));
