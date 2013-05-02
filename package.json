@@ -1,0 +1,13 @@
+{
+  "name": "datapipes"
+  , "version": "0.1.0"
+  , "dependencies": {
+      "express": "",
+      "request": "",
+      "csv": "" 
+  },
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x"
+  }
+}
