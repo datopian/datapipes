@@ -21,8 +21,8 @@ function convert(instream, outstream, mapfunc) {
   var outcsv = csv();
 
   outcsv
-    .from.stream(instream, {columns: true})
-    .to.stream(outstream, {header: true})
+    .from.stream(instream)
+    .to.stream(outstream)
     .transform(mapfunc)
     ;
 }
@@ -30,26 +30,47 @@ function convert(instream, outstream, mapfunc) {
 // var url = 'http://static.london.gov.uk/gla/expenditure/docs/2012-13-P12-250.csv';
 // var url = 'http://data.openspending.org/datasets/gb-local-gla/data/2013-jan.csv';
 app.get('/', function(req, res) {
-  var url = req.query.url;
-  if (!url) {
-    res.sendfile(__dirname + '/templates/index.html');
-  } else {
-    handleIt(url, res);
-  }
+  res.sendfile(__dirname + '/templates/index.html');
 });
 
-function handleIt(url, res) {
+app.get('/csv/:op', function(req, res) {
+  var url = req.query.url;
   var instream = request(url);
   var outstream = res;
-  mapfunc = function(row, idx) {
-    row['Vendor Name'] = row['Vendor Name'] + 'xxx';
-    if (idx < 6) {
-      return null;
-    } else {
+  mapfunc = makeMapFunc(req.params.op, req);
+  convert(instream, outstream, mapfunc);
+});
+
+function makeMapFunc(op, req) {
+  if (op == 'delete') {
+    var range = req.query.range;
+    var parts = range.split(',');
+    mapfunc = function(row, idx) {
+      var matches = false;
+      parts.forEach(function(part) {
+        if (part.indexOf(':') != -1) {
+          var _t = part.split(':');
+          if (idx >= _t[0] && idx < _t[1]) {
+            matches = true;
+            return;
+          }
+        } else {
+          part = parseInt(part);
+          if (idx == part) {
+            matches = true;
+            return;
+          }
+        }
+      });
+      if (matches) return null;
+      else return row;
+    }
+  } else {
+    mapfunc = function(row, idx) {
       return row;
     }
   }
-  convert(instream, outstream, mapfunc);
+  return mapfunc
 }
 
 app.listen(app.get('port'), function() {
