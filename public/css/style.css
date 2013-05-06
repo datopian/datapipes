@@ -12,8 +12,8 @@ This CSS licensed as far as necessary under GNU GPL2 and otherwise public domain
 ----------------------------------------------- */
 
 html {
-	background: #fff;
-	color: #000;
+  background: #fff;
+  color: #000;
 }
 body,
 div,
@@ -40,16 +40,16 @@ p,
 blockquote,
 th,
 td {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
 }
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 fieldset,
 img {
-	border: 0;
+  border: 0;
 }
 address,
 caption,
@@ -60,12 +60,12 @@ em,
 strong,
 th,
 var {
-	font-style: normal;
-	font-weight: normal;
+  font-style: normal;
+  font-weight: normal;
 }
 caption,
 th {
-	text-align: left;
+  text-align: left;
 }
 h1,
 h2,
@@ -73,41 +73,41 @@ h3,
 h4,
 h5,
 h6 {
-	font-size: 100%;
-	font-weight: normal;
+  font-size: 100%;
+  font-weight: normal;
 }
 blockquote,
 q {
-	quotes: none;
+  quotes: none;
 }
 blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-	content: '';
-	content: none;
+  content: '';
+  content: none;
 }
 abbr,
 acronym {
-	border: 0;
-	font-variant: normal;
+  border: 0;
+  font-variant: normal;
 }
 sup {
-	vertical-align: text-top;
+  vertical-align: text-top;
 }
 sub {
-	vertical-align: text-bottom;
+  vertical-align: text-bottom;
 }
 input,
 textarea,
 select {
-	font-family: inherit;
-	font-size: inherit;
-	font-weight: inherit;
-	outline: 0;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  outline: 0;
 }
 legend {
-	color: #000;
+  color: #000;
 }
 
 
@@ -115,14 +115,14 @@ legend {
 -------------------------------------------------------------- */
 
 body {
-	background-color: #e3e3e3;
-	background-attachment: fixed;
+  background-color: #e3e3e3;
+  background-attachment: fixed;
   background-image: url('../img/bg.jpg');
   background-repeat: repeat;
-	font-family: Cambria, Georgia, Times, serif;
-	font-size: 1em;
-	line-height: 1.5em;
-	text-align: center;
+  font-family: Cambria, Georgia, Times, serif;
+  font-size: 1em;
+  line-height: 1.5em;
+  text-align: center;
 }
 h1,
 h2,
@@ -130,132 +130,132 @@ h3,
 h4,
 h5,
 h6 {
-	clear: both;
-	color: #000;
-	font-family: Arvo, Cambria, Georgia, Times, serif;
-	font-weight: normal;
-	line-height: 1.3em;
-	text-shadow: 0 1px 0 #fff;
+  clear: both;
+  color: #000;
+  font-family: Arvo, Cambria, Georgia, Times, serif;
+  font-weight: normal;
+  line-height: 1.3em;
+  text-shadow: 0 1px 0 #fff;
 }
 hr {
-	background-color: #ccc;
-	border: 0;
-	height: 1px;
-	margin-bottom: 1.375em;
+  background-color: #ccc;
+  border: 0;
+  height: 1px;
+  margin-bottom: 1.375em;
 }
 p,
 dd,
 table {
-	margin-bottom: 1.375em;
+  margin-bottom: 1.375em;
 }
 ul,
 ol,
 pre,
 blockquote {
-	margin-bottom: 0.9375em;
+  margin-bottom: 0.9375em;
 }
 ul, ol {
-	margin: 0 0 1.375em 2em;
+  margin: 0 0 1.375em 2em;
 }
 ul {
-	list-style: square;
+  list-style: square;
 }
 ol {
-	list-style-type: decimal;
+  list-style-type: decimal;
 }
 ol ol {
-	list-style: upper-alpha;
+  list-style: upper-alpha;
 }
 ol ol ol {
-	list-style: lower-roman;
+  list-style: lower-roman;
 }
 ol ol ol ol {
-	list-style: lower-alpha;
+  list-style: lower-alpha;
 }
 ul ul,
 ol ol,
 ul ol,
 ol ul {
-	margin-bottom: 0;
+  margin-bottom: 0;
 }
 dt {
-	font-weight: bold;
+  font-weight: bold;
 }
 dd {
-	margin-bottom: 1.375em;
+  margin-bottom: 1.375em;
 }
 strong {
-	font-weight: bold;
+  font-weight: bold;
 }
 cite,
 em,
 i {
-	font-style: italic;
+  font-style: italic;
 }
 blockquote em,
 blockquote i,
 blockquote cite {
-	font-style: normal;
+  font-style: normal;
 }
 pre {
-	background: #ddd;
-	font: 1em monospace;
-	line-height: 1.5;
-	margin-bottom: 1.625em;
-	overflow: auto;
-	padding: 0.75em 1.625em;
+  background: #ddd;
+  font: 1em monospace;
+  line-height: 1.5;
+  margin-bottom: 1.625em;
+  overflow: auto;
+  padding: 0.75em 1.625em;
 }
 code,
 kbd {
-	font: 1em monospace;
+  font: 1em monospace;
 }
 abbr,
 acronym,
 dfn {
-	border-bottom: 1px dotted #a9a9a9;
-	cursor: help;
+  border-bottom: 1px dotted #a9a9a9;
+  cursor: help;
 }
 input,
 select,
 textarea,
 button {
-	font-family: Cambria, Georgia, Times, serif;
-	color: #000;
+  font-family: Cambria, Georgia, Times, serif;
+  color: #000;
 }
 button,
 label,
 a {
-	cursor: pointer;
+  cursor: pointer;
 }
 address {
-	font-style: normal;
-	display: block;
-	margin: 0 0 1.375em;
+  font-style: normal;
+  display: block;
+  margin: 0 0 1.375em;
 }
 ins {
-	background: #fff9c0;
-	text-decoration: none;
+  background: #fff9c0;
+  text-decoration: none;
 }
 sup,
 sub {
-	font-size: 10px;
-	height: 0;
-	line-height: 1;
-	position: relative;
-	vertical-align: baseline;
+  font-size: 10px;
+  height: 0;
+  line-height: 1;
+  position: relative;
+  vertical-align: baseline;
 }
 sup {
-	bottom: 1ex;
+  bottom: 1ex;
 }
 sub {
-	top: .5ex;
+  top: .5ex;
 }
 /* Links */
 a {
-	color: #eb374b;
+  color: #eb374b;
 }
 a:hover {
-	color: #05b2c2;
+  color: #05b2c2;
 }
 h1 a,
 h2 a,
@@ -263,39 +263,39 @@ h3 a,
 h4 a,
 h5 a,
 h6 a {
-	text-decoration: none;
+  text-decoration: none;
 }
 /* Clear setting */
 .clear {
-	clear: both;
-	display: block;
+  clear: both;
+  display: block;
 }
 .clearfix:after {
-	clear: both;
-	content: ".";
-	display: block;
-	height: 0;
-	visibility: hidden;
+  clear: both;
+  content: ".";
+  display: block;
+  height: 0;
+  visibility: hidden;
 }
 div:after,
 form li:after,
 ul:after {
-	clear: both;
+  clear: both;
 }
 /* Alignment */
 .alignleft {
-	display: inline;
-	float: left;
+  display: inline;
+  float: left;
 }
 .alignright {
-	display: inline;
-	float: right;
+  display: inline;
+  float: right;
 }
 .aligncenter {
-	clear: both;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
+  clear: both;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* =Structure
@@ -308,57 +308,57 @@ ul:after {
   text-align: left;
 }
 .header {
-	margin: 0px auto 15px;
-	padding: 25px 0 35px;
-	position: relative;
-	text-align: center;
-	width: 690px;
+  margin: 0px auto 15px;
+  padding: 25px 0 35px;
+  position: relative;
+  text-align: center;
+  width: 690px;
 }
 
 /* =Header
 -------------------------------------------------------------- */
 
 .header h1 {
-	font-size: 2.45em;
-	line-height: 1.1em;
+  font-size: 2.45em;
+  line-height: 1.1em;
 }
 .header h1 a {
-	color: #000;
+  color: #000;
 }
 .header h1 a:hover {
-	color: #05b2c2;
+  color: #05b2c2;
 }
 .description {
-	margin: 4px 0 0 0;
+  margin: 4px 0 0 0;
 }
 .description p {
-	color: #817f7f;
-	font-size: 1.125em;
-	font-style: italic;
-	margin: 0 auto;
-	max-width: 100%;
-	text-shadow: 0 1px 0 #fff;
-	width: 690px;
+  color: #817f7f;
+  font-size: 1.125em;
+  font-style: italic;
+  margin: 0 auto;
+  max-width: 100%;
+  text-shadow: 0 1px 0 #fff;
+  width: 690px;
 }
 .header-image {
-	height: 230px;
-	margin: -40px auto 60px;
-	width: 690px;
+  height: 230px;
+  margin: -40px auto 60px;
+  width: 690px;
 }
 .searchfield {
-	background: url(images/sprite.png) 0 -600px no-repeat;
-	float: right;
-	height: 1.375em;
-	padding-left: 0.9375em;
-	padding-top: 1px;
-	width: 11.4375em;
+  background: url(images/sprite.png) 0 -600px no-repeat;
+  float: right;
+  height: 1.375em;
+  padding-left: 0.9375em;
+  padding-top: 1px;
+  width: 11.4375em;
 }
 .searchfield input {
-	background: transparent;
-	border: none;
-	color: #a5a5a5;
-	font-size: 1em;
-	width: 9.75em;
+  background: transparent;
+  border: none;
+  color: #a5a5a5;
+  font-size: 1em;
+  width: 9.75em;
 }
 
 
@@ -366,88 +366,87 @@ ul:after {
 -------------------------------------------------------------- */
 
 .content {
-	-moz-box-shadow: 0 4px 0 rgba(94, 94, 94, 0.1);
-	-webkit-box-shadow: 0 4px 0 rgba(94, 94, 94, 0.1);
-	box-shadow: 0 4px 0 rgba(94, 94, 94, 0.1);
-	background: #f2f2f2;
-	margin-bottom: 90px;
-	padding: 25px 90px 22px;
+  -moz-box-shadow: 0 4px 0 rgba(94, 94, 94, 0.1);
+  -webkit-box-shadow: 0 4px 0 rgba(94, 94, 94, 0.1);
+  box-shadow: 0 4px 0 rgba(94, 94, 94, 0.1);
+  background: #f2f2f2;
+  margin-bottom: 90px;
+  padding: 25px 90px 22px;
 }
 /* content */
 .content h1 {
-	font-size: 2.5em;
-	margin-bottom: 12px;
+  font-size: 2.5em;
+  margin-bottom: 12px;
 }
 .content > h1 {
-	font-size: 1.6em;
-	line-height:1.2em;
-	margin: 0 0 1.1em;
+  font-size: 1.6em;
+  line-height:1.2em;
+  margin: 0 0 1.1em;
 }
 .content h2 {
-	font-size: 1.6875em;
-	margin-bottom: 12px;
+  font-size: 1.6875em;
+  margin-bottom: 12px;
 }
 .content h3 {
-	font-size: 1.125em;
-	margin-bottom: 12px;
+  font-size: 1.125em;
+  margin-bottom: 12px;
 }
 .content h4 {
- 	font-size: 0.8125em;
- 	margin-bottom: 12px;
+   font-size: 0.8125em;
+   margin-bottom: 12px;
 }
 .content h5 {
-	font-size: 0.6875em;
-	margin-bottom: 12px;
+  font-size: 0.6875em;
+  margin-bottom: 12px;
 }
 .content h6 {
-	font-size: 0.5em;
-	margin-bottom: 12px;
+  font-size: 0.5em;
+  margin-bottom: 12px;
 }
 .content table {
-	border-bottom: 1px solid #ddd;
-	margin: 0 0 1.625em;
-	width: 100%;
+  border-bottom: 1px solid #ddd;
+  margin: 0 0 1.625em;
+  width: 100%;
 }
 .content th {
-	color: #666;
-	font-size: 10px;
-	font-weight: 500;
-	letter-spacing: 0.1em;
-	line-height: 2.6em;
-	text-transform: uppercase;
+  color: #666;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  line-height: 2.6em;
+  text-transform: uppercase;
 }
 .content td {
-	border-top: 1px solid #ddd;
-	padding: 6px 10px 6px 0;
+  border-top: 1px solid #ddd;
+  padding: 6px 10px 6px 0;
 }
 .content blockquote,
 .content blockquote[class*="align"] {
-	font-size: 1.5em;
-	line-height: 1.166666em;
-	margin: 0;
-	padding: 0 0 0 20px;
+  font-size: 1.5em;
+  line-height: 1.166666em;
+  margin: 0;
+  padding: 0 0 0 20px;
 }
 .content blockquote * {
-	font-size: 1em;
-	margin-bottom: 0.9166666666666666em;
+  font-size: 1em;
+  margin-bottom: 0.9166666666666666em;
 }
 
 /* =Images
 -------------------------------------------------------------- */
 
 a img {
-	border: none;
+  border: none;
 }
 
 /* =Footer
 -------------------------------------------------------------- */
 
 .footer {
-	background-color: #f2f2f2;
-	margin-top: -5px;
-	padding: 25px 0;
-	position: relative;
+  background-color: #f2f2f2;
+  margin-top: -5px;
+  padding: 25px 0;
+  position: relative;
   border-top: 2px solid #ccc;
   text-align: center;
 }
-
