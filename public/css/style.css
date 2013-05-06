@@ -123,7 +123,6 @@ body {
 	font-size: 1em;
 	line-height: 1.5em;
 	text-align: center;
-  margin-top: -10px;
 }
 h1,
 h2,
@@ -309,7 +308,7 @@ ul:after {
   text-align: left;
 }
 .header {
-	margin: 10px auto 15px;
+	margin: 0px auto 15px;
 	padding: 25px 0 35px;
 	position: relative;
 	text-align: center;
