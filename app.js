@@ -74,6 +74,20 @@ function makeMapFunc(op, req) {
       if (matches) return null;
       else return row;
     }
+  } else if(op == 'head'){
+      var lines = 0;
+      var k = parseInt(req.query.n) || 10 // See man head for variable name
+
+      // *nix head
+      mapfunc = function(row, idx){
+          if(lines < k){
+              lines += 1;
+              return row
+          }else{
+              return null;
+          }
+      }
+
   } else {
     mapfunc = function(row, idx) {
       return row;
@@ -85,4 +99,3 @@ function makeMapFunc(op, req) {
 app.listen(app.get('port'), function() {
   console.log("Listening on " + app.get('port'));
 });
-
