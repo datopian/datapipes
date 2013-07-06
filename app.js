@@ -51,7 +51,13 @@ app.get('/csv/:op', function(req, res) {
   var instream = request(url);
   var outstream = res;
   mapfunc = makeMapFunc(req.params.op, req);
-  convert(instream, outstream, mapfunc);
+  instream.on('response', function (resp) {
+    if(resp.statusCode != 200) {
+      res.send(resp.statusCode, 'Error code ' + resp.statusCode + ' with upstream URL: ' + url);
+    } else {
+      convert(instream, outstream, mapfunc);
+    }
+  });
 });
 
 function makeMapFunc(op, req) {
