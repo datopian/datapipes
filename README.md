@@ -21,6 +21,14 @@ Some examples:
 
       /csv/delete/?range=0-3&url=abc
 
+* Convert CSV to HTML table:
+
+      /csv/html/?url=...
+
+  You can add line numbers:
+
+      /csv/html/?url=...#L10
+
 Probable operations - see [this issue](https://github.com/okfn/datapipes/issues/9) but as examples:
 
 * delete = delete rows

@@ -7,6 +7,7 @@ This CSS licensed as far as necessary under GNU GPL2 and otherwise public domain
 */
 
 @import url(http://fonts.googleapis.com/css?family=Arvo:400,700);
+@import url(http://fonts.googleapis.com/css?family=Inconsolata);
 
 /* =Reset
 ----------------------------------------------- */
@@ -450,3 +451,69 @@ a img {
   border-top: 2px solid #ccc;
   text-align: center;
 }
+
+/* =Tables
+ *
+ * Courtesy of http://johnsardine.com/example/simple-little-table/
+-------------------------------------------------------------- */
+
+
+table { 
+  width: 100%; 
+  border-collapse: collapse; 
+  font-family:Arial, Helvetica, sans-serif;
+  font-size: 12px;
+}
+/* Zebra striping */
+tr:nth-of-type(odd) { 
+  background: #eee; 
+}
+tr:nth-of-type(even) { 
+  background: #fff; 
+}
+th { 
+  color: #333; 
+  font-weight: bold; 
+
+  background-color: #e6e6e6;
+  background-repeat: no-repeat;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), color-stop(25%, #ffffff), to(#e6e6e6));
+  background-image: -webkit-linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+  background-image: -moz-linear-gradient(top, #ffffff, #ffffff 25%, #e6e6e6);
+  background-image: -ms-linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+  background-image: -o-linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+  background-image: linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+}
+td, th { 
+  padding: 6px; 
+  border: 1px solid #ccc; 
+  text-align: left; 
+}
+table tr:hover td {
+}
+
+table td > div {
+  overflow: hidden;
+  height: 15px;
+}
+
+table tr:target td {
+  background-color: rgb(255, 255, 204);
+}
+
+table .counter, table tr:target .counter {
+  font-family: Inconsolata, Courier, monospace;
+  font-size: 13px;
+  color: #aaa;
+  color: rgba(0,0,0,0.5);
+  background-color: #fff;
+  border: none;
+  text-align: right;
+}
+
+table .counter a {
+  text-decoration: none;
+}
+

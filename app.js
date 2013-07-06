@@ -87,13 +87,41 @@ function makeMapFunc(op, req) {
               return null;
           }
       }
-
+  } else if(op == 'html') {
+    mapfunc = htmlMapFunc
   } else {
     mapfunc = function(row, idx) {
       return row;
     }
   }
   return mapfunc
+}
+
+htmlMapFunc = function(row, idx) {
+  if (idx == 0) {
+    var out = '<html> \
+      <head> \
+        <link rel="stylesheet" href="/css/style.css" /> \
+      </head> \
+      <body class="view-html"> \
+      <table> \
+        <thead> \
+          <tr><th id="L0" rel="#L0" class="counter"></th> \
+    ';
+    row.forEach(function(item) {
+      out += '<th title="%s">%s</th>'.replace(/%s/g, item);
+    });
+    out += '</tr></thead><tbody>';
+    return out;
+  } else {
+    var out = '<tr id="L%s"><td class="counter"><a href="#L%s">%s</a></td>'.replace(/%s/g, idx);
+    row.forEach(function(item) {
+      out += '<td><div>' + item + '</div></td>';
+    });
+    out += '</tr>';
+    return out;
+  }
+  // how do we put </table> at the end
 }
 
 app.listen(app.get('port'), function() {
