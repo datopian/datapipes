@@ -31,8 +31,12 @@ function convert(instream, outstream, mapfunc) {
 
   outcsv
     .from.stream(instream)
-    .to.stream(outstream)
+    .to.stream(outstream, {end: false})
     .transform(mapfunc)
+    .on('end', function(count) {
+      outstream.write(mapfunc([], 'end'));
+      outstream.end();
+    })
     ;
 }
 
@@ -112,6 +116,14 @@ htmlMapFunc = function(row, idx) {
       out += '<th title="%s">%s</th>'.replace(/%s/g, item);
     });
     out += '</tr></thead><tbody>';
+    return out;
+  } else if (idx == 'end') {
+    var out = '</tbody> \
+      </table> \
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script> \
+      <script src="/js/table.js"></script> \
+      </body></html> \
+    ';
     return out;
   } else {
     var out = '<tr id="L%s"><td class="counter"><a href="#L%s">%s</a></td>'.replace(/%s/g, idx);
