@@ -5,6 +5,8 @@ var csv = require('csv');
 var Stream = require('stream');
 var request = require('request');
 var path = require('path');
+var nunjucks = require('nunjucks')
+var marked = require('marked');
 
 var app = express();
 
@@ -32,6 +34,10 @@ app.configure(function(){
   app.use(express.static(path.join(__dirname, 'public')));
 });
 
+var env = new nunjucks.Environment(new nunjucks.FileSystemLoader('templates'));
+env.express(app);
+
+
 function convert(instream, outstream, mapfunc) {
   var outcsv = csv();
 
@@ -52,11 +58,42 @@ function convert(instream, outstream, mapfunc) {
 // var url = 'http://static.london.gov.uk/gla/expenditure/docs/2012-13-P12-250.csv';
 // var url = 'http://data.openspending.org/datasets/gb-local-gla/data/2013-jan.csv';
 app.get('/', function(req, res) {
-  res.sendfile(__dirname + '/templates/index.html');
+  fs.readFile('docs/index.md', 'utf8', function(err, text) {
+    var content = marked(text);
+    res.render('index.html', {
+      content: content
+    });
+  });
 });
+
+function getMarkdownContent(filepath, cb) {
+  fs.readFile(filepath, 'utf8', function(err, text) {
+    if (err) {
+      cb(err, null);
+    } else {
+      cb(null, marked(text));
+    }
+  });
+}
 
 app.get('/csv/:op', function(req, res) {
   var url = req.query.url;
+  if (!url) {
+    getMarkdownContent('docs/op-' + req.params.op + '.md', function(err, content) {
+      if (err) {
+        res.send('No info on this operation yet');
+      } else {
+        res.render('index.html', {
+          content: content
+        });
+      }
+    });
+  } else {
+    doTransform(req, res, url)
+  }
+});
+
+function doTransform(req, res, url) {
   var instream = request(url);
   var outstream = res;
   mapfunc = makeMapFunc(req.params.op, req);
@@ -67,7 +104,7 @@ app.get('/csv/:op', function(req, res) {
       convert(instream, outstream, mapfunc);
     }
   });
-});
+}
 
 function makeMapFunc(op, req) {
   if (op == 'delete') {

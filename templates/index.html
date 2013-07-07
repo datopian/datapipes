@@ -14,26 +14,16 @@
 <div class="container">
   <div class="header">
     <h1>
-      Data Pipes
+      <a href="/">Data Pipes</a>
     </h1>
     <div class="description">
-  This is a pre-alpha demonstrator &ndash; check out the <a href="https://github.com/okfn/datapipes">code and issues on github</a> &hellip;
+  This is an alpha service &ndash; check out the <a href="https://github.com/okfn/datapipes">code and issues on github</a> &hellip;
     </div>
     <a href="http://okfnlabs.org/"><img src="http://assets.okfn.org/p/labs/img/logo-flask.png" style="height: 50px; margin-top: 10px;" /></a>
   </div>
 
   <div class="content">
-    <h1>Streaming Online Data Transformation!</h1>
-    <p>Data Pipes is an online service to provide unix-style cut, grep, sed in a streaming, "pipe-like" manner on the web (you can also run it locally!).</p>
-    <p>We need data that streams so, at the moment, we only operate on CSV files.</p>
-    <h2>Examples</h2>
-    <p>Delete the rows 1-3 of a CSV file:<br />
-    <a href="/csv/delete?range=1:4&url=http://static.london.gov.uk/gla/expenditure/docs/2012-13-P12-250.csv&">/csv/delete?range=1:4&url=http://static.london.gov.uk/gla/expenditure/docs/2012-13-P12-250.csv
-    </a>
-    </p>
-
-    <h2>Documentation</h2>
-    <a href="https://github.com/okfn/datapipes">Read it here on github</a>
+    {{content}}
   </div>
 
   <div class="footer">
