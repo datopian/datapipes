@@ -30,3 +30,12 @@ The basic operations are inspired by unix-style commands such `head`, `cut`, `gr
 * grep = filter (not yet implemented)
 * sed = find and replace (not yet implemented)
 
+<h2 id="contributing">Contributing</h2>
+
+Under the hood Data Pipes is a simple open-source node.js webapp living [here on github][source].
+
+It's super easy to contribute and here are some of the[ current issues][issues].
+
+[source]: https://github.com/okfn/datapipes
+[issues]: https://github.com/okfn/datapipes/issues
+
