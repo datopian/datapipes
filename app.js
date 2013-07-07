@@ -34,7 +34,10 @@ function convert(instream, outstream, mapfunc) {
     .to.stream(outstream, {end: false})
     .transform(mapfunc)
     .on('end', function(count) {
-      outstream.write(mapfunc([], 'end'));
+      var out = mapfunc(null, 'end');
+      if (out) { 
+        outstream.write(out);
+      }
       outstream.end();
     })
     ;
@@ -63,6 +66,9 @@ app.get('/csv/:op', function(req, res) {
 function makeMapFunc(op, req) {
   if (op == 'delete') {
     var range = req.query.range;
+    if (!range) {
+      range = '1'
+    }
     var parts = range.split(',');
     mapfunc = function(row, idx) {
       var matches = false;
