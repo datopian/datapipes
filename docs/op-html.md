@@ -16,5 +16,5 @@ S&P 500 companies:
 
 Hightlight a line:
 
-</csv/html/?https://raw.github.com/datasets/s-and-p-500-companies/master/data/constituents-financials.csv#L110>
+</csv/html/?url=https://raw.github.com/datasets/s-and-p-500-companies/master/data/constituents-financials.csv#L110>
 
