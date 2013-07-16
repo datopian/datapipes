@@ -1,6 +1,14 @@
-## html
+# html
 
 Convert the data to an elegant HTML table (with line numbers!).
+
+<form action="" method="GET" class="form">
+  <input type="text" name="url" value="" placeholder="Post your URL here" style="width: 100%" />
+  <button type="submit">Go &raquo;</button>
+</form>
+<br />
+
+### API
 
     html/?url=...
 
