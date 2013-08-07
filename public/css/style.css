@@ -458,22 +458,22 @@ a img {
 -------------------------------------------------------------- */
 
 
-table { 
-  width: 100%; 
-  border-collapse: collapse; 
+table {
+  width: 100%;
+  border-collapse: collapse;
   font-family:Arial, Helvetica, sans-serif;
   font-size: 12px;
 }
 /* Zebra striping */
-tr:nth-of-type(odd) { 
-  background: #eee; 
+tr:nth-of-type(odd) {
+  background: #eee;
 }
-tr:nth-of-type(even) { 
-  background: #fff; 
+tr:nth-of-type(even) {
+  background: #fff;
 }
-th { 
-  color: #333; 
-  font-weight: bold; 
+th {
+  color: #333;
+  font-weight: bold;
 
   background-color: #e6e6e6;
   background-repeat: no-repeat;
@@ -486,10 +486,10 @@ th {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
 }
-td, th { 
-  padding: 6px; 
-  border: 1px solid #ccc; 
-  text-align: left; 
+td, th {
+  padding: 6px;
+  border: 1px solid #ccc;
+  text-align: left;
 }
 table tr:hover td {
 }
@@ -518,3 +518,22 @@ table .counter a {
   text-decoration: none;
 }
 
+
+/* Sorting styles */
+th:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.headerSortDown, .headerSortUp {
+
+  background-color: #E9EA9F;
+  background-repeat: no-repeat;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), color-stop(25%, #ffffff), to(#E9EA9F));
+  background-image: -webkit-linear-gradient(#ffffff, #ffffff 25%, #E9EA9F);
+  background-image: -moz-linear-gradient(top, #ffffff, #ffffff 25%, #E9EA9F);
+  background-image: -ms-linear-gradient(#ffffff, #ffffff 25%, #E9EA9F);
+  background-image: -o-linear-gradient(#ffffff, #ffffff 25%, #E9EA9F);
+  background-image: linear-gradient(#ffffff, #ffffff 25%, #E9EA9F);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#E9EA9F', GradientType=0);
+}
