@@ -11,4 +11,6 @@ jQuery(document).ready(function($) {
   });
 
   maybeScrollToHash();
+
+  $('table').tablesorter()
 });
