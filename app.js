@@ -47,7 +47,7 @@ function convert(instream, outstream, mapfunc) {
     .transform(mapfunc)
     .on('end', function(count) {
       var out = mapfunc(null, 'end');
-      if (out) { 
+      if (out) {
         outstream.write(out);
       }
       outstream.end();
@@ -176,6 +176,7 @@ htmlMapFunc = function(row, idx) {
     var out = '</tbody> \
       </table> \
       <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script> \
+      <script src="/js/jquery.tablesorter.js"></script> \
       <script src="/js/table.js"></script> \
       </body></html> \
     ';
