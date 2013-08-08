@@ -308,7 +308,7 @@ ul:after {
   width: 690px;
   text-align: left;
 }
-.header {
+div.header {
   margin: 0px auto 15px;
   padding: 25px 0 35px;
   position: relative;
