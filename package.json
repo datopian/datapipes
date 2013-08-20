@@ -6,7 +6,8 @@
       "request": "",
       "csv": "",
       "marked": "",
-      "nunjucks": ""
+      "nunjucks": "",
+      "underscore": "",
   },
   "engines": {
     "node": "0.8.x",
