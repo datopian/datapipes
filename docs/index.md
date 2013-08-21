@@ -10,9 +10,33 @@ At present we **only handle CSV files** &ndash; they stream very naturally!
 
 ## API
 
-The API is of the form:
+The basic API is of the form:
 
-    /csv/{operation}/?url={source-url}&other-options ...
+    /csv/{transform} {args}/?url={source-url}&other-options...
+
+For example, here is a head operation which shows first n rows or a file (default case with no arguments will show first 10 lines):
+
+    /csv/head/?url={source-url}
+
+With arguments (showing first 20 rows):
+
+    /csv/head -n 20/?url={source-url}
+
+### Piping
+
+You can also do **piping**, that is pass output of one transformation as input to another:
+
+    /csv/{trans1} {args}/{trans2} {args}/.../?url={source-url}
+
+Here, the result of each transform is piped to the next one. Here's an
+example:
+
+    /csv/head -n 35/delete 1-5/grep LONDON/html?url=...
+
+Crudely this says: slice out the first 35 rows, then delete rows 1-5, then
+filter for all rows with LONDON in them, and finally transform to HTML output.
+
+### CORS and JS web apps
 
 CORS is supported so you can use this from pure JS web apps.
 
@@ -22,12 +46,12 @@ The basic operations are inspired by unix-style commands such `head`, `cut`, `gr
 
 [suggest]: https://github.com/okfn/datapipes/issues
 
-* [none](/csv/none/) (aka raw) = no transform (though file parsed)
+* [none](/csv/none/) (aka raw) = no transform (file parsed) - still useful (see docs)
 * [html](/csv/html/) = render as viewable HTML table
 * [delete](/csv/delete/) = delete rows
 * [head](/csv/head/) = take only first X rows
 * cut = select columns (not yet implemented)
-* grep = filter (not yet implemented)
+* [grep](/csv/grep/) = filter rows based on pattern matching
 * sed = find and replace (not yet implemented)
 
 <h2 id="contributing">Contributing</h2>

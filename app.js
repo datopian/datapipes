@@ -227,7 +227,7 @@ function getMarkdownContent(filepath, cb) {
         if (err) {
             cb(err, null);
         } else {
-            cb(null, marked(text));
+            cb(null, marked(text, {gfm: false}));
         }
     });
 }
@@ -235,8 +235,10 @@ function getMarkdownContent(filepath, cb) {
 app.get('/csv/*', function(req, res) {
     var url = req.query.url;
     if (!url) {
-        getMarkdownContent('docs/op-' + req.params.op + '.md', function(err, content) {
+        var transform = req.params[0].split('/')[0];
+        getMarkdownContent('docs/op-' + transform + '.md', function(err, content) {
             if (err) {
+            console.log(err);
                 res.send('No info on this operation yet');
             } else {
                 res.render('index.html', {
