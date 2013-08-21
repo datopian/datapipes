@@ -7,7 +7,7 @@
       "csv": "",
       "marked": "",
       "nunjucks": "",
-      "underscore": "",
+      "underscore": ""
   },
   "engines": {
     "node": "0.8.x",
