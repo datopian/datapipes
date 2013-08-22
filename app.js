@@ -189,7 +189,9 @@ var TransformOMatic = {
             var result = row;
             _.each(transformations, function(callable){
                 if(_.isNull(result)){
-                    return;
+                    if(index !== 'end'){
+                        return;
+                    }
                 }
                 result = callable(result, index);
             });
