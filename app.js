@@ -71,6 +71,9 @@ var Transformations = {
     head: function(call){
         var lines = 0;
         var number = call[2];
+        if(!number){
+          var number = 40;
+        }
         return function(row, idx){
             if(lines < number){
                 lines += 1;
