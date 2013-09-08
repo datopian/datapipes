@@ -44,6 +44,11 @@ function noop(arg){return arg}
 function convert(instream, outstream, mapfunc) {
     var outcsv = csv();
 
+    var initial = mapfunc(null, 'pre');
+    if (initial){
+      outstream.write(initial);
+    }
+
     outcsv
         .from.stream(instream)
         .to.stream(outstream, {end: false})
@@ -66,6 +71,9 @@ var Transformations = {
     head: function(call){
         var lines = 0;
         var number = call[2];
+        if(!number){
+          var number = 40;
+        }
         return function(row, idx){
             if(lines < number){
                 lines += 1;
@@ -130,7 +138,7 @@ var Transformations = {
     html: function(call){
         // Simple arity for now, just return
         return function(row, idx) {
-            if (idx == 0) {
+            if (idx ==  'pre'){
                 var out = '<html> \
 <head> \
 <link rel="stylesheet" href="/css/style.css" /> \
@@ -140,6 +148,10 @@ var Transformations = {
 <thead> \
 <tr><th id="L0" rel="#L0" class="counter"></th> \
 ';
+                return out;
+            }
+            else if (idx == 0) {
+                var out =  '';
                 row.forEach(function(item) {
                     out += '<th title="%s">%s</th>'.replace(/%s/g, item);
                 });
@@ -189,7 +201,7 @@ var TransformOMatic = {
             var result = row;
             _.each(transformations, function(callable){
                 if(_.isNull(result)){
-                    if(index !== 'end'){
+                    if(index !== 'pre' && index !== 'end'){
                         return;
                     }
                 }
