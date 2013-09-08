@@ -28,13 +28,15 @@ You can also do **piping**, that is pass output of one transformation as input t
 
     /csv/{trans1} {args}/{trans2} {args}/.../?url={source-url}
 
-Here, the result of each transform is piped to the next one. Here's an
-example:
+Here's an example:
 
-    /csv/head -n 35/delete 1-5/grep LONDON/html?url=...
+<a href="/csv/head%20-n%2050/delete%201:7/grep%20LONDON/html?url=https://raw.github.com/okfn/datapipes/master/test/data/gla.csv">
+/csv/head -n 50/delete 1:7/grep LONDON/html?url=https://raw.github.com/okfn/datapipes/master/test/data/gla.csv
+</a>
 
-Crudely this says: slice out the first 35 rows, then delete rows 1-5, then
-filter for all rows with LONDON in them, and finally transform to HTML output.
+Crudely this says: slice out the first 50 rows ([head][]), then delete rows 1-5
+([delete][]), then filter for all rows with LONDON in them ([grep][]), and
+finally transform to HTML output ([html][]).
 
 ### CORS and JS web apps
 
@@ -46,13 +48,18 @@ The basic operations are inspired by unix-style commands such `head`, `cut`, `gr
 
 [suggest]: https://github.com/okfn/datapipes/issues
 
-* [none](/csv/none/) (aka raw) = no transform (file parsed) - still useful (see docs)
-* [html](/csv/html/) = render as viewable HTML table
-* [delete](/csv/delete/) = delete rows
-* [head](/csv/head/) = take only first X rows
-* cut = select columns (not yet implemented)
-* [grep](/csv/grep/) = filter rows based on pattern matching
+* [none](/csv/none/) (aka raw) = no transform but file parsed (useful with CORS)
+* [html][] = render as viewable HTML table
+* [delete][] = delete rows
+* [head][] = take only first X rows
+* cut = select / delete columns (not yet implemented)
+* [grep][] = filter rows based on pattern matching
 * sed = find and replace (not yet implemented)
+
+[delete]: /csv/delete/
+[grep]: /csv/grep/
+[head]: /csv/head/
+[html]: /csv/html/
 
 <h2 id="contributing">Contributing</h2>
 
