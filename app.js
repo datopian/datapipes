@@ -84,6 +84,30 @@ var Transformations = {
     }
   },
 
+  // HOF to return a transformation that will cut columns
+  // Accepts a comma separated list of column positions to remove
+  // This is 0-indexed.
+  cut: function(call){
+    var columns = call[1] || "";
+    var parts = columns.split(',');
+
+    // Convert the indices to ints and sort then reverse them
+    var idxes = _.map(parts, function(num){ return parseInt(num)})
+    idxes.sort().reverse()
+
+    return function(row, index){
+      // for each row
+      _.each(row, function(value){
+        // delete the values at the specific position
+        _.each(idxes, function(position) {
+          delete row[position]
+        })
+      });
+
+      return _.without(row, undefined)
+    }
+  },
+
   // HOF to return a transformation that will grep for a pattern
   grep: function(call){
     var pattern = call[1];
