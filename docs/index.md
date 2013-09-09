@@ -30,13 +30,13 @@ You can also do **piping**, that is pass output of one transformation as input t
 
 Here's an example:
 
-<a href="/csv/head%20-n%2050/delete%201:7/grep%20LONDON/html?url=https://raw.github.com/okfn/datapipes/master/test/data/gla.csv">
-/csv/head -n 50/delete 1:7/grep LONDON/html?url=https://raw.github.com/okfn/datapipes/master/test/data/gla.csv
+<a href="/csv/head%20-n%2050/cut 0/delete%201:7/grep%20LONDON/html?url=https://raw.github.com/okfn/datapipes/master/test/data/gla.csv">
+/csv/head -n 50/cut 0/delete 1:7/grep LONDON/html?url=https://raw.github.com/okfn/datapipes/master/test/data/gla.csv
 </a>
 
-Crudely this says: slice out the first 50 rows ([head][]), then delete rows 1-5
-([delete][]), then filter for all rows with LONDON in them ([grep][]), and
-finally transform to HTML output ([html][]).
+Crudely this says: slice out the first 50 rows ([head][]), then cut column 0 ([cut][]),
+then delete rows 1-5 ([delete][]), then filter for all rows with LONDON in them
+([grep][]), and finally transform to HTML output ([html][]).
 
 ### CORS and JS web apps
 
@@ -52,7 +52,7 @@ The basic operations are inspired by unix-style commands such `head`, `cut`, `gr
 * [html][] = render as viewable HTML table
 * [delete][] = delete rows
 * [head][] = take only first X rows
-* cut = select / delete columns (not yet implemented)
+* [cut][] = select / delete columns (not yet implemented)
 * [grep][] = filter rows based on pattern matching
 * sed = find and replace (not yet implemented)
 
@@ -60,6 +60,7 @@ The basic operations are inspired by unix-style commands such `head`, `cut`, `gr
 [grep]: /csv/grep/
 [head]: /csv/head/
 [html]: /csv/html/
+[cut]: /csv/cut/
 
 <h2 id="contributing">Contributing</h2>
 
