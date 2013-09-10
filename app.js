@@ -101,6 +101,9 @@ var Transformations = {
       }else if(index == 'post'){
         return null;
       }
+      if (row === null) {
+        return null;
+      }
 
       // delete the values at the specific position
       _.each(idxes, function(position) {
@@ -296,7 +299,6 @@ app.get('/csv/*', function(req, res) {
     }
 
     TransformOMatic.transform(res, pipeline, url, failure);
-
   }
 });
 
