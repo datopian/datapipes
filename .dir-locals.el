@@ -1,3 +1,3 @@
 ;;; Set project level defaults for coding standards - Emacs Edition.
-((nil . ((tab-width . 8)
-         (js-indent-level . 8))))
+((nil . ((tab-width . 2)
+         (js-indent-level . 2))))

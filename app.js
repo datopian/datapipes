@@ -96,13 +96,16 @@ var Transformations = {
     idxes.sort().reverse()
 
     return function(row, index){
-      // for each row
-      _.each(row, function(value){
-        // delete the values at the specific position
-        _.each(idxes, function(position) {
-          delete row[position]
-        })
-      });
+      if(index ==  'pre'){
+        return null;
+      }else if(index == 'post'){
+        return null;
+      }
+
+      // delete the values at the specific position
+      _.each(idxes, function(position) {
+        delete row[position]
+      })
 
       return _.without(row, undefined)
     }
