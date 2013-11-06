@@ -57,12 +57,19 @@ function toIntArr(str){
           .value();
 }
 
-function convert(instream, outstream, mapfunc) {
+function convert(instream, outstream, mapfunc, outputFormat) {
   var outcsv = csv();
 
-  var initial = mapfunc(null, 'pre');
-  if (initial){
-    outstream.write(initial);
+  if (outputFormat == 'html') {
+    outstream.write('<html> \
+<head> \
+<link rel="stylesheet" href="/css/style.css" /> \
+</head> \
+<body class="view-html"> \
+<table> \
+<thead> \
+<tr><th id="L0" rel="#L0" class="counter"></th> \
+');
   }
 
   outcsv
@@ -70,9 +77,14 @@ function convert(instream, outstream, mapfunc) {
     .to.stream(outstream, {end: false})
     .transform(mapfunc)
     .on('end', function(count) {
-      var out = mapfunc(null, 'end');
-      if (out) {
-        outstream.write(out);
+      if (outputFormat == 'html') {
+        outstream.write('</tbody> \
+</table> \
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script> \
+<script src="/js/jquery.tablesorter.js"></script> \
+<script src="/js/table.js"></script> \
+</body></html> \
+');
       }
       outstream.end();
     })
@@ -91,9 +103,7 @@ var Transformations = {
       var number = 10;
     }
     return function(row, idx){
-      if(idx == 'pre'){
-        return null;
-      }else if(lines < number){
+      if(lines < number){
         lines += 1;
         return row
       }else{
@@ -112,15 +122,6 @@ var Transformations = {
     var idxes = toIntArr(columns);
 
     return function(row, index){
-      if(index ==  'pre'){
-        return null;
-      }else if(index == 'post'){
-        return null;
-      }
-      if (row === null) {
-        return null;
-      }
-
       // delete the values at the specific position
       _.each(idxes, function(position) {
         delete row[position]
@@ -184,33 +185,12 @@ var Transformations = {
   html: function(call){
     // Simple arity for now, just return
     return function(row, idx) {
-      if (idx ==  'pre'){
-        var out = '<html> \
-<head> \
-<link rel="stylesheet" href="/css/style.css" /> \
-</head> \
-<body class="view-html"> \
-<table> \
-<thead> \
-<tr><th id="L0" rel="#L0" class="counter"></th> \
-';
-        return out;
-      }
-      else if (idx == 0) {
+      if (idx == 0) {
         var out =  '';
         row.forEach(function(item) {
           out += '<th title="%s">%s</th>'.replace(/%s/g, item);
         });
         out += '</tr></thead><tbody>';
-        return out;
-      } else if (idx == 'end') {
-        var out = '</tbody> \
-</table> \
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script> \
-<script src="/js/jquery.tablesorter.js"></script> \
-<script src="/js/table.js"></script> \
-</body></html> \
-';
         return out;
       } else {
         var out = '<tr id="L%s"><td class="counter"><a href="#L%s">%s</a></td>'.replace(/%s/g, idx);
@@ -220,7 +200,6 @@ var Transformations = {
         out += '</tr>';
         return out;
       }
-      // how do we put </table> at the end
     }
 
   }
@@ -246,11 +225,7 @@ var TransformOMatic = {
     return function(row, index){
       var result = row;
       _.each(transformations, function(callable){
-        if(_.isNull(result)){
-          if(index !== 'pre' && index !== 'end'){
-            return;
-          }
-        }
+        if(_.isNull(result)) return;
         result = callable(result, index);
       });
       return result;
@@ -258,13 +233,13 @@ var TransformOMatic = {
   },
 
   // Conduct our transformation
-  transform: function(response, pipeline, url, failure){
+  transform: function(response, pipeline, url, outputFormat, failure){
     var instream = request(url);
     instream.on('response', function(data){
       if(response.statusCode != 200){
         failure(response);
       }else{
-        convert(data, response, pipeline);
+        convert(data, response, pipeline, outputFormat);
       }
     });
   },
@@ -307,14 +282,16 @@ app.get('/csv/*', function(req, res) {
       }
     });
   } else {
+    transformStr = req.params[0].replace(/\/+$/, '');
+    outputFormat = (transformStr.slice(-5) == '/html') ? 'html' : 'csv';
     //doTransform(req, res, url)
-    var pipeline = TransformOMatic.pipeline(req.params[0]);
+    var pipeline = TransformOMatic.pipeline(transformStr);
 
     var failure = function(resp){
       res.send(resp.statusCode, 'Error code ' + resp.statusCode + ' with upstream URL: ' + url);
     }
 
-    TransformOMatic.transform(res, pipeline, url, failure);
+    TransformOMatic.transform(res, pipeline, url, outputFormat, failure);
   }
 });
 
