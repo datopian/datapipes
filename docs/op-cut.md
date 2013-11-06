@@ -5,7 +5,7 @@
 range = comma separated range of column indices (0 based) e.g.
 
     0           # cut column 0
-    1,2,5       # cut columns 1,2,5
+    1,3,5-10    # cut columns 1,3 and 5 to 10
 
 ### Examples
 
