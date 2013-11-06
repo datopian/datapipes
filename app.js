@@ -6,7 +6,7 @@ var csv = require('csv');
 var Stream = require('stream');
 var request = require('request');
 var path = require('path');
-var nunjucks = require('nunjucks')
+var nunjucks = require('nunjucks');
 var marked = require('marked');
 var _ = require('underscore');
 
@@ -24,7 +24,7 @@ var CORSSupport = function(req, res, next) {
   else {
     next();
   }
-}
+};
 
 app.configure(function(){
   app.set('port', process.env.PORT || 5000);
@@ -39,7 +39,7 @@ app.configure(function(){
 var env = new nunjucks.Environment(new nunjucks.FileSystemLoader('templates'));
 env.express(app);
 
-function noop(arg){return arg}
+function noop(arg){return arg;}
 
 function toIntArr(str){
   var parts = str.split(',');
@@ -88,18 +88,18 @@ var Transformations = {
     var lines = 0;
     var number = call[2];
     if(!number){
-      var number = 10;
+      number = 10;
     }
     return function(row, idx){
       if(idx == 'pre'){
         return null;
       }else if(lines < number){
         lines += 1;
-        return row
+        return row;
       }else{
         return null;
       }
-    }
+    };
   },
 
   // HOF to return a transformation that will cut columns
@@ -123,11 +123,11 @@ var Transformations = {
 
       // delete the values at the specific position
       _.each(idxes, function(position) {
-        delete row[position]
-      })
+        delete row[position];
+      });
 
-      return _.without(row, undefined)
-    }
+      return _.without(row, undefined);
+    };
   },
 
   // HOF to return a transformation that will grep for a pattern
@@ -135,7 +135,7 @@ var Transformations = {
     var pattern = call[1];
     return function(row, index){
       if(index == 0){
-        return row
+        return row;
       }
       var match = false;
       _.each(row, function(value){
@@ -148,7 +148,7 @@ var Transformations = {
       }else{
         return null;
       }
-    }
+    };
   },
 
   // HOF to return a transformation that will delete rows
@@ -158,7 +158,7 @@ var Transformations = {
     return function(row, idx) {
       var matches = false;
       if(_.isUndefined(parts)){
-        return row
+        return row;
       }
       parts.forEach(function(part) {
         if (part.indexOf(':') != -1) {
@@ -177,7 +177,7 @@ var Transformations = {
       });
       if (matches) return null;
       else return row;
-    }
+    };
   },
 
   // HOF to return our HTML transformation
