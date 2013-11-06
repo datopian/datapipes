@@ -11,7 +11,7 @@ range = comma separated range of row indices (0 based) e.g.
 
 ### Examples
 
-Delete the rows 1-3 (inclusive) of a CSV file:
+Delete the rows 1-4 (inclusive) of a CSV file:
 
-<a href="/csv/delete%201:4/?url=http://static.london.gov.uk/gla/expenditure/docs/2012-13-P12-250.csv&">/csv/delete 1:4/?url=http://static.london.gov.uk/gla/expenditure/docs/2012-13-P12-250.csv</a>
+<a href="/csv/delete%201:4/?url=http://static.london.gov.uk/gla/expenditure/docs/2012-13-P12-250.csv">/csv/delete 1:4/?url=http://static.london.gov.uk/gla/expenditure/docs/2012-13-P12-250.csv</a>
 
