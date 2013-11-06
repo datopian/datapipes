@@ -72,10 +72,12 @@ var Transformations = {
     var lines = 0;
     var number = call[2];
     if(!number){
-      var number = 40;
+      var number = 10;
     }
     return function(row, idx){
-      if(lines < number){
+      if(idx == 'pre'){
+        return null;
+      }else if(lines < number){
         lines += 1;
         return row
       }else{
