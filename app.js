@@ -61,6 +61,7 @@ function convert(instream, outstream, mapfunc, outputFormat) {
   var outcsv = csv();
 
   if (outputFormat == 'html') {
+    outstream.header("Content-Type", "text/html; charset=utf-8");
     outstream.write('<html> \
 <head> \
 <link rel="stylesheet" href="/css/style.css" /> \
@@ -70,6 +71,8 @@ function convert(instream, outstream, mapfunc, outputFormat) {
 <thead> \
 <tr><th id="L0" rel="#L0" class="counter"></th> \
 ');
+  } else {
+    outstream.header("Content-Type", "text/plain; charset=utf-8");
   }
 
   outcsv
