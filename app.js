@@ -41,6 +41,22 @@ env.express(app);
 
 function noop(arg){return arg}
 
+function toIntArr(str){
+  var parts = str.split(',');
+  return _.chain(parts)
+          .map(function(part){
+            if (part.indexOf('-') == -1) {
+              return [parseInt(part)];
+            } else {
+              range = part.split('-');
+              return _.range(parseInt(range[0]), parseInt(range[1])+1);
+            }
+          })
+          .flatten()
+          .uniq()
+          .value();
+}
+
 function convert(instream, outstream, mapfunc) {
   var outcsv = csv();
 
@@ -91,11 +107,9 @@ var Transformations = {
   // This is 0-indexed.
   cut: function(call){
     var columns = call[1] || "";
-    var parts = columns.split(',');
 
-    // Convert the indices to ints and sort then reverse them
-    var idxes = _.map(parts, function(num){ return parseInt(num)})
-    idxes.sort().reverse()
+    // Convert the indices to ints
+    var idxes = toIntArr(columns);
 
     return function(row, index){
       if(index ==  'pre'){
