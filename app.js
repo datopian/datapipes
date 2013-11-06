@@ -75,7 +75,9 @@ var Transformations = {
       var number = 10;
     }
     return function(row, idx){
-      if(lines < number){
+      if(idx == 'pre'){
+        return null;
+      }else if(lines < number){
         lines += 1;
         return row
       }else{
