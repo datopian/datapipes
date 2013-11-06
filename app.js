@@ -57,42 +57,51 @@ function toIntArr(str){
           .value();
 }
 
-function convert(instream, outstream, mapfunc, outputFormat) {
-  var outcsv = csv();
+// Collection of staticmethod things that will
+// return a
+var Converters = {
 
-  if (outputFormat == 'html') {
-    outstream.header("Content-Type", "text/html; charset=utf-8");
-    outstream.write('<html> \
-<head> \
-<link rel="stylesheet" href="/css/style.css" /> \
-</head> \
-<body class="view-html"> \
-<table> \
-<thead> \
-<tr><th id="L0" rel="#L0" class="counter"></th> \
-');
-  } else {
-    outstream.header("Content-Type", "text/plain; charset=utf-8");
-  }
+  csvToCsv: function() {
+    return function(instream, outstream, mapfunc) {
+      var outcsv = csv();
+      outstream.header("Content-Type", "text/plain; charset=utf-8");
+      outcsv
+        .from.stream(instream)
+        .to.stream(outstream)
+        .transform(mapfunc);
+    };
+  },
+  csvToHtml: function() {
+    return function(instream, outstream, mapfunc) {
+      var outcsv = csv();
 
-  outcsv
-    .from.stream(instream)
-    .to.stream(outstream, {end: false})
-    .transform(mapfunc)
-    .on('end', function(count) {
-      if (outputFormat == 'html') {
-        outstream.write('</tbody> \
-</table> \
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script> \
-<script src="/js/jquery.tablesorter.js"></script> \
-<script src="/js/table.js"></script> \
-</body></html> \
-');
-      }
-      outstream.end();
-    })
-  ;
-}
+      outstream.header("Content-Type", "text/html; charset=utf-8");
+      outstream.write('<html>');
+      outstream.write('<head>');
+      outstream.write('<link rel="stylesheet" href="/css/style.css" />');
+      outstream.write('</head>');
+      outstream.write('<body class="view-html">');
+      outstream.write('<table>');
+      outstream.write('<thead>');
+      outstream.write('<tr><th id="L0" rel="#L0" class="counter"></th>');
+
+      outcsv
+        .from.stream(instream)
+        .to.stream(outstream, {end: false})
+        .transform(mapfunc)
+        .on('end', function(count) {
+          outstream.write('</tbody>');
+          outstream.write('</table>');
+          outstream.write('<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>');
+          outstream.write('<script src="/js/jquery.tablesorter.js"></script>');
+          outstream.write('<script src="/js/table.js"></script>');
+          outstream.write('</body></html>');
+          outstream.end();
+        })
+      ;
+    };
+  },
+};
 
 // Collection of staticmethod(ish) things that will
 // return a
@@ -188,26 +197,27 @@ var Transformations = {
   html: function(call){
     // Simple arity for now, just return
     return function(row, idx) {
+      var out;
       if (idx == 0) {
-        var out =  '';
+        out =  '';
         row.forEach(function(item) {
           out += '<th title="%s">%s</th>'.replace(/%s/g, item);
         });
         out += '</tr></thead><tbody>';
         return out;
       } else {
-        var out = '<tr id="L%s"><td class="counter"><a href="#L%s">%s</a></td>'.replace(/%s/g, idx);
+        out = '<tr id="L%s"><td class="counter"><a href="#L%s">%s</a></td>'.replace(/%s/g, idx);
         row.forEach(function(item) {
           out += '<td><div>' + item + '</div></td>';
         });
         out += '</tr>';
         return out;
       }
-    }
+    };
 
   }
 
-}
+};
 
 var TransformOMatic = {
 
@@ -223,7 +233,7 @@ var TransformOMatic = {
       }else{
         return noop;
       }
-    })
+    });
 
     return function(row, index){
       var result = row;
@@ -232,21 +242,21 @@ var TransformOMatic = {
         result = callable(result, index);
       });
       return result;
-    }
+    };
   },
 
   // Conduct our transformation
-  transform: function(response, pipeline, url, outputFormat, failure){
+  transform: function(response, pipeline, url, converter, failure){
     var instream = request(url);
     instream.on('response', function(data){
       if(response.statusCode != 200){
         failure(response);
       }else{
-        convert(data, response, pipeline, outputFormat);
+        converter(data, response, pipeline);
       }
     });
   },
-}
+};
 
 
 // var url = 'http://static.london.gov.uk/gla/expenditure/docs/2012-13-P12-250.csv';
@@ -286,15 +296,14 @@ app.get('/csv/*', function(req, res) {
     });
   } else {
     transformStr = req.params[0].replace(/\/+$/, '');
-    outputFormat = (transformStr.slice(-5) == '/html') ? 'html' : 'csv';
-    //doTransform(req, res, url)
+    converter = (transformStr.slice(-5) == '/html') ? Converters.csvToHtml() : Converters.csvToCsv();
     var pipeline = TransformOMatic.pipeline(transformStr);
 
     var failure = function(resp){
       res.send(resp.statusCode, 'Error code ' + resp.statusCode + ' with upstream URL: ' + url);
-    }
+    };
 
-    TransformOMatic.transform(res, pipeline, url, outputFormat, failure);
+    TransformOMatic.transform(res, pipeline, url, converter, failure);
   }
 });
 
