@@ -307,7 +307,7 @@ app.get('/csv/*', function(req, res) {
     });
   } else {
     transformStr = req.params[0].replace(/\/+$/, '');
-    converter = (transformStr.slice(-5) == '/html') ? Converters.csvToHtml() : Converters.csvToCsv();
+    converter = (transformStr == 'html' || transformStr.slice(-5) == '/html') ? Converters.csvToHtml() : Converters.csvToCsv();
     var pipeline = TransformOMatic.pipeline(transformStr);
 
     var failure = function(resp){
