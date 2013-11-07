@@ -164,6 +164,16 @@ var Transformations = {
     };
   },
 
+  // HOF to return a transformation that will delete empty rows
+  strip: function(call){
+    return function(row, idx) {
+      discard = _.every(row, function(val) {
+        return val === '';
+      });
+      return (discard) ? null : row;
+    };
+  },
+
   // HOF to return a transformation that will delete rows
   delete: function(call){
     var range = call[1];
