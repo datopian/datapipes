@@ -46,7 +46,7 @@ The basic operations are inspired by unix-style commands such `head`, `cut`, `gr
 
 [suggest]: https://github.com/okfn/datapipes/issues
 
-* [none](/csv/none/) (aka raw) = no transform but file parsed (useful with CORS)
+* [none][] (aka raw) = no transform but file parsed (useful with CORS)
 * [html][] = render as viewable HTML table
 * [delete][] = delete rows
 * [head][] = take only first X rows
@@ -54,17 +54,18 @@ The basic operations are inspired by unix-style commands such `head`, `cut`, `gr
 * [grep][] = filter rows based on pattern matching
 * sed = find and replace (not yet implemented)
 
-[delete]: /csv/delete/
-[grep]: /csv/grep/
-[head]: /csv/head/
-[html]: /csv/html/
-[cut]: /csv/cut/
+[none]: /none/
+[delete]: /delete/
+[grep]: /grep/
+[head]: /head/
+[html]: /html/
+[cut]: /cut/
 
 <h2 id="contributing">Contributing</h2>
 
 Under the hood Data Pipes is a simple open-source node.js webapp living [here on github][source].
 
-It's super easy to contribute and here are some of the[ current issues][issues].
+It's super easy to contribute and here are some of the [current issues][issues].
 
 [source]: https://github.com/okfn/datapipes
 [issues]: https://github.com/okfn/datapipes/issues
