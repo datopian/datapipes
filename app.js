@@ -237,7 +237,7 @@ var TransformOMatic = {
   pipeline: function(transform_string){
     var calls = transform_string.split('/');
     var transformations = _.map(calls, function(call){
-      call = call.split(' ');
+      call = call.trim().split(' ');
       var name = call[0];
       if(_.has(Transformations, name)){
         return Transformations[name](call);
@@ -294,6 +294,7 @@ function getMarkdownContent(filepath, cb) {
 app.get('/*', function(req, res) {
   var transform;
   var url = req.query.url;
+  var transform;
   if (!url) {
     transform = req.params[0].split('/')[0];
     getMarkdownContent('docs/op-' + transform + '.md', function(err, content) {
@@ -307,11 +308,11 @@ app.get('/*', function(req, res) {
       }
     });
   } else {
-    transformStr = req.params[0].replace(/\/+$/, '');
+    transformStr = req.params[0].replace(/(\/+|\s+)$/, '');
 
     transform = transformStr.toLowerCase().split('/');
     setFormat = function(part, allowedFormats, defaultFormat) {
-      format = part.split(' ')[0];
+      format = part.trim().split(' ')[0];
       return (_.contains(allowedFormats, format)) ? format : defaultFormat;
     };
     from = setFormat(transform[0], ['csv'], 'csv');
