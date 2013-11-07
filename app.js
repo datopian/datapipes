@@ -237,7 +237,7 @@ var TransformOMatic = {
   pipeline: function(transform_string){
     var calls = transform_string.split('/');
     var transformations = _.map(calls, function(call){
-      call = call.split(' ');
+      call = call.trim().split(' ');
       var name = call[0];
       if(_.has(Transformations, name)){
         return Transformations[name](call);
@@ -293,8 +293,9 @@ function getMarkdownContent(filepath, cb) {
 
 app.get('/csv/*', function(req, res) {
   var url = req.query.url;
+  var transform;
   if (!url) {
-    var transform = req.params[0].split('/')[0];
+    transform = req.params[0].split('/')[0];
     getMarkdownContent('docs/op-' + transform + '.md', function(err, content) {
       if (err) {
       console.log(err);
@@ -306,8 +307,9 @@ app.get('/csv/*', function(req, res) {
       }
     });
   } else {
-    transformStr = req.params[0].replace(/\/+$/, '');
-    converter = (transformStr == 'html' || transformStr.slice(-5) == '/html') ? Converters.csvToHtml() : Converters.csvToCsv();
+    transformStr = req.params[0].replace(/(\/+|\s+)$/, '');
+    renderer = _.last(transformStr.split('/')).trim();
+    converter = (renderer == 'html') ? Converters.csvToHtml() : Converters.csvToCsv();
     var pipeline = TransformOMatic.pipeline(transformStr);
 
     var failure = function(resp){
