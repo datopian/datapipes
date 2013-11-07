@@ -50,6 +50,7 @@ The basic operations are inspired by unix-style commands such `head`, `cut`, `gr
 * [html][] = render as viewable HTML table
 * [delete][] = delete rows
 * [head][] = take only first X rows
+* [strip][] = delete all blank rows
 * [cut][] = select / delete columns (not yet implemented)
 * [grep][] = filter rows based on pattern matching
 * sed = find and replace (not yet implemented)
@@ -58,6 +59,7 @@ The basic operations are inspired by unix-style commands such `head`, `cut`, `gr
 [delete]: /delete/
 [grep]: /grep/
 [head]: /head/
+[strip]: /strip/
 [html]: /html/
 [cut]: /cut/
 

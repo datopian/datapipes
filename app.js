@@ -41,6 +41,7 @@ env.express(app);
 
 function noop(arg){return arg;}
 
+// expand out a string like '1,3,5-8' to [1,3,5,6,7,8]
 function toIntArr(str){
   var parts = str.split(',');
   return _.chain(parts)
@@ -161,6 +162,16 @@ var Transformations = {
       }else{
         return null;
       }
+    };
+  },
+
+  // HOF to return a transformation that will delete empty rows
+  strip: function(call){
+    return function(row, idx) {
+      discard = _.every(row, function(val) {
+        return val === '';
+      });
+      return (discard) ? null : row;
     };
   },
 
