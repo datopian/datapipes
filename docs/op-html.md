@@ -1,4 +1,4 @@
-# html
+## html
 
 Convert the data to an elegant HTML table (with line numbers!).
 
