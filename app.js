@@ -61,7 +61,7 @@ function toIntArr(str){
 // return a
 var Converters = {
 
-  csvToCsv: function() {
+  csv_to_csv: function() {
     return function(instream, outstream, mapfunc) {
       var outcsv = csv();
       outstream.header("Content-Type", "text/plain; charset=utf-8");
@@ -71,7 +71,7 @@ var Converters = {
         .transform(mapfunc);
     };
   },
-  csvToHtml: function() {
+  csv_to_html: function() {
     return function(instream, outstream, mapfunc) {
       var outcsv = csv();
 
@@ -280,10 +280,11 @@ function getMarkdownContent(filepath, cb) {
   });
 }
 
-app.get('/csv/*', function(req, res) {
+app.get('/*', function(req, res) {
+  var transform;
   var url = req.query.url;
   if (!url) {
-    var transform = req.params[0].split('/')[0];
+    transform = req.params[0].split('/')[0];
     getMarkdownContent('docs/op-' + transform + '.md', function(err, content) {
       if (err) {
       console.log(err);
@@ -296,7 +297,16 @@ app.get('/csv/*', function(req, res) {
     });
   } else {
     transformStr = req.params[0].replace(/\/+$/, '');
-    converter = (transformStr.slice(-5) == '/html') ? Converters.csvToHtml() : Converters.csvToCsv();
+
+    transform = transformStr.toLowerCase().split('/');
+    setFormat = function(part, allowedFormats, defaultFormat) {
+      format = part.split(' ')[0];
+      return (_.contains(allowedFormats, format)) ? format : defaultFormat;
+    };
+    from = setFormat(transform[0], ['csv'], 'csv');
+    to = setFormat(_.last(transform), ['csv', 'html'], 'csv');
+    converter = Converters[from + '_to_' + to]();
+
     var pipeline = TransformOMatic.pipeline(transformStr);
 
     var failure = function(resp){
