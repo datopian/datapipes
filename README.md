@@ -1,3 +1,6 @@
+[![Build
+Status](https://travis-ci.org/okfn/datapipes.png)](https://travis-ci.org/okfn/datapipes)
+
 Data Pipes = Unix-Style Data Tools + CSV + Web
 
 Web service to provide unix-style `cut`, `grep`, `sed` in a streaming, "pipe-like" manner.
