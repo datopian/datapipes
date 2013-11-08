@@ -288,13 +288,13 @@ app.get('*', function(req, res) {
   if (!url) {
     var page = req.params[0].split('/')[0];
     if (page === '') {
-      page = 'index';
+      mdFilename = 'docs/index.md';
     } else {
-      page = 'op-' + page;
+      mdFilename = 'docs/op-' + page + '.md';
     }
-    getMarkdownContent('docs/' + page + '.md', function(err, content) {
+    getMarkdownContent(mdFilename, function(err, content) {
       if (err) {
-      console.log(err);
+        console.log(err);
         res.send('No info on this operation yet');
       } else {
         res.render('index.html', {
