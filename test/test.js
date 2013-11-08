@@ -16,10 +16,10 @@ describe('GET /', function(){
 
 ops = ['cut', 'delete', 'grep', 'head', 'html', 'none', 'strip'];
 _.each(ops, function(op) {
-  describe('GET /csv/' + op, function(){
+  describe('GET /' + op, function(){
     it('should respond with ' + op + ' docs page', function(done){
       request
-        .get('/csv/' + op)
+        .get('/' + op)
         .expect('Content-Type', /html/)
         .expect(200, done);
     });

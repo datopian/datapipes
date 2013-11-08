@@ -62,7 +62,7 @@ function toIntArr(str){
 // return a
 var Converters = {
 
-  csvToCsv: function() {
+  csv_to_csv: function() {
     return function(instream, outstream, mapfunc) {
       var outcsv = csv();
       outstream.header("Content-Type", "text/plain; charset=utf-8");
@@ -72,7 +72,7 @@ var Converters = {
         .transform(mapfunc);
     };
   },
-  csvToHtml: function() {
+  csv_to_html: function() {
     return function(instream, outstream, mapfunc) {
       var outcsv = csv();
 
@@ -272,14 +272,6 @@ var TransformOMatic = {
 
 // var url = 'http://static.london.gov.uk/gla/expenditure/docs/2012-13-P12-250.csv';
 // var url = 'http://data.openspending.org/datasets/gb-local-gla/data/2013-jan.csv';
-app.get('/', function(req, res) {
-  fs.readFile('docs/index.md', 'utf8', function(err, text) {
-    var content = marked(text);
-    res.render('index.html', {
-      content: content
-    });
-  });
-});
 
 function getMarkdownContent(filepath, cb) {
   fs.readFile(filepath, 'utf8', function(err, text) {
@@ -291,14 +283,18 @@ function getMarkdownContent(filepath, cb) {
   });
 }
 
-app.get('/csv/*', function(req, res) {
+app.get('*', function(req, res) {
   var url = req.query.url;
-  var transform;
   if (!url) {
-    transform = req.params[0].split('/')[0];
-    getMarkdownContent('docs/op-' + transform + '.md', function(err, content) {
+    var page = req.params[0].split('/')[0];
+    if (page === '') {
+      mdFilename = 'docs/index.md';
+    } else {
+      mdFilename = 'docs/op-' + page + '.md';
+    }
+    getMarkdownContent(mdFilename, function(err, content) {
       if (err) {
-      console.log(err);
+        console.log(err);
         res.send('No info on this operation yet');
       } else {
         res.render('index.html', {
@@ -308,8 +304,16 @@ app.get('/csv/*', function(req, res) {
     });
   } else {
     transformStr = req.params[0].replace(/(\/+|\s+)$/, '');
-    renderer = _.last(transformStr.split('/')).trim();
-    converter = (renderer == 'html') ? Converters.csvToHtml() : Converters.csvToCsv();
+
+    transform = transformStr.toLowerCase().split('/');
+    setFormat = function(part, allowedFormats, defaultFormat) {
+      format = part.trim().split(' ')[0];
+      return (_.contains(allowedFormats, format)) ? format : defaultFormat;
+    };
+    from = setFormat(transform[0], ['csv'], 'csv');
+    to = setFormat(_.last(transform), ['csv', 'html'], 'csv');
+    converter = Converters[from + '_to_' + to]();
+
     var pipeline = TransformOMatic.pipeline(transformStr);
 
     var failure = function(resp){
