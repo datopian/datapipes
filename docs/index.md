@@ -48,7 +48,7 @@ The basic operations are inspired by unix-style commands such `head`, `cut`, `gr
 
 [suggest]: https://github.com/okfn/datapipes/issues
 
-* [none](/csv/none/) (aka raw) = no transform but file parsed (useful with CORS)
+* [none][] (aka raw) = no transform but file parsed (useful with CORS)
 * [html][] = render as viewable HTML table
 * [delete][] = delete rows
 * [head][] = take only first X rows
@@ -57,12 +57,13 @@ The basic operations are inspired by unix-style commands such `head`, `cut`, `gr
 * [grep][] = filter rows based on pattern matching
 * sed = find and replace (not yet implemented)
 
-[delete]: /csv/delete/
-[grep]: /csv/grep/
-[head]: /csv/head/
-[strip]: /csv/strip/
-[html]: /csv/html/
-[cut]: /csv/cut/
+[none]: /none/
+[delete]: /delete/
+[grep]: /grep/
+[head]: /head/
+[strip]: /strip/
+[html]: /html/
+[cut]: /cut/
 
 <h2 id="contributing">Contributing</h2>
 
