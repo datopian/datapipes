@@ -20,7 +20,17 @@ This is a Node Express application. To install and run do the following.
         npm install .
         node app.js
 
+### Deployment
+
 For deployment we use Heroku.
+
+Primary app is called `datapipes` on Heroku. To add it do:
+
+    heroku git:remote -a datapipes
+
+The to deploy:
+
+    git push datapipes
 
 ## Inspirations and Related
 
