@@ -71,6 +71,35 @@ var TransformOMatic = {
       }
     });
   },
+
+  // hack the input to the required form
+  rejig: function(transformStr) {
+    transform = transformStr.split('/');
+
+    firstOp = transform[0].trim().split(' ');
+    if (firstOp[0] == 'csv') {
+      firstOp[0] = 'incsv';
+      transform[0] = firstOp.join(' ');
+    } else {
+      // default to parsing csv
+      transform.unshift('incsv');
+    }
+
+    numOps = transform.length;
+    lastOp = transform[numOps-1].trim().split(' ');
+    if (lastOp[0] == 'html') {
+      lastOp[0] = 'outhtml';
+      transform[numOps-1] = lastOp.join(' ');
+    } else if (lastOp[0] == 'none') {
+      lastOp[0] = 'outcsv';
+      transform[numOps-1] = lastOp.join(' ');
+    } else {
+      // default to outputting csv
+      transform.push('outcsv');
+    }
+
+    return transform.join('/');
+  },
 };
 
 function getMarkdownContent(filepath, cb) {
@@ -104,6 +133,8 @@ app.get('/*', function(req, res) {
     });
   } else {
     transformStr = req.params[0].replace(/(\/+|\s+)$/, '');
+
+    transformStr = TransformOMatic.rejig(transformStr);
 
     var transformers = TransformOMatic.pipeline(transformStr);
 
