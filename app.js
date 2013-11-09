@@ -64,9 +64,10 @@ var TransformOMatic = {
         failure(response);
       } else {
         stream = data;
-        _.each(transformers, function(callable) {
-          stream = stream.pipe(callable);
+        _.each(transformers, function(next) {
+          stream = stream.pipe(next);
         });
+        response.setHeader("Content-Type", stream.contentType());
         stream.pipe(response);
       }
     });
