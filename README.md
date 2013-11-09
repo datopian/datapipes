@@ -26,7 +26,6 @@ Probable operations - see [this issue](https://github.com/okfn/datapipes/issues/
 * head / tail / delete
 * sed (note sed 3d = delete ...)
 
-
 ## Potential additional features
 
 * Allow arbitrary map functions
@@ -34,6 +33,13 @@ Probable operations - see [this issue](https://github.com/okfn/datapipes/issues/
 * View support
 * Conversion
 * Async (run on a queue)
+
+## Inspirations and Related
+
+* https://github.com/substack/dnode dnode is an asynchronous rpc system for
+  node.js that lets you call remote functions. You can pass callbacks to remote
+  functions, and the remote end can call the functions you passed in with
+  callbacks of its own and so on. It's callbacks all the way down!
 
 ## Copyright and License
 
