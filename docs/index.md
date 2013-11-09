@@ -30,7 +30,9 @@ You can also do **piping**, that is pass output of one transformation as input t
 
 Here's an example:
 
-[/csv/head -n 50/cut 0/delete 1:7/grep LONDON/html?url=https&#58;//raw.github.com/okfn/datapipes/master/test/data/gla.csv](/csv/head -n 50/cut 0/delete 1:7/grep LONDON/html?url=https://raw.github.com/okfn/datapipes/master/test/data/gla.csv)
+[/csv/head -n 50/cut 0/delete 1:7/grep LONDON/html?url=https&#58;//raw.github.com/okfn/datapipes/master/test/data/gla.csv][ex]
+
+[ex]: /csv/head%20-n%2050/cut%200/delete%201:7/grep%20LONDON/html?url=https://raw.github.com/okfn/datapipes/master/test/data/gla.csv
 
 Crudely this says: slice out the first 50 rows ([head][]), then cut column 0 ([cut][]),
 then delete rows 1-5 ([delete][]), then filter for all rows with LONDON in them
