@@ -187,7 +187,7 @@ var Transformations = {
       parts.forEach(function(part) {
         if (part.indexOf(':') != -1) {
           var _t = part.split(':');
-          if (idx >= _t[0] && idx < _t[1]) {
+          if (idx >= _t[0] && idx <= _t[1]) {
             matches = true;
             return;
           }
