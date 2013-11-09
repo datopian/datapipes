@@ -1,38 +1,26 @@
+A webapp providing online Unix-Style data transformations on CSVs.
+
+Specifically, its a web service which unix-style `cut`, `grep`, `sed` in a streaming, "pipe-like" manner.
+
 [![Build
 Status](https://travis-ci.org/okfn/datapipes.png)](https://travis-ci.org/okfn/datapipes)
-
-Data Pipes = Unix-Style Data Tools + CSV + Web
-
-Web service to provide unix-style `cut`, `grep`, `sed` in a streaming, "pipe-like" manner.
-
-At the moment we operate on CSV files only (plain txt perhaps coming soon ...).
 
 ## API and Usage
 
 See <http://datapipes.okfnlabs.org/>
 
-### Discussion
+## Installation
 
-API is under discussion and development - see:
+This is a Node Express application. To install and run do the following.
 
-* [API structure issue](https://github.com/okfn/datapipes/issues/2)
-* [Proposed Operations issue](https://github.com/okfn/datapipes/issues/9)
+1. Clone this repo
+2. Then change into the repository base directory
+3. Then do:
 
-Probable operations - see [this issue](https://github.com/okfn/datapipes/issues/9) but as examples:
+        npm install .
+        node app.js
 
-* delete = delete rows
-* cut = select columns
-* grep = filter
-* head / tail / delete
-* sed (note sed 3d = delete ...)
-
-## Potential additional features
-
-* Allow arbitrary map functions
-* Run JS scripts from explorer.okfnlabs.org
-* View support
-* Conversion
-* Async (run on a queue)
+For deployment we use Heroku.
 
 ## Inspirations and Related
 
