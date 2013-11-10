@@ -64,7 +64,12 @@ var TransformOMatic = {
         _.each(transformers, function(next) {
           stream = stream.pipe(next);
         });
-        response.setHeader("Content-Type", stream.contentType());
+        if (stream.contentType) {
+          response.setHeader("Content-Type", stream.contentType());
+        } else {
+          // default to plain text
+          response.setHeader("Content-Type", "text/plain; charset=utf-8");
+        }
         stream.pipe(response);
       }
     });
