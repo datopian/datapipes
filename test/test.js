@@ -25,7 +25,7 @@ describe('GET /', function(){
 describe('Docs', function(){
   ops = ['none', 'head', 'cut', 'delete', 'grep', 'strip', 'html'];
   _.each(ops, function(op) {
-    var url = '/csv/' + op;
+    var url = '/' + op;
     describe('GET ' + url, function(){
       it('should respond with html', function(done){
         request
