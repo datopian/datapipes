@@ -88,15 +88,30 @@ var TransformOMatic = {
 
     // parser-related stuff
     inputFormatSpecified = false;
-    for (x = 0; x < numOps - 1; x++) {
-      op = transform[x].trim().split(' ');
-      if (inputFormats.indexOf(op[0]) != -1) {
-        // update the default output format
-        defaultOutputFormat = op[0];
-        op[0] = 'in' + op[0];
-        transform[x] = op.join(' ');
+    if (numOps == 1) {
+      if (transform[0] === '') {
+        transform[0] = 'in' + defaultInputFormat;
         inputFormatSpecified = true;
-        break;
+      } else {
+        op = transform[0].trim().split(' ');
+        if (inputFormats.indexOf(op[0]) != -1) {
+          defaultOutputFormat = op[0];
+          op[0] = 'in' + op[0];
+          transform[0] = op.join(' ');
+          inputFormatSpecified = true;
+        }
+      }
+    } else {
+      for (x = 0; x < numOps - 1; x++) {
+        op = transform[x].trim().split(' ');
+        if (inputFormats.indexOf(op[0]) != -1) {
+          // update the default output format
+          defaultOutputFormat = op[0];
+          op[0] = 'in' + op[0];
+          transform[x] = op.join(' ');
+          inputFormatSpecified = true;
+          break;
+        }
       }
     }
     if (!inputFormatSpecified) {
