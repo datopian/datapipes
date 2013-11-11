@@ -222,7 +222,7 @@ describe('grep op', function(){
                 // skip the header row
                 return;
               }
-              contains_london = _.some(row, function(val) {
+              var contains_london = _.some(row, function(val) {
                 return val.indexOf('LONDON') != -1;
               });
               assert.equal(contains_london, true);
@@ -252,7 +252,7 @@ describe('strip op', function(){
           csv()
             .from.string(res.text)
             .on('record', function(row,index){
-              emptyRow = _.every(row, function(val) {
+              var emptyRow = _.every(row, function(val) {
                 return val === '';
               });
               assert.notEqual(emptyRow, true);
@@ -280,7 +280,7 @@ describe('html op', function(){
           if (err) done(err);
 
           var out = res.text;
-          numRows = out.match(/<tr/g).length;
+          var numRows = out.match(/<tr/g).length;
           assert.equal(numRows, num_rows_head);
 
           done();

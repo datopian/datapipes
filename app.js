@@ -60,7 +60,7 @@ var TransformOMatic = {
       if (response.statusCode != 200) {
         failure(response);
       } else {
-        stream = data;
+        var stream = data;
         _.each(transformers, function(next) {
           stream = stream.pipe(next);
         });
@@ -77,17 +77,17 @@ var TransformOMatic = {
 
   // hack the input to the required form
   rejig: function(transformStr) {
-    inputFormats = ['csv'];
-    outputFormats = ['csv', 'html'];
+    var inputFormats = ['csv'];
+    var outputFormats = ['csv', 'html'];
 
-    defaultInputFormat = 'csv';
-    defaultOutputFormat = defaultInputFormat;
+    var defaultInputFormat = 'csv';
+    var defaultOutputFormat = defaultInputFormat;
 
-    transform = transformStr.split('/');
-    numOps = transform.length;
+    var transform = transformStr.split('/');
+    var numOps = transform.length;
 
     // parser-related stuff
-    inputFormatSpecified = false;
+    var inputFormatSpecified = false;
     if (numOps == 1) {
       if (transform[0] === '') {
         transform[0] = 'in' + defaultInputFormat;
@@ -120,7 +120,7 @@ var TransformOMatic = {
     }
 
     // renderer-related stuff
-    lastOp = transform[numOps-1].trim().split(' ');
+    var lastOp = transform[numOps-1].trim().split(' ');
     if (outputFormats.indexOf(lastOp[0]) != -1) {
       lastOp[0] = 'out' + lastOp[0];
       transform[numOps-1] = lastOp.join(' ');
@@ -149,6 +149,7 @@ function getMarkdownContent(filepath, cb) {
 
 app.get('/*', function(req, res) {
   var url = req.query.url;
+  var mdFilename;
   if (!url) {
     var page = req.params[0].split('/')[0];
     if (page === '') {
@@ -167,7 +168,7 @@ app.get('/*', function(req, res) {
       }
     });
   } else {
-    transformStr = req.params[0].replace(/(\/+|\s+)$/, '');
+    var transformStr = req.params[0].replace(/(\/+|\s+)$/, '');
 
     transformStr = TransformOMatic.rejig(transformStr);
 
