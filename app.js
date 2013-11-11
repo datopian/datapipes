@@ -77,28 +77,45 @@ var TransformOMatic = {
 
   // hack the input to the required form
   rejig: function(transformStr) {
-    transform = transformStr.split('/');
+    inputFormats = ['csv'];
+    outputFormats = ['csv', 'html'];
 
-    firstOp = transform[0].trim().split(' ');
-    if (firstOp[0] == 'csv') {
-      firstOp[0] = 'incsv';
-      transform[0] = firstOp.join(' ');
-    } else {
-      // default to parsing csv
-      transform.unshift('incsv');
+    defaultInputFormat = 'csv';
+    defaultOutputFormat = defaultInputFormat;
+
+    transform = transformStr.split('/');
+    numOps = transform.length;
+
+    // parser-related stuff
+    inputFormatSpecified = false;
+    for (x = 0; x < numOps - 1; x++) {
+      op = transform[x].trim().split(' ');
+      if (inputFormats.indexOf(op[0]) != -1) {
+        // update the default output format
+        defaultOutputFormat = op[0];
+        op[0] = 'in' + op[0];
+        transform[x] = op.join(' ');
+        inputFormatSpecified = true;
+        break;
+      }
+    }
+    if (!inputFormatSpecified) {
+      transform.unshift('in' + defaultInputFormat);
+      numOps += 1;
     }
 
-    numOps = transform.length;
+    // renderer-related stuff
     lastOp = transform[numOps-1].trim().split(' ');
-    if (lastOp[0] == 'html') {
-      lastOp[0] = 'outhtml';
+    if (outputFormats.indexOf(lastOp[0]) != -1) {
+      lastOp[0] = 'out' + lastOp[0];
       transform[numOps-1] = lastOp.join(' ');
     } else if (lastOp[0] == 'none') {
+      // 'none' operator is a special case
       lastOp[0] = 'outcsv';
       transform[numOps-1] = lastOp.join(' ');
     } else {
-      // default to outputting csv
-      transform.push('outcsv');
+      // use the default output format
+      transform.push('out' + defaultOutputFormat);
     }
 
     return transform.join('/');
