@@ -54,7 +54,7 @@ describe('none op', function(){
               assert.equal(row.length, num_cols);
             })
             .on('end', function(count) {
-              assert.equal(count, 100);
+              assert.equal(count, num_rows);
               done();
             })
           ;
@@ -85,9 +85,10 @@ describe('head op', function(){
     });
   });
 
-  var url2 = '/csv/head -n 5/?url=' + data_url;
+  var num_rows_head = 5;
+  var url2 = '/csv/head -n ' + num_rows_head + '/?url=' + data_url;
   describe('GET ' + url2, function(){
-    it('should return 5 csv rows', function(done){
+    it('should return ' + num_rows_head + ' csv rows', function(done){
       request
         .get(url2)
         .expect('Content-Type', /plain/)
@@ -98,7 +99,7 @@ describe('head op', function(){
           csv()
             .from.string(res.text)
             .on('end', function(count) {
-              assert.equal(count, 5);
+              assert.equal(count, num_rows_head);
               done();
             })
           ;
@@ -267,9 +268,10 @@ describe('strip op', function(){
 });
 
 describe('html op', function(){
-  var url = '/csv/head -n 5/html/?url=' + data_url;
+  var num_rows_head = 5;
+  var url = '/csv/head -n ' + num_rows_head + '/html/?url=' + data_url;
   describe('GET ' + url, function(){
-    it('should return 5 html rows', function(done){
+    it('should return ' + num_rows_head + ' html rows', function(done){
       request
         .get(url)
         .expect('Content-Type', /html/)
@@ -279,7 +281,7 @@ describe('html op', function(){
 
           var out = res.text;
           numRows = out.match(/<tr/g).length;
-          assert.equal(numRows, 5);
+          assert.equal(numRows, num_rows_head);
 
           done();
         });
