@@ -108,6 +108,72 @@ describe('head op', function(){
   });
 });
 
+describe('tail op', function(){
+  var url = '/csv/tail/?url=' + data_url;
+  describe('GET ' + url, function(){
+    it('should return 10 csv rows', function(done){
+      request
+        .get(url)
+        .expect('Content-Type', /plain/)
+        .expect(200)
+        .end(function(err, res) {
+          if (err) done(err);
+
+          csv()
+            .from.string(res.text)
+            .on('end', function(count) {
+              assert.equal(count, 10);
+              done();
+            })
+          ;
+        });
+    });
+  });
+
+  var num_rows_tail = 5;
+  var url2 = '/csv/tail -n ' + num_rows_tail + '/?url=' + data_url;
+  describe('GET ' + url2, function(){
+    it('should return ' + num_rows_tail + ' csv rows', function(done){
+      request
+        .get(url2)
+        .expect('Content-Type', /plain/)
+        .expect(200)
+        .end(function(err, res) {
+          if (err) done(err);
+
+          csv()
+            .from.string(res.text)
+            .on('end', function(count) {
+              assert.equal(count, num_rows_tail);
+              done();
+            })
+          ;
+        });
+    });
+  });
+
+  var url3 = '/csv/tail -n +' + num_rows_tail + '/?url=' + data_url;
+  describe('GET ' + url3, function(){
+    it('should return ' + (num_rows - num_rows_tail) + ' csv rows', function(done){
+      request
+        .get(url3)
+        .expect('Content-Type', /plain/)
+        .expect(200)
+        .end(function(err, res) {
+          if (err) done(err);
+
+          csv()
+            .from.string(res.text)
+            .on('end', function(count) {
+              assert.equal(count, (num_rows - num_rows_tail));
+              done();
+            })
+          ;
+        });
+    });
+  });
+});
+
 describe('cut op', function(){
   var url = '/csv/cut 0,3/?url=' + data_url;
   var num_cols_removed = 2;
