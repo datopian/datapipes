@@ -411,12 +411,63 @@ describe('strip op', function(){
               done();
             })
           ;
-        });
+        })
+      ;
     });
   });
 });
 
-describe('html op', function(){
+describe('outcsv op', function(){
+  var url = '/csv/csv --tabs/?url=' + data_url;
+  describe('GET ' + url, function(){
+    it('should return ' + num_cols + ' tab-separated csv columns', function(done){
+      request
+        .get(url)
+        .expect('Content-Type', /plain/)
+        .expect(200)
+        .end(function(err, res) {
+          if (err) done(err);
+
+          csv()
+            .from.string(res.text, {delimiter: '\t'})
+            .on('record', function(row,index){
+              assert.equal(row.length, num_cols);
+            })
+            .on('end', function(count) {
+              done();
+            })
+          ;
+        })
+      ;
+    });
+  });
+
+  var url2 = '/csv/csv --delimiter . -q \'/?url=' + data_url;
+  describe('GET ' + url, function(){
+    it('should return ' + num_cols + ' dot-separated csv columns, with single quote quotes', function(done){
+      request
+        .get(url2)
+        .expect('Content-Type', /plain/)
+        .expect(200)
+        .end(function(err, res) {
+          if (err) done(err);
+
+          csv()
+            .from.string(res.text, {delimiter: '.', quote: '\''})
+            .on('record', function(row,index){
+              assert.equal(row.length, num_cols);
+            })
+            .on('end', function(count) {
+              done();
+            })
+          ;
+        })
+      ;
+    });
+  });
+});
+
+describe('outhtml op', function(){
   var num_rows_head = 5;
   var url = '/csv/head -n ' + num_rows_head + '/html/?url=' + data_url;
   describe('GET ' + url, function(){
