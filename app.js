@@ -95,7 +95,7 @@ var TransformOMatic = {
       } else {
         op = transform[0].trim().split(' ');
         if (inputFormats.indexOf(op[0]) != -1) {
-          defaultOutputFormat = op[0];
+          defaultOutputFormat = op.join(' ');
           op[0] = 'in' + op[0];
           transform[0] = op.join(' ');
           inputFormatSpecified = true;
@@ -106,7 +106,7 @@ var TransformOMatic = {
         op = transform[x].trim().split(' ');
         if (inputFormats.indexOf(op[0]) != -1) {
           // update the default output format
-          defaultOutputFormat = op[0];
+          defaultOutputFormat = op.join(' ');
           op[0] = 'in' + op[0];
           transform[x] = op.join(' ');
           inputFormatSpecified = true;
