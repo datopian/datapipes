@@ -18,7 +18,8 @@ describe('GET /', function(){
     request
       .get('/')
       .expect('Content-Type', /html/)
-      .expect(200, done);
+      .expect(200, done)
+    ;
   });
 });
 
@@ -31,7 +32,8 @@ describe('Docs', function(){
         request
           .get(url)
           .expect('Content-Type', /html/)
-          .expect(200, done);
+          .expect(200, done)
+        ;
       });
     });
   });
@@ -58,7 +60,8 @@ describe('none op', function(){
               done();
             })
           ;
-        });
+        })
+      ;
     });
   });
 });
@@ -81,7 +84,8 @@ describe('head op', function(){
               done();
             })
           ;
-        });
+        })
+      ;
     });
   });
 
@@ -103,7 +107,8 @@ describe('head op', function(){
               done();
             })
           ;
-        });
+        })
+      ;
     });
   });
 });
@@ -126,7 +131,8 @@ describe('tail op', function(){
               done();
             })
           ;
-        });
+        })
+      ;
     });
   });
 
@@ -148,7 +154,8 @@ describe('tail op', function(){
               done();
             })
           ;
-        });
+        })
+      ;
     });
   });
 
@@ -169,7 +176,8 @@ describe('tail op', function(){
               done();
             })
           ;
-        });
+        })
+      ;
     });
   });
 });
@@ -195,7 +203,8 @@ describe('cut op', function(){
               done();
             })
           ;
-        });
+        })
+      ;
     });
   });
 
@@ -219,7 +228,8 @@ describe('cut op', function(){
               done();
             })
           ;
-        });
+        })
+      ;
     });
   });
 
@@ -291,7 +301,8 @@ describe('delete op', function(){
               done();
             })
           ;
-        });
+        })
+      ;
     });
   });
 
@@ -313,7 +324,8 @@ describe('delete op', function(){
               done();
             })
           ;
-        });
+        })
+      ;
     });
   });
 
@@ -368,7 +380,8 @@ describe('grep op', function(){
               done();
             })
           ;
-        });
+        })
+      ;
     });
   });
 });
@@ -420,7 +433,8 @@ describe('html op', function(){
           assert.equal(numRows, num_rows_head);
 
           done();
-        });
+        })
+      ;
     });
   });
 });
