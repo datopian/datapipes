@@ -268,6 +268,28 @@ describe('delete op', function(){
         });
     });
   });
+
+  var url3 = '/csv/delete 10/?url=' + data_url;
+  describe('GET ' + url3, function(){
+    var num_rows_removed = 1;
+    it('should return csv with ' + (num_rows - num_rows_removed) + ' rows (' + num_rows_removed + ' removed)', function(done){
+      request
+        .get(url3)
+        .expect('Content-Type', /plain/)
+        .expect(200)
+        .end(function(err, res) {
+          if (err) done(err);
+
+          csv()
+            .from.string(res.text)
+            .on('end', function(count) {
+              assert.equal(count, (num_rows - num_rows_removed));
+              done();
+            })
+          ;
+        });
+    });
+  });
 });
 
 describe('grep op', function(){
