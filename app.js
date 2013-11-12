@@ -44,7 +44,7 @@ var TransformOMatic = {
     var calls = transformStr.split('/');
     var transformers = _.map(calls, function(call){
       call = call.trim().split(' ');
-      var name = call[0];
+      var name = call.shift();
       if (_.has(ops, name)) {
         return new ops[name](call);
       } else {
