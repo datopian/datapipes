@@ -222,6 +222,30 @@ describe('cut op', function(){
         });
     });
   });
+
+  var url3 = '/csv/cut 0,2-4 --complement/?url=' + data_url;
+  describe('GET ' + url2, function(){
+    var num_cols_kept = 4;
+    it('should return csv with ' + num_cols_kept + ' columns', function(done){
+      request
+        .get(url3)
+        .expect('Content-Type', /plain/)
+        .expect(200)
+        .end(function(err, res) {
+          if (err) done(err);
+
+          csv()
+            .from.string(res.text)
+            .on('record', function(row,index){
+              assert.equal(row.length, num_cols_kept);
+            })
+            .on('end', function(count) {
+              done();
+            })
+          ;
+        });
+    });
+  });
 });
 
 describe('delete op', function(){
