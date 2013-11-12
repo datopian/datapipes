@@ -176,8 +176,8 @@ describe('tail op', function(){
 
 describe('cut op', function(){
   var url = '/csv/cut 0,3/?url=' + data_url;
-  var num_cols_removed = 2;
   describe('GET ' + url, function(){
+    var num_cols_removed = 2;
     it('should return csv with ' + (num_cols - num_cols_removed) + ' columns (' + num_cols_removed + ' removed)', function(done){
       request
         .get(url)
@@ -238,6 +238,30 @@ describe('cut op', function(){
             .from.string(res.text)
             .on('record', function(row,index){
               assert.equal(row.length, num_cols_kept);
+            })
+            .on('end', function(count) {
+              done();
+            })
+          ;
+        });
+    });
+  });
+
+  var url4 = '/csv/cut 3/?url=' + data_url;
+  describe('GET ' + url, function(){
+    var num_cols_removed = 1;
+    it('should return csv with ' + (num_cols - num_cols_removed) + ' columns (' + num_cols_removed + ' removed)', function(done){
+      request
+        .get(url4)
+        .expect('Content-Type', /plain/)
+        .expect(200)
+        .end(function(err, res) {
+          if (err) done(err);
+
+          csv()
+            .from.string(res.text)
+            .on('record', function(row,index){
+              assert.equal(row.length, (num_cols - num_cols_removed));
             })
             .on('end', function(count) {
               done();
