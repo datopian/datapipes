@@ -60,7 +60,7 @@ var TransformOMatic = {
       if (response.statusCode != 200) {
         failure(response);
       } else {
-        stream = data;
+        var stream = data;
         _.each(transformers, function(next) {
           stream = stream.pipe(next);
         });
@@ -77,28 +77,60 @@ var TransformOMatic = {
 
   // hack the input to the required form
   rejig: function(transformStr) {
-    transform = transformStr.split('/');
+    var inputFormats = ['csv'];
+    var outputFormats = ['csv', 'html'];
 
-    firstOp = transform[0].trim().split(' ');
-    if (firstOp[0] == 'csv') {
-      firstOp[0] = 'incsv';
-      transform[0] = firstOp.join(' ');
+    var defaultInputFormat = 'csv';
+    var defaultOutputFormat = defaultInputFormat;
+
+    var transform = transformStr.split('/');
+    var numOps = transform.length;
+
+    // parser-related stuff
+    var inputFormatSpecified = false;
+    if (numOps == 1) {
+      if (transform[0] === '') {
+        transform[0] = 'in' + defaultInputFormat;
+        inputFormatSpecified = true;
+      } else {
+        op = transform[0].trim().split(' ');
+        if (inputFormats.indexOf(op[0]) != -1) {
+          defaultOutputFormat = op.join(' ');
+          op[0] = 'in' + op[0];
+          transform[0] = op.join(' ');
+          inputFormatSpecified = true;
+        }
+      }
     } else {
-      // default to parsing csv
-      transform.unshift('incsv');
+      for (x = 0; x < numOps - 1; x++) {
+        op = transform[x].trim().split(' ');
+        if (inputFormats.indexOf(op[0]) != -1) {
+          // update the default output format
+          defaultOutputFormat = op.join(' ');
+          op[0] = 'in' + op[0];
+          transform[x] = op.join(' ');
+          inputFormatSpecified = true;
+          break;
+        }
+      }
+    }
+    if (!inputFormatSpecified) {
+      transform.unshift('in' + defaultInputFormat);
+      numOps += 1;
     }
 
-    numOps = transform.length;
-    lastOp = transform[numOps-1].trim().split(' ');
-    if (lastOp[0] == 'html') {
-      lastOp[0] = 'outhtml';
+    // renderer-related stuff
+    var lastOp = transform[numOps-1].trim().split(' ');
+    if (outputFormats.indexOf(lastOp[0]) != -1) {
+      lastOp[0] = 'out' + lastOp[0];
       transform[numOps-1] = lastOp.join(' ');
     } else if (lastOp[0] == 'none') {
+      // 'none' operator is a special case
       lastOp[0] = 'outcsv';
       transform[numOps-1] = lastOp.join(' ');
     } else {
-      // default to outputting csv
-      transform.push('outcsv');
+      // use the default output format
+      transform.push('out' + defaultOutputFormat);
     }
 
     return transform.join('/');
@@ -117,6 +149,7 @@ function getMarkdownContent(filepath, cb) {
 
 app.get('/*', function(req, res) {
   var url = req.query.url;
+  var mdFilename;
   if (!url) {
     var page = req.params[0].split('/')[0];
     if (page === '') {
@@ -135,7 +168,7 @@ app.get('/*', function(req, res) {
       }
     });
   } else {
-    transformStr = req.params[0].replace(/(\/+|\s+)$/, '');
+    var transformStr = req.params[0].replace(/(\/+|\s+)$/, '');
 
     transformStr = TransformOMatic.rejig(transformStr);
 
