@@ -4,7 +4,7 @@ Filter data to only those rows where certain columns match a regular expression.
 
 ### Usage
 
-    grep [-v] [-e pattern] [-c columns] [pattern]/?url…
+    grep [-v] [-e pattern] [-c columns] [PATTERN]/?url…
 
     -c COLUMNS, --columns COLUMNS
         comma-separated list of columns to search.

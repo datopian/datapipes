@@ -1,16 +1,17 @@
 ## cut
 
-Remove certain columns from data.
+Remove specified columns from data.
 
 ### Usage
 
-    cut [--complement] [range]/?url…
+    cut [--complement] [RANGE]/?url…
 
     --complement
         Keep the specified columns, and delete the rest.
 
-    range
-        Comma separated range of column indices (0 based)
+    RANGE
+        Comma separated column indices (0 based). Ranges can
+        also be specified with a hyphen.
 
 ### Examples
 
