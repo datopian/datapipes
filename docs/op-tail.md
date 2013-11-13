@@ -1,22 +1,25 @@
 ## tail
 
-Simple tail operation:
+Truncate dataset to its last rows.
 
-    # Defaults to last 10 rows
-    /csv/tail/?url=...
+### Usage
 
-    # Explicit set number of rows to take using -n option
-    #
-    # Take last 30 rows
-    /csv/tail -n 30/?url=...
+    tail [-n COUNT]/?url…
 
-    # Take all rows after the first 30
-    /csv/tail -n +30/?url=...
+    -n COUNT
+        Number of rows to truncate to. If this option is
+        omitted, it defaults to 10.
+
+        A leading + sign means this number is relative to
+        the first row. Otherwise it is relative to the last
+        row.
 
 ### Examples
 
+Return the last 10 rows.
+
 </csv/tail/?url=https://raw.github.com/datasets/bond-yields-uk-10y/master/annual.csv>
 
+Return all rows after the first 5.
 
-</csv/tail%20-n%2020/?url=https://raw.github.com/datasets/bond-yields-uk-10y/master/annual.csv>
-
+[/csv/tail -n +5/?url=https://raw.github.com/datasets/bond-yields-uk-10y/master/annual.csv](/csv/tail -n +5/?url=https://raw.github.com/datasets/bond-yields-uk-10y/master/annual.csv)

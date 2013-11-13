@@ -1,17 +1,21 @@
 ## head
 
-Simple head operation:
+Truncate dataset to its first rows.
 
-    # defaults to 10 rows
-    /csv/head/?url=...
+### Usage
 
-    # explicit set number of rows to take using -n option
-    /csv/head -n 30/?url=...
+    head [-n COUNT]/?url…
+
+    -n COUNT
+        Number of rows to truncate to. If this option is
+        omitted, it defaults to 10.
 
 ### Examples
 
+Return the first 10 rows.
+
 </csv/head/?url=https://raw.github.com/datasets/bond-yields-uk-10y/master/annual.csv>
 
+Return the first 20 rows.
 
-</csv/head%20-n%2020/?url=https://raw.github.com/datasets/bond-yields-uk-10y/master/annual.csv>
-
+[/csv/head -n 20/?url=https://raw.github.com/datasets/bond-yields-uk-10y/master/annual.csv](/csv/head -n 20/?url=https://raw.github.com/datasets/bond-yields-uk-10y/master/annual.csv)

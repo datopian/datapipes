@@ -52,6 +52,7 @@ The basic operations are inspired by unix-style commands such `head`, `cut`, `gr
 * [html][] = render as viewable HTML table
 * [delete][] = delete rows
 * [head][] = take only first X rows
+* [tail][] = take only last X rows
 * [strip][] = delete all blank rows
 * [cut][] = select / delete columns
 * [grep][] = filter rows based on pattern matching
@@ -61,6 +62,7 @@ The basic operations are inspired by unix-style commands such `head`, `cut`, `gr
 [delete]: /delete/
 [grep]: /grep/
 [head]: /head/
+[tail]: /tail/
 [strip]: /strip/
 [html]: /html/
 [cut]: /cut/
