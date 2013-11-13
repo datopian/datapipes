@@ -13,7 +13,8 @@ Filter data to only those rows where certain columns match a regular expression.
         The regular expression to search for.
 
     -v, --invert-match
-        Return the rows that do __not__ match the regular expression.
+        Return the rows that do __not__ match the regular
+        expression.
 
 ### Examples
 

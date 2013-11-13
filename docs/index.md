@@ -53,7 +53,7 @@ The basic operations are inspired by unix-style commands such `head`, `cut`, `gr
 * [delete][] = delete rows
 * [head][] = take only first X rows
 * [strip][] = delete all blank rows
-* [cut][] = select / delete columns (not yet implemented)
+* [cut][] = select / delete columns
 * [grep][] = filter rows based on pattern matching
 * sed = find and replace (not yet implemented)
 
