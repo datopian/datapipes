@@ -8,11 +8,18 @@ Convert the data to an elegant HTML table (with line numbers!).
 </form>
 <br />
 
-### API
+### Usage
 
-    html/?url=...
+    html [-H]/?url…
 
-You can highlight line numbers:
+    -H, --no-header-row
+        By default, the first row of data is rendered as a header row.
+        This switch disables that behaviour.
+
+        If the first row was parsed as a header row, it will not be
+        displayed.
+
+You can also highlight line numbers:
 
     html/?url=...#L10
 

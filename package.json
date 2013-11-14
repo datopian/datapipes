@@ -1,6 +1,7 @@
 {
   "name": "datapipes"
   , "version": "0.1.0"
+  , "author": "Open Knowledge Foundation <labs@okfn.org>"
   , "dependencies": {
       "express": "",
       "request": "",
@@ -9,16 +10,20 @@
       "nunjucks": "",
       "underscore": "",
       "optimist": ""
-  },
-  "devDependencies": {
+  }
+  , "repository": {
+    "type": "git",
+    "url": "https://github.com/okfn/datapipes"
+  }
+  , "devDependencies": {
     "supertest": "",
     "mocha": ""
-  },
-  "engines": {
+  }
+  , "engines": {
     "node": "0.10.x",
     "npm": "1.3.x"
-  },
-  "scripts": {
+  }
+  , "scripts": {
     "test": "./node_modules/mocha/bin/mocha ./test/test.js"
   }
 }
