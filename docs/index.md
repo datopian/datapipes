@@ -2,11 +2,13 @@
 
 Data Pipes is a service to provide streaming, "pipe-like" data transformations on the web &ndash; things like deleting rows or columns, find and replace, head, grep etc.
 
-At present we **only handle CSV files** &ndash; they stream very naturally!
+To illustrate here's a live example:
 
-*(Interested in [JSON support then vote here][json-issue])*
+[/csv/head -n 50/cut 0/delete 1:7/grep LONDON/html?url=https&#58;//raw.github.com/okfn/datapipes/master/test/data/gla.csv][ex]
 
-[json-issue]: https://github.com/okfn/datapipes/issues/16
+[ex]: /csv/head%20-n%2050/cut%200/delete%201:7/grep%20LONDON/html?url=https://raw.github.com/okfn/datapipes/master/test/data/gla.csv
+
+Crudely this does the following: parses the incoming url as CSV, slices out the first 50 rows ([head][]), then cuts column 0 ([cut][]), then deletes rows 1-5 ([delete][]), then filters for all rows with LONDON in them ([grep][]), and finally transforms to HTML output ([html][]).
 
 ## API
 
@@ -28,15 +30,13 @@ You can also do **piping**, that is pass output of one transformation as input t
 
     /csv/{trans1} {args}/{trans2} {args}/.../?url={source-url}
 
-Here's an example:
+### Input Formats
 
-[/csv/head -n 50/cut 0/delete 1:7/grep LONDON/html?url=https&#58;//raw.github.com/okfn/datapipes/master/test/data/gla.csv][ex]
+At present we only support CSV but we are considering support for JSON, plain text and RSS.
 
-[ex]: /csv/head%20-n%2050/cut%200/delete%201:7/grep%20LONDON/html?url=https://raw.github.com/okfn/datapipes/master/test/data/gla.csv
+*If you are Interested in [JSON support then vote here][json-issue])*
 
-Crudely this says: slice out the first 50 rows ([head][]), then cut column 0 ([cut][]),
-then delete rows 1-5 ([delete][]), then filter for all rows with LONDON in them
-([grep][]), and finally transform to HTML output ([html][]).
+[json-issue]: https://github.com/okfn/datapipes/issues/16
 
 ### CORS and JS web apps
 
