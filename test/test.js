@@ -355,9 +355,41 @@ describe('delete op', function(){
 describe('grep op', function(){
   var url = '/csv/grep LONDON/?url=' + data_url;
   describe('GET ' + url, function(){
-    it('should return csv with ' + (num_london_rows + 1) + ' rows (1 header plus ' + num_london_rows + ' containing the word "LONDON")', function(done){
+    it('should return csv with ' + (num_london_rows + 1) + ' rows - 1 header plus ' + num_london_rows + ' containing the word "LONDON"', function(done){
       request
         .get(url)
+        .expect('Content-Type', /plain/)
+        .expect(200)
+        .end(function(err, res) {
+          if (err) done(err);
+
+          csv()
+            .from.string(res.text)
+            .on('record', function(row,index){
+              if (index === 0) {
+                // skip the header row
+                return;
+              }
+              var contains_london = _.some(row, function(val) {
+                return val.indexOf('LONDON') != -1;
+              });
+              assert.equal(contains_london, true);
+            })
+            .on('end', function(count) {
+              assert.equal(count, (num_london_rows + 1));
+              done();
+            })
+          ;
+        })
+      ;
+    });
+  });
+
+  var url2 = '/csv/grep -i London/?url=' + data_url;
+  describe('GET ' + url, function(){
+    it('should return csv with ' + (num_london_rows + 1) + ' rows - 1 header plus ' + num_london_rows + ' containing the word "London" (case-insensitive)', function(done){
+      request
+        .get(url2)
         .expect('Content-Type', /plain/)
         .expect(200)
         .end(function(err, res) {

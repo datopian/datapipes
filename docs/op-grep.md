@@ -4,13 +4,16 @@ Filter data to only those rows where certain columns match a regular expression.
 
 ### Usage
 
-    grep [-v] [-e pattern] [-c columns] [PATTERN]/?url…
+    grep [-iv] [-e pattern] [-c columns] [PATTERN]/?url…
 
     -c COLUMNS, --columns COLUMNS
         comma-separated list of columns to search.
 
     -e PATTERN, --regexp PATTERN
         The regular expression to search for.
+
+    -i, --ignore-case
+        Perform case-insensitive pattern matching.
 
     -v, --invert-match
         Return the rows that do __not__ match the regular
