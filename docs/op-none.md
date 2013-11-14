@@ -11,4 +11,4 @@ No transform of the data. Still useful as:
 
 ### Examples
 
-</csv/none/?url=https://raw.github.com/datasets/bond-yields-uk-10y/master/annual.csv>
+</none/?url=https://raw.github.com/datasets/bond-yields-uk-10y/master/annual.csv>

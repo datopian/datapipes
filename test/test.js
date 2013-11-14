@@ -40,7 +40,7 @@ describe('Docs', function(){
 });
 
 describe('none op', function(){
-  var url = '/csv/none/?url=' + data_url;
+  var url = '/none/?url=' + data_url;
   describe('GET ' + url, function(){
     it('should return csv with ' + num_rows + ' rows and ' + num_cols + ' columns (original file)', function(done){
       request

@@ -89,9 +89,9 @@ var TransformOMatic = {
     // parser-related stuff
     var inputFormatSpecified = false;
     if (numOps == 1) {
-      if (transform[0] === '') {
-        transform[0] = 'in' + defaultInputFormat;
-        inputFormatSpecified = true;
+      if (['', 'none'].indexOf(transform[0]) != -1) {
+        // 'none' operator is a special case
+        return 'none';
       } else {
         op = transform[0].trim().split(' ');
         if (inputFormats.indexOf(op[0]) != -1) {
@@ -123,10 +123,6 @@ var TransformOMatic = {
     var lastOp = transform[numOps-1].trim().split(' ');
     if (outputFormats.indexOf(lastOp[0]) != -1) {
       lastOp[0] = 'out' + lastOp[0];
-      transform[numOps-1] = lastOp.join(' ');
-    } else if (lastOp[0] == 'none') {
-      // 'none' operator is a special case
-      lastOp[0] = 'outcsv';
       transform[numOps-1] = lastOp.join(' ');
     } else {
       // use the default output format
