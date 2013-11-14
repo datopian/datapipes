@@ -67,7 +67,7 @@ describe('none op', function(){
 });
 
 describe('head op', function(){
-  var url = '/csv/head/?url=' + data_url;
+  var url = '/csv -H/head/?url=' + data_url;
   describe('GET ' + url, function(){
     it('should return 10 csv rows', function(done){
       request
@@ -92,7 +92,7 @@ describe('head op', function(){
   var num_rows_head = 5;
   var url2 = '/csv/head -n ' + num_rows_head + '/?url=' + data_url;
   describe('GET ' + url2, function(){
-    it('should return ' + num_rows_head + ' csv rows', function(done){
+    it('should return ' + (1 + num_rows_head) + ' csv rows', function(done){
       request
         .get(url2)
         .expect('Content-Type', /plain/)
@@ -103,7 +103,7 @@ describe('head op', function(){
           csv()
             .from.string(res.text)
             .on('end', function(count) {
-              assert.equal(count, num_rows_head);
+              assert.equal(count, (1 + num_rows_head));
               done();
             })
           ;
@@ -114,7 +114,7 @@ describe('head op', function(){
 });
 
 describe('tail op', function(){
-  var url = '/csv/tail/?url=' + data_url;
+  var url = '/csv --no-header-row/tail/?url=' + data_url;
   describe('GET ' + url, function(){
     it('should return 10 csv rows', function(done){
       request
@@ -139,7 +139,7 @@ describe('tail op', function(){
   var num_rows_tail = 5;
   var url2 = '/csv/tail -n ' + num_rows_tail + '/?url=' + data_url;
   describe('GET ' + url2, function(){
-    it('should return ' + num_rows_tail + ' csv rows', function(done){
+    it('should return ' + (1 + num_rows_tail) + ' csv rows', function(done){
       request
         .get(url2)
         .expect('Content-Type', /plain/)
@@ -150,7 +150,7 @@ describe('tail op', function(){
           csv()
             .from.string(res.text)
             .on('end', function(count) {
-              assert.equal(count, num_rows_tail);
+              assert.equal(count, (1 + num_rows_tail));
               done();
             })
           ;
@@ -161,7 +161,7 @@ describe('tail op', function(){
 
   var url3 = '/csv/tail -n +' + num_rows_tail + '/?url=' + data_url;
   describe('GET ' + url3, function(){
-    it('should return ' + (num_rows - num_rows_tail) + ' csv rows', function(done){
+    it('should return ' + (1 + num_rows - num_rows_tail) + ' csv rows', function(done){
       request
         .get(url3)
         .expect('Content-Type', /plain/)
@@ -471,7 +471,7 @@ describe('outhtml op', function(){
   var num_rows_head = 5;
   var url = '/csv/head -n ' + num_rows_head + '/html/?url=' + data_url;
   describe('GET ' + url, function(){
-    it('should return ' + num_rows_head + ' html rows', function(done){
+    it('should return ' + (1 + num_rows_head) + ' html rows', function(done){
       request
         .get(url)
         .expect('Content-Type', /html/)
@@ -481,7 +481,7 @@ describe('outhtml op', function(){
 
           var out = res.text;
           var numRows = out.match(/<tr/g).length;
-          assert.equal(numRows, num_rows_head);
+          assert.equal(numRows, (1 + num_rows_head));
 
           done();
         })
