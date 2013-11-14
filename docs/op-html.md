@@ -8,11 +8,11 @@ Convert the data to an elegant HTML table (with line numbers!).
 </form>
 <br />
 
-### API
+### Usage
 
-    html/?url=...
+    html/?url…
 
-You can highlight line numbers:
+You can also highlight line numbers:
 
     html/?url=...#L10
 

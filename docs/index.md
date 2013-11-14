@@ -49,6 +49,7 @@ The basic operations are inspired by unix-style commands such `head`, `cut`, `gr
 [suggest]: https://github.com/okfn/datapipes/issues
 
 * [none][] (aka raw) = no transform but file parsed (useful with CORS)
+* [csv][] = parse / render csv
 * [html][] = render as viewable HTML table
 * [delete][] = delete rows
 * [head][] = take only first X rows
@@ -59,6 +60,7 @@ The basic operations are inspired by unix-style commands such `head`, `cut`, `gr
 * sed = find and replace (not yet implemented)
 
 [none]: /none/
+[csv]: /csv/
 [delete]: /delete/
 [grep]: /grep/
 [head]: /head/
