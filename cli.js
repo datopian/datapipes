@@ -29,6 +29,7 @@ var argv = require('optimist')
     s: {alias: 'share', boolean: true, describe: 'Generate a URL to share this.'},
   })
   .usage(usage)
+  .demand(1)
   .argv
 ;
 
