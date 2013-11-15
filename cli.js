@@ -19,11 +19,16 @@ stdout.prototype.send = function(statuscode, msg) {
   process.stderr.write(msg + '\n');
 };
 
+var usage = '\nPerform streaming data transformations on remote csv files.\n';
+usage += 'More details: http://datapipes.okfnlabs.org\n\n';
+usage += 'Usage: $0 [-s] [-u URL] -- [PIPELINE]';
+
 var argv = require('optimist')
   .options({
     u: {alias: 'url', string: true, demand: true, describe: 'URL of input data.'},
     s: {alias: 'share', boolean: true, describe: 'Generate a URL to share this.'},
   })
+  .usage(usage)
   .argv
 ;
 
