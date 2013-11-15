@@ -21,13 +21,28 @@ stdout.prototype.send = function(statuscode, msg) {
 
 var argv = require('optimist')
   .options({
-    url: {string: true, demand: true},
-    v: {alias: 'verbose', boolean: true},
+    u: {alias: 'url', string: true, demand: true, describe: 'URL of input data.'},
+    s: {alias: 'share', boolean: true, describe: 'Generate a URL to share this.'},
   })
   .argv
 ;
 
 var transformStr = argv._.join(' ');
+
+if (argv.s) {
+  var transformUrl = 'http://datapipes.okfnlabs.org/';
+  transformUrl += transformStr + '?url=';
+  transformUrl += argv.url;
+  var stars = Array(transformUrl.length+1).join('*');
+
+  console.log('URL to share:');
+  console.log(stars);
+  console.log(transformUrl);
+  console.log(stars);
+
+  return;
+}
+
 transformStr = TransformOMatic.rejig(transformStr);
 
 var transformers = TransformOMatic.pipeline(transformStr);
