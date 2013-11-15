@@ -1,6 +1,19 @@
 #!/usr/bin/env node
-var stdout = require('stdout');
+var inherits = require('util').inherits;
+var Writable = require('stream').Writable;
 var TransformOMatic = require('./lib/transform');
+
+function stdout() {
+  if (!(this instanceof stdout)) return new stdout();
+  Writable.call(this, {objectMode: true});
+}
+
+inherits(stdout, Writable);
+
+stdout.prototype._write = function(chunk, encoding, done) {
+  process.stdout.write(chunk);
+  done();
+};
 
 var argv = require('optimist')
   .options({
