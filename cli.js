@@ -15,6 +15,10 @@ stdout.prototype._write = function(chunk, encoding, done) {
   done();
 };
 
+stdout.prototype.send = function(statuscode, msg) {
+  process.stderr.write(msg + '\n');
+};
+
 var argv = require('optimist')
   .options({
     url: {string: true, demand: true},
