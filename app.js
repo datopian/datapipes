@@ -40,11 +40,19 @@ env.express(app);
 
 var TransformOMatic = {
   // Conduct our transformation
-  pipeline: function(transformStr){
+  pipeline: function(transformStr, query){
     var calls = transformStr.split('/');
     var transformers = _.map(calls, function(call){
       call = call.trim().split(' ');
       var name = call.shift();
+
+      call = _.map(call, function(arg) {
+        if (arg.length > 0 && arg.charAt(0) == '$') {
+          return query[arg.substr(1)];
+        }
+        return arg;
+      });
+
       if (_.has(ops, name)) {
         return new ops[name](call);
       } else {
@@ -168,7 +176,7 @@ app.get('/*', function(req, res) {
 
     transformStr = TransformOMatic.rejig(transformStr);
 
-    var transformers = TransformOMatic.pipeline(transformStr);
+    var transformers = TransformOMatic.pipeline(transformStr, req.query);
 
     var failure = function(resp){
       res.send(resp.statusCode, 'Error code ' + resp.statusCode + ' with upstream URL: ' + url);
