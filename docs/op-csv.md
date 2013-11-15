@@ -12,7 +12,7 @@ Parse or render csv
     -H, --no-header-row
         On parse, indicate that the first row of the data is not a
         header row.
-        On render, this switch is not valid and has no effect.
+        On render, indicate that the header row should be discarded.
 
     -S, --skipinitialspace
         Ignore whitespace immediately following the delimiter.

@@ -16,8 +16,8 @@ Convert the data to an elegant HTML table (with line numbers!).
         By default, the first row of data is rendered as a header row.
         This switch disables that behaviour.
 
-        If the first row was parsed as a header row, this switch is not
-        valid and will have no effect.
+        If the first row was parsed as a header row, this switch will
+        prevent it from being displayed.
 
 You can also highlight lines by their line numbers:
 
