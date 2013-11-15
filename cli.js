@@ -31,7 +31,8 @@ var transformStr = argv._.join(' ');
 
 if (argv.s) {
   var transformUrl = 'http://datapipes.okfnlabs.org/';
-  transformUrl += transformStr + '?url=';
+  transformUrl += encodeURIComponent(transformStr);
+  transformUrl += '?url=';
   transformUrl += argv.url;
   var stars = Array(transformUrl.length+1).join('*');
 
