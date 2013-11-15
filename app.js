@@ -77,11 +77,14 @@ app.get('/*', function(req, res) {
 
     var transformers = TransformOMatic.pipeline(transformStr);
 
-    var failure = function(resp){
-      res.send(resp.statusCode, 'Error code ' + resp.statusCode + ' with upstream URL: ' + url);
-    };
+    if (_.last(transformers).contentType) {
+      res.setHeader("Content-Type", _.last(transformers).contentType());
+    } else {
+      // default to plain text
+      res.setHeader("Content-Type", "text/plain; charset=utf-8");
+    }
 
-    TransformOMatic.transform(res, transformers, url, failure);
+    TransformOMatic.transform(res, transformers, url);
   }
 });
 
