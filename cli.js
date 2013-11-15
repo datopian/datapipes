@@ -33,11 +33,18 @@ var argv = require('optimist')
   .argv
 ;
 
-var transformStr = argv._.join(' ');
+var transformStr = argv._
+  .join(' ')
+  .split('/')
+  .map(function(item) {
+    return item.trim(' ');
+  })
+  .join('/')
+;
 
 if (argv.s) {
   var transformUrl = 'http://datapipes.okfnlabs.org/';
-  transformUrl += encodeURIComponent(transformStr);
+  transformUrl += encodeURI(transformStr);
   transformUrl += '?url=';
   transformUrl += argv.url;
   var stars = Array(transformUrl.length+1).join('*');
