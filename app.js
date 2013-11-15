@@ -62,7 +62,9 @@ var TransformOMatic = {
       } else {
         var stream = data;
         _.each(transformers, function(next) {
-          stream = stream.pipe(next);
+          if (next) {
+            stream = stream.pipe(next);
+          }
         });
         if (stream.contentType) {
           response.setHeader("Content-Type", stream.contentType());
