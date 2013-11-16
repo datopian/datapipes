@@ -75,7 +75,7 @@ app.get('/*', function(req, res) {
     // rewrite the transform string in the form required
     transformStr = TransformOMatic.rejig(transformStr);
 
-    var transformers = TransformOMatic.pipeline(transformStr);
+    var transformers = TransformOMatic.pipeline(transformStr, req.query);
 
     if (_.last(transformers).contentType) {
       res.setHeader("Content-Type", _.last(transformers).contentType());
