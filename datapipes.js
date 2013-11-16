@@ -35,6 +35,7 @@ var argv = require('optimist')
 
 var transformStr = argv._
   .join(' ')
+  .replace(/(^(\/|\s)+|(\/|\s)+$)/g, '')
   .split('/')
   .map(function(item) {
     return item.trim(' ');
