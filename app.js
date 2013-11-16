@@ -158,7 +158,8 @@ app.get('/*', function(req, res) {
       }
     });
   } else {
-    var transformStr = req.params[0].replace(/(\/+|\s+)$/, '');
+    // remove leading&trailing spaces&slashes
+    var transformStr = req.params[0].replace(/(^(\/|\s)+|(\/|\s)+$)/g, '');
 
     transformStr = TransformOMatic.rejig(transformStr);
 
