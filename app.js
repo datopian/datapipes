@@ -1,13 +1,11 @@
 var fs = require('fs');
 var express = require('express');
-var request = require('request');
 var path = require('path');
 var nunjucks = require('nunjucks');
 var marked = require('marked');
 var _ = require('underscore');
 
-var ops = require('./lib/tools').toIntArr;
-var ops = require('./lib/operators');
+var TransformOMatic = require('./lib/transform');
 
 var app = express();
 
@@ -38,95 +36,6 @@ app.configure(function(){
 var env = new nunjucks.Environment(new nunjucks.FileSystemLoader('templates'));
 env.express(app);
 
-var TransformOMatic = {
-  // Conduct our transformation
-  pipeline: function(transformStr){
-    var calls = transformStr.split('/');
-    var transformers = _.map(calls, function(call){
-      call = call.trim().split(' ');
-      var name = call.shift();
-      if (_.has(ops, name)) {
-        return new ops[name](call);
-      } else {
-        console.log('Noop');
-      }
-    });
-    return transformers;
-  },
-
-  transform: function(response, transformers, url, failure){
-    var instream = request(url);
-    instream.on('response', function(data){
-      if (response.statusCode != 200) {
-        failure(response);
-      } else {
-        var stream = data;
-        _.each(transformers, function(next) {
-          if (next) {
-            stream = stream.pipe(next);
-          }
-        });
-        if (stream.contentType) {
-          response.setHeader("Content-Type", stream.contentType());
-        } else {
-          // default to plain text
-          response.setHeader("Content-Type", "text/plain; charset=utf-8");
-        }
-        stream.pipe(response);
-      }
-    });
-  },
-
-  // hack the input to the required form
-  rejig: function(transformStr) {
-    var supportedFormats = ['csv', 'html'];
-
-    var defaultInputFormat = 'csv';
-    var defaultOutputFormat = defaultInputFormat;
-
-    var transform = transformStr.split('/');
-
-    // 'none' operator is a special case
-    if (transform.length == 1 && ['', 'none'].indexOf(transform[0]) != -1) {
-      return 'none';
-    }
-
-    // first operator __must__ be a parser
-    op = transform[0].trim().split(' ');
-    if (supportedFormats.indexOf(op[0]) != -1) {
-      // update the default output format
-      defaultOutputFormat = op.join(' ');
-      op[0] = 'in' + op[0];
-      transform[0] = op.join(' ');
-    } else {
-      transform.unshift('in' + defaultInputFormat);
-    }
-
-    var outin = 'out';
-    // loop through transforms, alternating
-    // between parser and renderer
-    for (x = 1; x < transform.length; x++) {
-      op = transform[x].trim().split(' ');
-      if (supportedFormats.indexOf(op[0]) != -1) {
-        // update the default output format
-        defaultOutputFormat = op.join(' ');
-        op[0] = outin + op[0];
-        outin = (outin == 'in') ? 'out' : 'in';
-        transform[x] = op.join(' ');
-      }
-    }
-
-    // last operator __must__ be a renderer
-    var lastOp = transform[transform.length-1].trim().split(' ');
-    if (lastOp[0].length <= 'out'.length || supportedFormats.indexOf(lastOp[0].substr(3)) == -1) {
-      // use the default output format
-      transform.push('out' + defaultOutputFormat);
-    }
-
-    return transform.join('/');
-  },
-};
-
 function getMarkdownContent(filepath, cb) {
   fs.readFile(filepath, 'utf8', function(err, text) {
     if (err) {
@@ -141,6 +50,8 @@ app.get('/*', function(req, res) {
   var url = req.query.url;
   var mdFilename;
   if (!url) {
+    // if there's no url parameter,
+    // attempt to serve a docs page
     var page = req.params[0].split('/')[0];
     if (page === '') {
       mdFilename = 'docs/index.md';
@@ -161,15 +72,19 @@ app.get('/*', function(req, res) {
     // remove leading&trailing spaces&slashes
     var transformStr = req.params[0].replace(/(^(\/|\s)+|(\/|\s)+$)/g, '');
 
+    // rewrite the transform string in the form required
     transformStr = TransformOMatic.rejig(transformStr);
 
     var transformers = TransformOMatic.pipeline(transformStr);
 
-    var failure = function(resp){
-      res.send(resp.statusCode, 'Error code ' + resp.statusCode + ' with upstream URL: ' + url);
-    };
+    if (_.last(transformers).contentType) {
+      res.setHeader("Content-Type", _.last(transformers).contentType());
+    } else {
+      // default to plain text
+      res.setHeader("Content-Type", "text/plain; charset=utf-8");
+    }
 
-    TransformOMatic.transform(res, transformers, url, failure);
+    TransformOMatic.transform(res, transformers, url);
   }
 });
 
