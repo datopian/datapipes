@@ -1,0 +1,47 @@
+#!/usr/bin/env node
+var TransformOMatic = require('./lib/transform');
+var stdout = require('./lib/stdout');
+
+var usage = '\nPerform streaming data transformations on remote csv files.\n';
+usage += 'More details: http://datapipes.okfnlabs.org\n\n';
+usage += 'Usage: $0 [-s] [-u URL] -- [PIPELINE]';
+
+var argv = require('optimist')
+  .options({
+    s: {alias: 'share', boolean: true, describe: 'Generate a URL to share this.'},
+    u: {alias: 'url', string: true, describe: 'URL of input data.'},
+  })
+  .usage(usage)
+  .demand(1)
+  .argv
+;
+
+// cli mode
+var transformStr = argv._
+  .join(' ')
+  .replace(/(^(\/|\s)+|(\/|\s)+$)/g, '')
+  .split('/')
+  .map(function(item) {
+    return item.trim(' ');
+  })
+  .join('/')
+;
+
+if (argv.share) {
+  var transformUrl = 'http://datapipes.okfnlabs.org/';
+  transformUrl += encodeURI(transformStr);
+  transformUrl += '?url=';
+  transformUrl += argv.url;
+  var stars = Array(transformUrl.length+1).join('*');
+
+  console.log('URL to share:');
+  console.log(stars);
+  console.log(transformUrl);
+  console.log(stars);
+
+  return;
+}
+
+transformStr = TransformOMatic.rejig(transformStr);
+var transformers = TransformOMatic.pipeline(transformStr);
+TransformOMatic.transform(stdout(), transformers, argv.url);

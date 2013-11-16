@@ -1,88 +1,33 @@
 #!/usr/bin/env node
-var inherits = require('util').inherits;
-var Writable = require('stream').Writable;
 var TransformOMatic = require('./lib/transform');
-
-function stdout() {
-  if (!(this instanceof stdout)) return new stdout();
-  Writable.call(this, {objectMode: true});
-}
-
-inherits(stdout, Writable);
-
-stdout.prototype._write = function(chunk, encoding, done) {
-  process.stdout.write(chunk);
-  done();
-};
-
-stdout.prototype.send = function(statuscode, msg) {
-  process.stderr.write(msg + '\n');
-};
+var stdout = require('./lib/stdout');
 
 var usage = '\nPerform streaming data transformations on remote csv files.\n';
 usage += 'More details: http://datapipes.okfnlabs.org\n\n';
-usage += 'Usage: $0 [--cli] [-s] [-u URL] -- [PIPELINE]';
+usage += 'Usage: $0 [PIPELINE]';
 
 var argv = require('optimist')
-  .options({
-    cli: {boolean: true, describe: 'CLI mode.'},
-    s: {alias: 'share', boolean: true, describe: 'Generate a URL to share this.'},
-    u: {alias: 'url', string: true, describe: 'URL of input data.'},
-  })
   .usage(usage)
   .demand(1)
   .argv
 ;
 
-var transformUrl;
-var transformStr;
+// web mode
+var transformUrl = process.argv
+  .splice(2)
+  .join(' ')
+  .replace(/(^(\/|\s)+|(\/|\s)+$)/g, '')
+  .split('?')
+;
 
-if (argv.cli) {
-  // cli mode
-  transformStr = argv._
-    .join(' ')
-    .replace(/(^(\/|\s)+|(\/|\s)+$)/g, '')
-    .split('/')
-    .map(function(item) {
-      return item.trim(' ');
-    })
-    .join('/')
-  ;
-
-  if (argv.share) {
-    transformUrl = 'http://datapipes.okfnlabs.org/';
-    transformUrl += encodeURI(transformStr);
-    transformUrl += '?url=';
-    transformUrl += argv.url;
-    var stars = Array(transformUrl.length+1).join('*');
-
-    console.log('URL to share:');
-    console.log(stars);
-    console.log(transformUrl);
-    console.log(stars);
-
-    return;
-  }
-} else {
-  // web mode
-  transformUrl = process.argv
-    .splice(2)
-    .join(' ')
-    .replace(/(^(\/|\s)+|(\/|\s)+$)/g, '')
-    .split('?')
-  ;
-
-  transformStr = transformUrl.shift();
-  var queryStr = transformUrl.join('?');
-  argv = queryStr.split('&').reduce(function(hash, str) {
-    parts = str.split('=');
-    hash[parts.shift()] = parts.join('=');
-    return hash;
-  }, {});
-}
+var transformStr = transformUrl.shift();
+var queryStr = transformUrl.join('?');
+argv = queryStr.split('&').reduce(function(hash, str) {
+  parts = str.split('=');
+  hash[parts.shift()] = parts.join('=');
+  return hash;
+}, {});
 
 transformStr = TransformOMatic.rejig(transformStr);
-
 var transformers = TransformOMatic.pipeline(transformStr);
-
 TransformOMatic.transform(stdout(), transformers, argv.url);
