@@ -69,8 +69,8 @@ app.get('/*', function(req, res) {
       }
     });
   } else {
-    // remove trailing spaces and slashes
-    var transformStr = req.params[0].replace(/(\/+|\s+)$/, '');
+    // remove leading&trailing spaces&slashes
+    var transformStr = req.params[0].replace(/(^(\/|\s)+|(\/|\s)+$)/g, '');
 
     // rewrite the transform string in the form required
     transformStr = TransformOMatic.rejig(transformStr);

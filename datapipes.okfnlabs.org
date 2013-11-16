@@ -38,6 +38,7 @@ var transformUrl;
 var transformStr;
 
 if (argv.cli) {
+  // cli mode
   transformStr = argv._
     .join(' ')
     .replace(/(^(\/|\s)+|(\/|\s)+$)/g, '')
