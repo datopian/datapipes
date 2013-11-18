@@ -1,6 +1,6 @@
 ## grep
 
-Filter data to only those rows where certain columns match a regular expression.
+Filter data to only those rows where certain columns match a pattern.
 
 ### Usage
 
