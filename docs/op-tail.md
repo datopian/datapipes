@@ -4,15 +4,14 @@ Truncate dataset to its last rows.
 
 ### Usage
 
-    tail [-n COUNT]/?url…
+    tail [-n COUNT]
 
     -n COUNT
         Number of rows to truncate to. If this option is
         omitted, it defaults to 10.
 
-        A leading + sign means this number is relative to
-        the first row. Otherwise it is relative to the last
-        row.
+        A leading + sign means this number is relative to the
+        first row. Otherwise it is relative to the last row.
 
 ### Examples
 

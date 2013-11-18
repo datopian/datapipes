@@ -7,7 +7,7 @@ No transform of the data. Still useful as:
 
 ### Usage
 
-    none/?url…
+    none
 
 ### Examples
 

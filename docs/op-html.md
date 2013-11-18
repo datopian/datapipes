@@ -10,14 +10,14 @@ Convert the data to an elegant HTML table (with line numbers!).
 
 ### Usage
 
-    html [-H]/?url…
+    html [-H]
 
     -H, --no-header-row
-        By default, the first row of data is rendered as a header row.
-        This switch disables that behaviour.
+        By default, the first row of data is rendered as a
+        header row. This switch disables that behaviour.
 
-        If the first row was parsed as a header row, this switch is not
-        valid and will have no effect.
+        If the first row was parsed as a header row, this
+        switch is not valid and will have no effect.
 
 You can also highlight lines by their line numbers:
 

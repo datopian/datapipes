@@ -4,7 +4,7 @@ Discard empty rows.
 
 ### Usage
 
-    strip/?url…
+    strip
 
 ### Examples
 
