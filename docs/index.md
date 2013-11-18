@@ -58,24 +58,25 @@ The basic operations are inspired by unix-style commands such `head`, `cut`, `gr
 
 * [none][] (aka `raw`) = no transform but file parsed (useful with CORS)
 * [csv][] = parse / render csv
-* [html][] = render as viewable HTML table
-* [delete][] = delete rows
 * [head][] = take only first X rows
 * [tail][] = take only last X rows
+* [delete][] = delete rows
 * [strip][] = delete all blank rows
-* [cut][] = select / delete columns
 * [grep][] = filter rows based on pattern matching
-* sed = find and replace (not yet implemented)
+* [cut][] = select / delete columns
+* [replace][] = find and replace (not yet implemented)
+* [html][] = render as viewable HTML table
 
 [none]: /none/
 [csv]: /csv/
-[delete]: /delete/
-[grep]: /grep/
 [head]: /head/
 [tail]: /tail/
+[delete]: /delete/
 [strip]: /strip/
-[html]: /html/
+[grep]: /grep/
 [cut]: /cut/
+[replace]: /replace/
+[html]: /html/
 
 <h2 id="contributing">Contributing</h2>
 
