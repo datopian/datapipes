@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <h2>Interactive mode</h2>
+
+  <form action="" method="GET" class="form">
+    <input type="text" name="pipeline" value="" placeholder="e.g. /csv/head?url=…" style="width: 100%" />
+  </form>
+
+  <pre class="result"></pre>
+{% endblock %}
+
+{% block extra_js %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+  $(function() {
+    $("[name='pipeline']").keyup(function(e) {
+      console.log(this.value);
+      $.get(this.value, function(res) {
+        $('.result').html(res);
+      });
+    });
+  });
+</script>
+{% endblock %}

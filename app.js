@@ -46,6 +46,10 @@ function getMarkdownContent(filepath, cb) {
   });
 }
 
+app.get('/interactive', function(req, res) {
+  res.render('interactive.html');
+});
+
 app.get('/*', function(req, res) {
   var url = req.query.url;
   var mdFilename;
@@ -63,7 +67,7 @@ app.get('/*', function(req, res) {
         console.log(err);
         res.send('No info on this operation yet');
       } else {
-        res.render('index.html', {
+        res.render('docs.html', {
           content: content
         });
       }
