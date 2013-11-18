@@ -30,6 +30,6 @@ Parse or render csv
 
 ### Examples
 
-Turn comma-delimited data to tab-delimited.
+Turn comma-delimited data (csv) to tab-delimited (tsv).
 
 <a href="/csv/csv -t/?url=http://static.london.gov.uk/gla/expenditure/docs/2012-13-P12-250.csv">/csv/csv -t/?url=http://static.london.gov.uk/gla/expenditure/docs/2012-13-P12-250.csv</a>
