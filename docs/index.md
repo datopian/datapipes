@@ -40,9 +40,11 @@ At present we only support CSV but we are considering support for JSON, plain te
 
 ### Query string substitution
 
-Some characters can’t be used in a URL path because of restrictions. If this is a limitation (for instance if you need to use backslashes in your `grep` regex) variables can be defined in the query string and substituted in. E.g.:
+Some characters can’t be used in a URL path because of [restrictions][ietf]. If this is a limitation (for instance if you need to use backslashes in your `grep` regex) variables can be defined in the query string and substituted in. E.g.:
 
     /csv/grep $dt/html/?dt=\d{2}-\d{2}-\d{4}&url={source-url}
+
+[ietf]: http://tools.ietf.org/html/rfc3986
 
 ### CORS and JS web apps
 
@@ -54,7 +56,7 @@ The basic operations are inspired by unix-style commands such `head`, `cut`, `gr
 
 [suggest]: https://github.com/okfn/datapipes/issues
 
-* [none][] (aka raw) = no transform but file parsed (useful with CORS)
+* [none][] (aka `raw`) = no transform but file parsed (useful with CORS)
 * [csv][] = parse / render csv
 * [html][] = render as viewable HTML table
 * [delete][] = delete rows
@@ -79,7 +81,7 @@ The basic operations are inspired by unix-style commands such `head`, `cut`, `gr
 
 Under the hood Data Pipes is a simple open-source node.js webapp living [here on github][source].
 
-It's super easy to contribute and here are some of the[ current issues][issues].
+It's super easy to contribute and here are some of the [current issues][issues].
 
 [source]: https://github.com/okfn/datapipes
 [issues]: https://github.com/okfn/datapipes/issues
