@@ -3,11 +3,11 @@
 {% block content %}
   <h2>Interactive mode</h2>
 
-  <form action="" method="GET" class="form">
-    <input type="text" name="pipeline" value="" placeholder="e.g. /csv/head?url=…" style="width: 100%" />
-  </form>
+  <input type="text" name="pipeline" value="" placeholder="e.g. /csv/head?url=…" style="width: 100%" />
 
-  <pre class="result"></pre>
+  <div class="console">
+    <pre class="output"></pre>
+  </div>
 {% endblock %}
 
 {% block extra_js %}
@@ -15,10 +15,11 @@
 <script>
   $(function() {
     $("[name='pipeline']").keyup(function(e) {
-      console.log(this.value);
-      $.get(this.value, function(res) {
-        $('.result').html(res);
-      });
+      if (this.value != '') {
+        $.get('/exec/' + this.value, function(res) {
+          $('.output').html(res);
+        });
+      }
     });
   });
 </script>
