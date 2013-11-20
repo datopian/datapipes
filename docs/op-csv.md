@@ -11,8 +11,8 @@ Parse or render csv
         tab-delimited.
 
     -H, --no-header-row
-        On parse, indicate that the first row of the data is
-        not a header row.
+        On parse, indicate that the data does not contain a
+        header row.
         On render, this switch is not valid and has no effect.
 
     -S, --skipinitialspace
