@@ -208,7 +208,7 @@ describe('cut op', function(){
     });
   });
 
-  var url2 = '/csv/cut 0,2-4/?url=' + data_url;
+  var url2 = '/csv/cut 0,2:4/?url=' + data_url;
   describe('GET ' + url2, function(){
     var num_cols_removed = 4;
     it('should return csv with ' + (num_cols - num_cols_removed) + ' columns (' + num_cols_removed + ' removed)', function(done){
@@ -233,7 +233,7 @@ describe('cut op', function(){
     });
   });
 
-  var url3 = '/csv/cut 0,2-4 --complement/?url=' + data_url;
+  var url3 = '/csv/cut 0,2:4 --complement/?url=' + data_url;
   describe('GET ' + url2, function(){
     var num_cols_kept = 4;
     it('should return csv with ' + num_cols_kept + ' columns', function(done){
