@@ -4,7 +4,7 @@ Truncate dataset to its first rows.
 
 ### Usage
 
-    head [-n COUNT]/?url…
+    head [-n COUNT]
 
     -n COUNT
         Number of rows to truncate to. If this option is

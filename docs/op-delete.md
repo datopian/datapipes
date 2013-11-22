@@ -4,7 +4,7 @@ Remove specified rows from data.
 
 ### Usage
 
-    delete [RANGE]/?url…
+    delete [RANGE]
 
     RANGE
         Comma separated column indices (0 based). Ranges can

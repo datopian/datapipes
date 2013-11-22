@@ -4,7 +4,7 @@ Remove specified columns from data.
 
 ### Usage
 
-    cut [--complement] [RANGE]/?url…
+    cut [--complement] [RANGE]
 
     --complement
         Keep the specified columns, and delete the rest.
