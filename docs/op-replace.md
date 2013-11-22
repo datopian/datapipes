@@ -4,10 +4,13 @@ Find and replace.
 
 ### Usage
 
-    replace [-r] [FIND] [REPLACE]
+    replace [-r] [-c columns] [FIND] [REPLACE]
 
     -r, --regex
         Find argument is a regular expression.
+
+    -c COLUMNS, --columns COLUMNS
+        comma-separated list of columns to search.
 
     FIND
         Text to search for.
