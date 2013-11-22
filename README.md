@@ -1,6 +1,8 @@
 A webapp providing online Unix-Style data transformations on CSVs.
 
-Specifically, its a web service which unix-style `cut`, `grep`, `sed` in a streaming, "pipe-like" manner.
+Specifically, it’s a web service which offers unix-style `cut`, `grep`, `sed`
+in a streaming, "pipe-like" manner. It can be run via a browser or a command
+line interface.
 
 [![Build
 Status](https://travis-ci.org/okfn/datapipes.png)](https://travis-ci.org/okfn/datapipes)
@@ -14,21 +16,34 @@ See <http://datapipes.okfnlabs.org/>
 This is a Node Express application. To install and run do the following.
 
 1. Clone this repo
-2. Then change into the repository base directory
-3. Then do:
+2. Change into the repository base directory
+3. Run:
 
-        npm install .
+        npm install
+
+## Testing
+
+Once installed, you can run the tests locally with:
+
+        make test
+
+## Running
+
+To start the app locally, it’s:
+
         node app.js
 
-### Deployment
+You can then access it from <http://localhost:5000/>
+
+## Deployment
 
 For deployment we use Heroku.
 
-Primary app is called `datapipes` on Heroku. To add it do:
+The primary app is called `datapipes` on Heroku. To add it as a git remote, do:
 
     heroku git:remote -a datapipes
 
-The to deploy:
+Then to deploy:
 
     git push datapipes
 
