@@ -26,4 +26,7 @@
   , "scripts": {
     "test": "make"
   }
+  , "bin": {
+    "datapipes": "./bin/datapipes"
+  }
 }
