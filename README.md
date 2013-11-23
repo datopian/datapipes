@@ -19,19 +19,25 @@ This is a Node Express application. To install and run do the following.
 2. Change into the repository base directory
 3. Run:
 
-        npm install
+```bash
+$ npm install
+```
 
 ## Testing
 
 Once installed, you can run the tests locally with:
 
-        make test
+```bash
+$ make test
+```
 
 ## Running
 
 To start the app locally, it’s:
 
-        node app.js
+```bash
+$ node app.js
+```
 
 You can then access it from <http://localhost:5000/>
 
@@ -41,11 +47,15 @@ For deployment we use Heroku.
 
 The primary app is called `datapipes` on Heroku. To add it as a git remote, do:
 
-    heroku git:remote -a datapipes
+```bash
+$ heroku git:remote -a datapipes
+```
 
 Then to deploy:
 
-    git push datapipes
+```bash
+$ git push datapipes
+```
 
 ## Inspirations and Related
 
