@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-var TransformOMatic = require('./lib/transform');
-var stdout = require('./lib/stdout');
+var TransformOMatic = require('../lib/transform');
+var stdout = require('../lib/stdout');
 
 var usage = '\nPerform streaming data transformations on remote csv files.\n';
 usage += 'More details: http://datapipes.okfnlabs.org\n\n';
