@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="interactive">
 <head>
   <meta charset="utf-8">
   <title>
@@ -10,7 +10,7 @@
 
   <link rel="shortcut icon" href="/favicon.ico"/>
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="/css/interactive.css" />
+  <link rel="stylesheet" href="/css/style.css" />
 </head>
 
 <body>
@@ -20,7 +20,7 @@
         <form class="navbar-form">
           <div class="form-group col-xs-10">
             <label class="sr-only" for="pipeline">Pipeline</label>
-            <input type="text" class="form-control" name="pipeline" id="pipeline" placeholder="Pipeline e.g. /csv/head" value="{{pipeline}}">
+            <input type="text" class="form-control" name="pipeline" id="pipeline" placeholder="Pipeline e.g. /csv/head?url=…" value="{{pipeline}}">
           </div>
           <button class="btn btn-primary" type="submit">Submit</button>
         </form>
@@ -28,7 +28,8 @@
     </div>
   </div>
 
-  <pre id="output"></pre>
+  <div id="output">
+  </div>
   <div class="overlay"></div>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -38,7 +39,13 @@
         $('.overlay').show();
         var pipeline = $('#pipeline').val().replace(/^(\/|\s)+/g, '');
         $.get('/exec/' + pipeline, function(res) {
-          $('#output').html(res);
+          try {
+            var table = $(res).filter('table');
+            $('#output').html(table);
+          } catch (e) {
+            console.log('<pre>' + res + '</pre>');
+            $('#output').html('<pre>' + res + '</pre>');
+          }
         })
         .always(function() {
           $('.overlay').hide();
