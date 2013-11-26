@@ -48,7 +48,7 @@ function getMarkdownContent(filepath, cb) {
 
 function datapipe(path, query, res) {
   // remove leading&trailing spaces&slashes
-  var transformStr = path.replace(/(^(\/|\s)+|(\/|\s)+$)/g, '');
+  var transformStr = path.replace(/(\/|\s)+$/g, '');
 
   // rewrite the transform string in the form required
   transformStr = TransformOMatic.rejig(transformStr);
@@ -71,8 +71,21 @@ app.get(/\/exec\/(.*)?/, function(req, res) {
   datapipe(req.params[0], req.query, res);
 });
 
-app.get('/interactive', function(req, res) {
-  res.render('interactive.html');
+app.get(/\/interactive(\/.*)?/, function(req, res) {
+  var pipeline = '';
+  queryStr = _.map(req.query, function(v, k) {
+    return k + '=' + v;
+  }).join('&');
+
+  if (req.params[0] !== undefined) {
+    pipeline = req.params[0] + '?' + queryStr;
+  } else if (queryStr !== '') {
+    pipeline = '/csv/head?' + queryStr;
+  }
+
+  res.render('interactive.html', {
+    pipeline: pipeline,
+  });
 });
 
 app.get('/*', function(req, res) {

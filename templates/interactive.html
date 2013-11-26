@@ -1,26 +1,55 @@
-{% extends "layout.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>
+    Home - Data Pipes
+  </title>
+  <meta name="author" content="Open Knowledge Foundation Labs" />
+  <meta name="description" content="Data Pipes - Streaming Online Data Processing and Transformations" />
 
-{% block content %}
-  <h2>Interactive mode</h2>
+  <link rel="shortcut icon" href="/favicon.ico"/>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/interactive.css" />
+</head>
 
-  <input type="text" name="pipeline" value="" placeholder="e.g. /csv/head?url=…" style="width: 100%" />
-
-  <div class="console">
-    <pre class="output"></pre>
+<body>
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <form class="navbar-form">
+          <div class="form-group col-xs-10">
+            <label class="sr-only" for="pipeline">Pipeline</label>
+            <input type="text" class="form-control" name="pipeline" id="pipeline" placeholder="Pipeline e.g. /csv/head" value="{{pipeline}}">
+          </div>
+          <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
   </div>
-{% endblock %}
 
-{% block extra_js %}
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script>
-  $(function() {
-    $("[name='pipeline']").keyup(function(e) {
-      if (this.value != '') {
-        $.get('/exec/' + this.value, function(res) {
-          $('.output').html(res);
+  <pre id="output"></pre>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script>
+    $(function() {
+      runPipeline = function() {
+        // loading spinner!
+        var pipeline = $('#pipeline').val().replace(/^(\/|\s)+/g, '');
+        $.get('/exec/' + pipeline, function(res) {
+          $('#output').html(res);
         });
       }
+
+      if ($('#pipeline').val() !== '') {
+        runPipeline();
+      }
+
+      $("form").submit(function(e) {
+        e.preventDefault();
+        runPipeline();
+      });
     });
-  });
-</script>
-{% endblock %}
+  </script>
+</body>
+</html>
