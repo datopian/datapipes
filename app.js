@@ -46,13 +46,56 @@ function getMarkdownContent(filepath, cb) {
   });
 }
 
+function datapipe(path, query, res) {
+  // remove leading&trailing spaces&slashes
+  var transformStr = path.replace(/(\/|\s)+$/g, '');
+
+  // rewrite the transform string in the form required
+  transformStr = TransformOMatic.rejig(transformStr);
+
+  var transformers = TransformOMatic.pipeline(transformStr, query);
+
+  if (_.last(transformers).contentType) {
+    res.setHeader("Content-Type", _.last(transformers).contentType());
+  } else {
+    // default to plain text
+    res.setHeader("Content-Type", "text/plain; charset=utf-8");
+  }
+
+  TransformOMatic.transform(res, transformers, query.url);
+}
+
+// this route runs everything through a pipeline.
+// it never serves docs pages.
+app.get(/\/exec\/(.*)?/, function(req, res) {
+  datapipe(req.params[0], req.query, res);
+});
+
+app.get(/\/interactive(\/.*)?/, function(req, res) {
+  var pipeline = '';
+  queryStr = _.map(req.query, function(v, k) {
+    return k + '=' + v;
+  }).join('&');
+
+  if (req.params[0] !== undefined) {
+    pipeline = req.params[0] + '?' + queryStr;
+  } else if (queryStr !== '') {
+    pipeline = '/csv/head?' + queryStr;
+  }
+
+  res.render('interactive.html', {
+    pipeline: pipeline,
+  });
+});
+
 app.get('/*', function(req, res) {
-  var url = req.query.url;
   var mdFilename;
-  if (!url) {
+  var path = req.params[0];
+
+  if (!req.query.url) {
     // if there's no url parameter,
     // attempt to serve a docs page
-    var page = req.params[0].split('/')[0];
+    var page = path.split('/')[0];
     if (page === '') {
       mdFilename = 'docs/index.md';
     } else {
@@ -63,28 +106,13 @@ app.get('/*', function(req, res) {
         console.log(err);
         res.send('No info on this operation yet');
       } else {
-        res.render('index.html', {
+        res.render('docs.html', {
           content: content
         });
       }
     });
   } else {
-    // remove leading&trailing spaces&slashes
-    var transformStr = req.params[0].replace(/(^(\/|\s)+|(\/|\s)+$)/g, '');
-
-    // rewrite the transform string in the form required
-    transformStr = TransformOMatic.rejig(transformStr);
-
-    var transformers = TransformOMatic.pipeline(transformStr, req.query);
-
-    if (_.last(transformers).contentType) {
-      res.setHeader("Content-Type", _.last(transformers).contentType());
-    } else {
-      // default to plain text
-      res.setHeader("Content-Type", "text/plain; charset=utf-8");
-    }
-
-    TransformOMatic.transform(res, transformers, url);
+    datapipe(path, req.query, res);
   }
 });
 

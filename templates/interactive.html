@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>
+    Home - Data Pipes
+  </title>
+  <meta name="author" content="Open Knowledge Foundation Labs" />
+  <meta name="description" content="Data Pipes - Streaming Online Data Processing and Transformations" />
+
+  <link rel="shortcut icon" href="/favicon.ico"/>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body class="interactive">
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <form class="navbar-form">
+          <div class="form-group col-xs-10">
+            <label class="sr-only" for="pipeline">Pipeline</label>
+            <input type="text" class="form-control" name="pipeline" id="pipeline" placeholder="Pipeline e.g. /csv/head?url=…" value="{{pipeline}}">
+          </div>
+          <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="output">
+  </div>
+  <div class="overlay"></div>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script>
+    $(function() {
+      runPipeline = function() {
+        $('.overlay').show();
+        var pipeline = $('#pipeline').val().replace(/^(\/|\s)+/g, '');
+        $.get('/exec/' + pipeline, function(res) {
+          try {
+            var table = $(res).filter('table');
+            $('#output').html(table);
+          } catch (e) {
+            console.log('<pre>' + res + '</pre>');
+            $('#output').html('<pre>' + res + '</pre>');
+          }
+        })
+        .always(function() {
+          $('.overlay').hide();
+        });
+      }
+
+      if ($('#pipeline').val() !== '') {
+        runPipeline();
+      }
+
+      $("form").submit(function(e) {
+        e.preventDefault();
+        runPipeline();
+      });
+    });
+  </script>
+</body>
+</html>

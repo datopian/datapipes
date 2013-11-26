@@ -21,7 +21,7 @@
   </div>
 
   <div class="content">
-    {{content}}
+    {% block content %}{% endblock %}
   </div>
 
   <div class="footer">
@@ -50,6 +50,7 @@
   ga('create', 'UA-33874954-19', 'okfnlabs.org');
   ga('send', 'pageview');
 </script>
+{% block extra_js %}{% endblock %}
 </body>
 </html>
 
