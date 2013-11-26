@@ -53,7 +53,7 @@ function datapipe(path, query, res) {
   // rewrite the transform string in the form required
   transformStr = TransformOMatic.rejig(transformStr);
 
-  var transformers = TransformOMatic.pipeline(transformStr, query);
+  var transformers = TransformOMatic.pipeline(transformStr, query, res);
 
   if (_.last(transformers).contentType) {
     res.setHeader("Content-Type", _.last(transformers).contentType());
@@ -104,7 +104,7 @@ app.get('/*', function(req, res) {
     getMarkdownContent(mdFilename, function(err, content) {
       if (err) {
         console.log(err);
-        res.send('No info on this operation yet');
+        res.send(404, 'Page not found: ' + req.params[0]);
       } else {
         res.render('docs.html', {
           content: content
