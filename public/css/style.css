@@ -542,6 +542,8 @@ th:hover {
 body.interactive {
   padding-top: 50px;
   text-align: inherit;
+  font-size: 14px;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 .interactive pre {

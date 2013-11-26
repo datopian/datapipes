@@ -36,19 +36,21 @@
   <script>
     $(function() {
       runPipeline = function() {
-        $('.overlay').show();
+        $('.overlay').fadeIn();
         var pipeline = $('#pipeline').val().replace(/^(\/|\s)+/g, '');
         $.get('/exec/' + pipeline, function(res) {
           try {
             var table = $(res).filter('table');
             $('#output').html(table);
           } catch (e) {
-            console.log('<pre>' + res + '</pre>');
             $('#output').html('<pre>' + res + '</pre>');
           }
         })
+        .fail(function(res) {
+          $('#output').html('<div class="alert alert-danger">' + res.responseText + '</div>');
+        })
         .always(function() {
-          $('.overlay').hide();
+          $('.overlay').fadeOut();
         });
       }
 
