@@ -29,15 +29,19 @@
   </div>
 
   <pre id="output"></pre>
+  <div class="overlay"></div>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script>
     $(function() {
       runPipeline = function() {
-        // loading spinner!
+        $('.overlay').show();
         var pipeline = $('#pipeline').val().replace(/^(\/|\s)+/g, '');
         $.get('/exec/' + pipeline, function(res) {
           $('#output').html(res);
+        })
+        .always(function() {
+          $('.overlay').hide();
         });
       }
 
