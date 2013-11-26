@@ -68,7 +68,8 @@ function datapipe(path, query, res) {
 // this route runs everything through a pipeline.
 // it never serves docs pages.
 app.get(/\/exec\/(.*)?/, function(req, res) {
-  datapipe(req.params[0], req.query, res);
+  path = req.params[0] || '';
+  datapipe(path, req.query, res);
 });
 
 app.get(/\/interactive(\/.*)?/, function(req, res) {
@@ -80,6 +81,7 @@ app.get(/\/interactive(\/.*)?/, function(req, res) {
   if (req.params[0] !== undefined) {
     pipeline = req.params[0] + '?' + queryStr;
   } else if (queryStr !== '') {
+    // default pipeline: /csv/head
     pipeline = '/csv/head?' + queryStr;
   }
 
