@@ -13,8 +13,8 @@ This CSS licensed as far as necessary under GNU GPL2 and otherwise public domain
 ----------------------------------------------- */
 
 html {
-  background: #fff;
   color: #000;
+  height: 100%;
 }
 body,
 div,
@@ -539,12 +539,7 @@ th:hover {
 }
 
 /* Interactive mode */
-html.interactive {
-  background-color: inherit;
-  height: 100%;
-}
-
-.interactive body {
+body.interactive {
   padding-top: 50px;
   text-align: inherit;
 }
