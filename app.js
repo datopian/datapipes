@@ -69,6 +69,13 @@ function datapipe(path, query, res) {
 // it never serves docs pages.
 app.get(/\/exec\/(.*)?/, function(req, res) {
   path = req.params[0] || '';
+  if (!req.query.url) {
+    var errStr = 'A URL is required.';
+    console.log(errStr);
+    res.send(500, errStr);
+    res.end();
+    return;
+  }
   datapipe(path, req.query, res);
 });
 
