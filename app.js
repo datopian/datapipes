@@ -24,7 +24,8 @@ var CORSSupport = function(req, res, next) {
 };
 
 var chromeSpaceReplace = function(req, res, next) {
-  if (req.url.indexOf('%20') !== -1) {
+  var agent = req.headers['user-agent'] || '';
+  if (agent.indexOf('Chrome') !== -1 && req.url.indexOf('%20') !== -1) {
     // replace %20s with nbsps
     var url = req.url.replace(/%20/g, ' ');
     res.redirect(url);
