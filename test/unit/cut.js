@@ -3,7 +3,7 @@ var csv = require('csv');
 var stream = require('stream');
 var _ = require('underscore');
 
-var ops = require('../lib/operators.js');
+var ops = require('../../lib/operators.js');
 
 var dataStr = '2006/2007 - 12,81.2,163.0,244.2,77.4,143.4,220.5,5.4%,7.6%,6.8%,4.6%,4.4%,4.5%,,,,,,,,';
 var row = dataStr.split(',');
