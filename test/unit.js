@@ -6,5 +6,5 @@ require('./unit/cut.js');
 // require('./unit/html.js');
 // require('./unit/none.js');
 // require('./unit/replace.js');
-// require('./unit/strip.js');
+require('./unit/strip.js');
 // require('./unit/tail.js');
