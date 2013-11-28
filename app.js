@@ -23,10 +23,23 @@ var CORSSupport = function(req, res, next) {
   }
 };
 
+var chromeSpaceReplace = function(req, res, next) {
+  var agent = req.headers['user-agent'] || '';
+  if (agent.indexOf('Chrome') !== -1 && req.url.indexOf('%20') !== -1) {
+    // replace %20s with nbsps
+    var url = req.url.replace(/%20/g, ' ');
+    res.redirect(url);
+    return;
+  }
+
+  next();
+};
+
 app.configure(function(){
   app.set('port', process.env.PORT || 5000);
   app.set('views', __dirname + '/templates');
   app.use(express.logger('dev'));
+  app.use(chromeSpaceReplace);
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(CORSSupport);
@@ -49,6 +62,8 @@ function getMarkdownContent(filepath, cb) {
 function datapipe(path, query, res) {
   // remove leading&trailing spaces&slashes
   var transformStr = path.replace(/(\/|\s)+$/g, '');
+  // replace nbsps with spaces
+  transformStr = transformStr.replace(/ /g, ' ');
 
   // rewrite the transform string in the form required
   transformStr = TransformOMatic.rejig(transformStr);
