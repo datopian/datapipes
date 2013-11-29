@@ -49,7 +49,7 @@ describe('Chrome space replace', function(){
       .end(function(err, res) {
         // %20 in path is fixed
         assert.notEqual(res.header['location'].indexOf('csv -H'), -1);
-        // %20 in query string is left in tact
+        // %20 in query string is left intact
         assert.notEqual(res.header['location'].indexOf('Research%20Documents'), -1);
         done();
       })
