@@ -39,6 +39,24 @@ describe('Docs', function(){
   });
 });
 
+describe('Chrome space replace', function(){
+  var url = '/csv%20-H/head?url=http://www.biglotteryfund.org.uk/-/media/Files/Research%20Documents/aOpenDataFiles/BIGGrantOpenData2004_05.csv';
+  it('should fix the %20 in the path, but not break the query string', function(done){
+    request
+      .get(url)
+      .set('user-agent', 'Chrome')
+      .expect(302)
+      .end(function(err, res) {
+        // %20 in path is fixed
+        assert.notEqual(res.header['location'].indexOf('csv -H'), -1);
+        // %20 in query string is left in tact
+        assert.notEqual(res.header['location'].indexOf('Research%20Documents'), -1);
+        done();
+      })
+    ;
+  });
+});
+
 describe('none op', function(){
   var url = '/none/?url=' + data_url;
   describe('GET ' + url, function(){
