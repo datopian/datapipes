@@ -39,7 +39,7 @@ app.configure(function(){
   app.set('port', process.env.PORT || 5000);
   app.set('views', __dirname + '/templates');
   app.use(express.logger('dev'));
-  app.use(chromeSpaceReplace);
+  // app.use(chromeSpaceReplace);
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(CORSSupport);
