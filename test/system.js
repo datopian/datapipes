@@ -55,6 +55,13 @@ describe('Chrome space replace', function(){
       })
     ;
   });
+
+  it('should ignore requests that are not from Chrome', function(done){
+    request
+      .get(url)
+      .expect(200, done)
+    ;
+  });
 });
 
 describe('none op', function(){
