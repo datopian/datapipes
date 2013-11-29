@@ -16,7 +16,8 @@ Find and replace.
         Text to search for.
 
     REPLACE
-        Text to replace the found text with.
+        Text to replace the found text with. Defaults
+        to the empty string.
 
 ### Examples
 
