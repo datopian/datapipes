@@ -1,10 +1,11 @@
-// require('./unit/csv.js');
+// require('./unit/incsv.js');
+// require('./unit/outcsv.js');
 require('./unit/cut.js');
 // require('./unit/delete.js');
 // require('./unit/grep.js');
 // require('./unit/head.js');
-// require('./unit/html.js');
-// require('./unit/none.js');
+// require('./unit/outhtml.js');
+require('./unit/none.js');
 // require('./unit/replace.js');
 require('./unit/strip.js');
 // require('./unit/tail.js');
