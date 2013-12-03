@@ -24,8 +24,9 @@ var CORSSupport = function(req, res, next) {
 };
 
 var chromeSpaceReplace = function(req, res, next) {
+  var re = /(?:Windows|Macintosh).*?Chrome/;
   var agent = req.headers['user-agent'] || '';
-  if (agent.indexOf('Chrome') !== -1) {
+  if (re.test(agent)) {
     var parts = req.url.split('?');
     var datapipe = parts.shift();
     if (datapipe.indexOf('%20') !== -1) {

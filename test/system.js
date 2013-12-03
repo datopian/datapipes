@@ -44,7 +44,7 @@ describe('Chrome space replace', function(){
   it('should fix the %20 in the path, but not break the query string', function(done){
     request
       .get(url)
-      .set('user-agent', 'Chrome')
+      .set('user-agent', 'Windows Chrome')
       .expect(302)
       .end(function(err, res) {
         // %20 in path is fixed
