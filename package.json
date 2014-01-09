@@ -9,7 +9,8 @@
       "marked": "",
       "nunjucks": "",
       "underscore": "",
-      "optimist": ""
+      "optimist": "",
+      "sandbox": ""
   }
   , "repository": {
     "type": "git",
