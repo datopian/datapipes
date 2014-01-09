@@ -30,4 +30,5 @@
   , "bin": {
     "datapipes": "./bin/datapipes"
   }
+  , "main": "lib/index"
 }
