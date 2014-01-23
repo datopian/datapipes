@@ -12,6 +12,7 @@ dp.transform(inUrl, outFile, [
     operator: 'delete'
   }
 ]);
+```
 
 ## do it by hand
 
@@ -34,12 +35,14 @@ We have a helpful `mapToTranform`
 
 Suppose you have a map function
 
+```
 function helloMap(obj, idx) {
   row[0] = 'hello'
   return row;
 }
 
 operators['hello'] = mapToTransform(helloMap);
+```
 
 ## How It Works
 
