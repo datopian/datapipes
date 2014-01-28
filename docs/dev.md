@@ -6,10 +6,23 @@ var dp = require('datapipes');
 // load data from inUrl, write to outFile after applying the sequence of transformations
 dp.transform(inUrl, outFile, [
   {
-    operator: 'head'
+    operator: 'head',
+    options: {
+      number: 10 // number of rows
+    }
   },
   {
+    operator: 'grep',
+    options: {
+      regex: 'london',
+      ignorecase: true
+    }
+  }
+  {
     operator: 'delete'
+    options: {
+      range: '3,5:10'
+    }
   }
 ]);
 ```
