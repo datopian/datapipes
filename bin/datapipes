@@ -5,7 +5,7 @@ var TransformOMatic = require('../lib/transform')
   , path = require('path')
   ;
 
-var filepath = path.join(path.dirname(__dirname), 'docs', 'cli.md')
+var filepath = path.join(path.dirname(__dirname), 'doc', 'cli.md')
   , usage = fs.readFileSync(filepath, 'utf8')
   ;
 

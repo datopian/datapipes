@@ -87,7 +87,7 @@ function datapipe(path, query, res) {
 }
 
 // this route runs everything through a pipeline.
-// it never serves docs pages.
+// it never serves doc pages.
 app.get(/\/exec\/(.*)?/, function(req, res) {
   path = req.params[0] || '';
   if (!req.query.url) {
@@ -124,12 +124,12 @@ app.get('/*', function(req, res) {
 
   if (!req.query.url) {
     // if there's no url parameter,
-    // attempt to serve a docs page
+    // attempt to serve a doc page
     var page = path.split('/')[0];
     if (page === '') {
-      mdFilename = 'docs/index.md';
+      mdFilename = 'doc/index.md';
     } else {
-      mdFilename = 'docs/op-' + page + '.md';
+      mdFilename = 'doc/op-' + page + '.md';
     }
     getMarkdownContent(mdFilename, function(err, content) {
       if (err) {
