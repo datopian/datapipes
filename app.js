@@ -5,6 +5,7 @@ var nunjucks = require('nunjucks');
 var marked = require('marked');
 var _ = require('underscore');
 
+var util = require('./lib/util');
 var TransformOMatic = require('./lib/transform');
 
 var app = express();
@@ -66,15 +67,8 @@ function getMarkdownContent(filepath, cb) {
 }
 
 function datapipe(path, query, res) {
-  // remove leading&trailing spaces&slashes
-  var transformStr = path.replace(/(\/|\s)+$/g, '');
-  // replace nbsps with spaces
-  transformStr = transformStr.replace(/ /g, ' ');
-
-  // rewrite the transform string in the form required
-  transformStr = TransformOMatic.rejig(transformStr);
-
-  var transformers = TransformOMatic.pipeline(transformStr, query, res);
+  var pipelineSpec = util.parseUrl(path, query);
+  var transformers = TransformOMatic.pipeline(pipelineSpec, res);
 
   if (_.last(transformers).contentType) {
     res.setHeader("Content-Type", _.last(transformers).contentType());

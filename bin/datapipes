@@ -3,6 +3,7 @@ var TransformOMatic = require('../lib/transform')
   , stdout = require('../lib/stdout')
   , fs = require('fs')
   , path = require('path')
+  , util = require('../lib/util')
   ;
 
 var filepath = path.join(path.dirname(__dirname), 'doc', 'cli.md')
@@ -45,6 +46,8 @@ if (argv.share) {
   return;
 }
 
-transformStr = TransformOMatic.rejig(transformStr);
-var transformers = TransformOMatic.pipeline(transformStr);
+
+var pipelineSpec = util.parseUrl(transformStr);
+var transformers = TransformOMatic.pipeline(pipelineSpec);
 TransformOMatic.transform(stdout(), transformers, argv.url);
+
