@@ -10,7 +10,8 @@
       "nunjucks": "",
       "underscore": "",
       "optimist": "",
-      "sandbox": ""
+      "sandbox": "",
+      "event-stream": ""
   }
   , "repository": {
     "type": "git",
@@ -18,7 +19,8 @@
   }
   , "devDependencies": {
     "supertest": "",
-    "mocha": ""
+    "mocha": "",
+    "concat-stream": ""
   }
   , "engines": {
     "node": "0.10.x",
