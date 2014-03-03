@@ -1,4 +1,4 @@
-A webapp providing online Unix-Style data transformations on CSVs.
+A node library, command line tool and webapp to provide Unix-Style data transformations on CSVs (and other data formats).
 
 Specifically, it’s a web service which offers unix-style `cut`, `grep`, `sed`
 in a streaming, "pipe-like" manner. It can be run via a browser or a command
