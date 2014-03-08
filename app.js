@@ -1,12 +1,15 @@
-var fs = require('fs');
-var express = require('express');
-var path = require('path');
-var nunjucks = require('nunjucks');
-var marked = require('marked');
-var _ = require('underscore');
+var fs = require('fs')
+  , express = require('express')
+  , path = require('path')
+  , nunjucks = require('nunjucks')
+  , marked = require('marked')
+  , _ = require('underscore')
+  ;
 
-var util = require('./lib/util');
-var TransformOMatic = require('./lib/transform');
+var util = require('./lib/util')
+  , TransformOMatic = require('./lib/transform')
+  , routes = require('./routes/index')
+  ;
 
 var app = express();
 
@@ -94,23 +97,7 @@ app.get(/\/exec\/(.*)?/, function(req, res) {
   datapipe(path, req.query, res);
 });
 
-app.get(/\/interactive(\/.*)?/, function(req, res) {
-  var pipeline = '';
-  queryStr = _.map(req.query, function(v, k) {
-    return k + '=' + v;
-  }).join('&');
-
-  if (req.params[0] !== undefined) {
-    pipeline = req.params[0] + '?' + queryStr;
-  } else if (queryStr !== '') {
-    // default pipeline: /csv/head
-    pipeline = '/csv/head?' + queryStr;
-  }
-
-  res.render('interactive.html', {
-    pipeline: pipeline,
-  });
-});
+app.get(/\/interactive(\/.*)?/, routes.wizard);
 
 app.get('/*', function(req, res) {
   var mdFilename;
