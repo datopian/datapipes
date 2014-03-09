@@ -20,5 +20,5 @@ Return the first 10 rows.
 
 Return the first 20 rows.
 
-[/csv/head 20/?url=https://raw.github.com/datasets/bond-yields-uk-10y/master/annual.csv](/csv/head 20/?url=https://raw.github.com/datasets/bond-yields-uk-10y/master/annual.csv)
+[/csv/head 20/?url=https://raw.github.com/datasets/bond-yields-uk-10y/master/annual.csv](/csv/head%2020/?url=https://raw.github.com/datasets/bond-yields-uk-10y/master/annual.csv)
 
