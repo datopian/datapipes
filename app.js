@@ -56,7 +56,7 @@ app.configure(function(){
   app.use(express.static(path.join(__dirname, 'public')));
 });
 
-var env = new nunjucks.Environment(new nunjucks.FileSystemLoader('templates'));
+var env = new nunjucks.Environment(new nunjucks.FileSystemLoader('views'));
 env.express(app);
 
 function getMarkdownContent(filepath, cb) {
