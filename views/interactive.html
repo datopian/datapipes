@@ -57,13 +57,13 @@
     <div class="alert alert-danger">{{error}}</div>
     {% endif %}
 
+    {% if pipeline %}
     <div class="link">
       <label>Your DataPipe URL</label>
       <a href="{{pipeline}}" target="_blank">{{pipeline}}</a>
       <a href="#" class="btn btn-xs btn-primary js-copy" data-url="{{pipeline}}">Copy</a>
     </div>
 
-    {% if pipeline %}
     <iframe src="{{pipeline}}"></iframe>
     {% endif %}
   </div>

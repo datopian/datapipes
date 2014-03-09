@@ -7,6 +7,9 @@ var fs = require('fs')
 exports.wizard = function(req, res) {
   if (!req.query.url) {
     res.render('interactive.html', {
+      query: {
+        head: 10
+      },
       output: 'html'
     });
     return;
