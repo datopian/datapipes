@@ -32,6 +32,18 @@
         </div>
       </div>
       <div class="form-group">
+        <label for="output" class="col-sm-2 control-label">Output Format</label>
+        <div class="col-sm-10">
+          {% for name in ['html', 'csv'] %}
+          <label class="radio-inline">
+            <input type="radio" name="output" value="{{name}}"
+              {% if output == name %}checked="checked"{% endif %}
+              > {{name.toUpperCase()}}
+          </label>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
           <button class="btn btn-primary" type="submit">Run</button>
         </div>
@@ -46,7 +58,7 @@
 
     <div class="link">
       <label>Your DataPipe URL</label>
-      <a href="{{pipeline}}">{{pipeline}}</a>
+      <a href="{{pipeline}}" target="_blank">{{pipeline}}</a>
       <a href="#" class="btn btn-xs btn-primary js-copy" data-url="{{pipeline}}">Copy</a>
     </div>
 
