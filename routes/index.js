@@ -6,7 +6,9 @@ var fs = require('fs')
 
 exports.wizard = function(req, res) {
   if (!req.query.url) {
-    res.render('interactive.html', tmplData);
+    res.render('interactive.html', {
+      output: 'html'
+    });
     return;
   }
 
@@ -15,6 +17,7 @@ exports.wizard = function(req, res) {
   delete tmp.url;
   var output = req.query.output || 'html';
   delete tmp.output;
+  console.log(output);
 
   var pipes = ['csv'];
   pipes = pipes.concat(_.map(tmp, function(v, k) {
