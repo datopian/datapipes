@@ -4,7 +4,7 @@ var assert = require('assert')
   , concat = require('concat-stream')
 
   , transform = require('../lib/transform')
-  , dp = require('datapipes')
+  , dp = require('../lib/index')
   ;
 
 function createSavingStream(cb) {
@@ -61,3 +61,4 @@ describe('Library', function() {
     }
   });
 });
+
