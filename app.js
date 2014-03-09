@@ -83,21 +83,8 @@ function datapipe(path, query, res) {
   TransformOMatic.transform(res, transformers, query.url);
 }
 
-// this route runs everything through a pipeline.
-// it never serves doc pages.
-app.get(/\/exec\/(.*)?/, function(req, res) {
-  path = req.params[0] || '';
-  if (!req.query.url) {
-    var errStr = 'A URL is required.';
-    console.log(errStr);
-    res.send(500, errStr);
-    res.end();
-    return;
-  }
-  datapipe(path, req.query, res);
-});
-
 app.get(/\/interactive(\/.*)?/, routes.wizard);
+app.get(/\/wizard(\/.*)?/, routes.wizard);
 
 app.get('/*', function(req, res) {
   var mdFilename;

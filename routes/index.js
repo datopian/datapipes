@@ -5,20 +5,27 @@ var fs = require('fs')
   ;
 
 exports.wizard = function(req, res) {
-  var pipeline = '';
-  queryStr = _.map(req.query, function(v, k) {
-    return k + '=' + v;
-  }).join('&');
-
-  if (req.params[0] !== undefined) {
-    pipeline = req.params[0] + '?' + queryStr;
-  } else if (queryStr !== '') {
-    // default pipeline: /csv/head
-    pipeline = '/csv/head?' + queryStr;
+  var pipeline = '/csv/';
+  if (!req.query.url) {
+    res.render('interactive.html', tmplData);
+    return;
   }
 
-  res.render('interactive.html', {
+  queryStr = '?url=' + req.query.url;
+  var tmp = _.extend({}, req.query);
+  delete tmp.url;
+  var pipes = '/csv/' + _.map(tmp, function(v, k) {
+    return k + ' ' + v
+  }).join('/');
+
+  var pipeline = req.protocol + '://' + req.get('host') + pipes + '/' + queryStr;
+
+  var tmplData = {
+    url: req.query.url,
     pipeline: pipeline,
-  });
+    query: tmp
+  };
+
+  res.render('interactive.html', tmplData);
 };
 

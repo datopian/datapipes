@@ -14,53 +14,54 @@
 </head>
 
 <body class="interactive">
-  <div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container">
-        <form class="navbar-form">
-          <div class="form-group col-xs-10">
-            <label class="sr-only" for="pipeline">Pipeline</label>
-            <input type="text" class="form-control" name="pipeline" id="pipeline" placeholder="Pipeline e.g. /csv/head?url=…" value="{{pipeline}}">
-          </div>
-          <button class="btn btn-primary" type="submit">Submit</button>
-        </form>
+  <div class="container">
+    <form class="form-horizontal" action="">
+      <div class="form-group">
+        <label for="url" class="col-sm-2 control-label">URL</label>
+        <div class="col-sm-10">
+          <input type="url" class="form-control" name="url" value="{{url}}"
+            placeholder="URL to source CSV data e.g. http://mysite.com/data.csv" />
+        </div>
       </div>
-    </div>
+      <div class="form-group">
+        <label for="head" class="col-sm-2 control-label">Head</label>
+        <div class="col-sm-10">
+          <input type="number" class="form-control" name="head" value="{{query.head}}"
+            placeholder="Number of rows to take for head"
+            />
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button class="btn btn-primary" type="submit">Run</button>
+        </div>
+      </div>
+    </form>
   </div>
 
   <div id="output">
+    {% if error %}
+    <div class="alert alert-danger">{{error}}</div>
+    {% endif %}
+
+    <div class="link">
+      <label>Your DataPipe URL</label>
+      <a href="{{pipeline}}">{{pipeline}}</a>
+      <a href="#" class="btn btn-xs btn-primary js-copy" data-url="{{pipeline}}">Copy</a>
+    </div>
+
+    {% if pipeline %}
+    <iframe src="{{pipeline}}"></iframe>
+    {% endif %}
   </div>
   <div class="overlay"></div>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script>
     $(function() {
-      runPipeline = function() {
-        $('.overlay').fadeIn();
-        var pipeline = $('#pipeline').val().replace(/^(\/|\s)+/g, '');
-        $.get('/exec/' + pipeline, function(res) {
-          try {
-            var table = $(res).filter('table');
-            $('#output').html(table);
-          } catch (e) {
-            $('#output').html('<pre>' + res + '</pre>');
-          }
-        })
-        .fail(function(res) {
-          $('#output').html('<div class="alert alert-danger">' + res.responseText + '</div>');
-        })
-        .always(function() {
-          $('.overlay').fadeOut();
-        });
-      }
-
-      if ($('#pipeline').val() !== '') {
-        runPipeline();
-      }
-
-      $("form").submit(function(e) {
+      $('.js-copy').on('click', function (e) {
         e.preventDefault();
-        runPipeline();
+        window.prompt("Copy to clipboard: Ctrl+C, Enter", $(e.target).data('url'));
       });
     });
   </script>
