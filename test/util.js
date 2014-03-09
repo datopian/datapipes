@@ -5,14 +5,14 @@ var util = require('../lib/util')
 describe('Library', function() {
   it('parseUrl works', function() {
     ins = [
-      '/',
-      '/csv/cut 1/'
+      '/'
+      , '/csv/cut 1/'
     ];
     exp = [
       [{
         operator: 'none'
-      }],
-      [
+      }]
+      , [
         {
           operator: 'incsv',
           options: ''
