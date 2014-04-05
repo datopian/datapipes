@@ -7,10 +7,12 @@ describe('Library', function() {
     ins = [
       '/'
       , '/csv/cut 1/'
+      , '/none'
     ];
     exp = [
       [{
-        operator: 'none'
+        operator: 'none',
+        options: ''
       }]
       , [
         {
@@ -25,7 +27,11 @@ describe('Library', function() {
           operator: 'outcsv',
           options: ''
         }
-      ]
+      ],
+      [{
+        operator: 'none',
+        options: ''
+      }]
     ];
     ins.forEach(function(path, idx) {
       var out = util.parseUrl(path);
