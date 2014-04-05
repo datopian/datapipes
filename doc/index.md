@@ -1,12 +1,15 @@
 # Shareable Simple Data Transformations
 
 Data Pipes is an online service for doing **simple data transformations** on tabular
-data – deleting rows and columns, find and replace, filtering, viewing as HTML
-– and, furthermore, to **connect these transformations** together Unix pipes style
-to make more complex transformations.
+data – deleting rows and columns, find and replace, filtering, viewing as HTML.
 
-Plus: as an online service **to share your pipeline** (and its output data) just
-**copy/paste the URL**.
+Even better you can **connect these transformations** together Unix pipes style
+to make more complex transformations (for example, first delete a column, then
+do a find and replace).
+
+You can do all of this in your browser **without having to install anything**
+and to **share your data and pipeline** all you need to do is copy and paste a
+URL.
 
 ### Quick start
 
