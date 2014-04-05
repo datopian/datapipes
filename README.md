@@ -1,17 +1,48 @@
-A node library, command line tool and webapp to provide Unix-Style data transformations on CSVs (and other data formats).
+A node library, command line tool and webapp to provide "pipe-able" Unix-Style
+data transformations on row-based data like CSVs.
 
-Specifically, it’s a web service which offers unix-style `cut`, `grep`, `sed`
-in a streaming, "pipe-like" manner. It can be run via a browser or a command
-line interface.
+DataPipes offers unix-style `cut`, `grep`, `sed` operations on row-based data
+like CSVs in a streaming, connectable "pipe-like" manner.
+
+DataPipes can be used:
+
+* Online at <http://datapipes.okfnlabs.org/>
+* Via a command line interface - see below
+* As a Node JS library - see below
 
 [![Build
 Status](https://travis-ci.org/okfn/datapipes.png)](https://travis-ci.org/okfn/datapipes)
 
-## API and Usage
+## Install
 
-See <http://datapipes.okfnlabs.org/>
+```
+npm install -g datapipes
+```
 
-## Installation
+## Usage - Command line
+
+Once installed, `datapipes` will be available on the command line:
+
+    datapipes -h
+
+See the help for usage instructions, but to give a quick taster:
+
+    # head (first 10 rows) of this file
+    datapipes https://raw.github.com/datasets/browser-stats/master/data.csv head
+
+    # search for occurrences of London (ignore case) and show first 10 results
+    datapipes https://raw.github.com/rgrp/dataset-gla/master/data/all.csv "grep -i london" head
+
+## Usage - Library
+
+See the [Developer
+Docs](https://github.com/okfn/datapipes/blob/master/doc/dev.md).
+
+----
+
+## Developers
+
+### Installation
 
 This is a Node Express application. To install and run do the following.
 
@@ -23,7 +54,7 @@ This is a Node Express application. To install and run do the following.
 $ npm install
 ```
 
-## Testing
+### Testing
 
 Once installed, you can run the tests locally with:
 
@@ -31,7 +62,7 @@ Once installed, you can run the tests locally with:
 $ make test
 ```
 
-## Running
+### Running
 
 To start the app locally, it’s:
 
@@ -41,7 +72,7 @@ $ node app.js
 
 You can then access it from <http://localhost:5000/>
 
-## Deployment
+### Deployment
 
 For deployment we use Heroku.
 
@@ -66,7 +97,7 @@ $ git push datapipes
 
 ## Copyright and License
 
-Copyright 2013 Open Knowledge Foundation and Contributors.
+Copyright 2013-2014 Open Knowledge Foundation and Contributors.
 
 Licensed under the MIT license:
 
