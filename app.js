@@ -2,6 +2,7 @@ var fs = require('fs')
   , express = require('express')
   , path = require('path')
   , nunjucks = require('nunjucks')
+  , request = require('request')
   , marked = require('marked')
   , _ = require('underscore')
   ;
@@ -45,6 +46,11 @@ var chromeSpaceReplace = function(req, res, next) {
   next();
 };
 
+function errorHandler(err, req, res, next) {
+  res.status(500);
+  res.render('error', { error: err });
+}
+
 app.configure(function(){
   app.set('port', process.env.PORT || 5000);
   app.set('views', __dirname + '/templates');
@@ -53,6 +59,7 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(CORSSupport);
+  app.use(errorHandler);
   app.use(express.static(path.join(__dirname, 'public')));
 });
 
@@ -80,7 +87,17 @@ function datapipe(path, query, res) {
     res.setHeader("Content-Type", "text/plain; charset=utf-8");
   }
 
-  TransformOMatic.transform(res, transformers, query.url);
+  var url = query.url
+    , stream
+    ;
+  stream = request(url)
+    .on('error', function(err){
+      var errStr = 'Error with upstream URL: ' + url;
+      console.log(errStr);
+      res.send(500, errStr);
+    })
+  ;
+  TransformOMatic.transform(res, transformers, stream);
 }
 
 app.get(/\/interactive(\/.*)?/, routes.wizard);
