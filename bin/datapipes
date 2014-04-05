@@ -1,30 +1,76 @@
 #!/usr/bin/env node
 var TransformOMatic = require('../lib/transform')
   , stdout = require('../lib/stdout')
+  , stdin = process.stdin
   , fs = require('fs')
+  , request = require('request')
   , path = require('path')
   , util = require('../lib/util')
   ;
 
-var filepath = path.join(path.dirname(__dirname), 'doc', 'cli.md')
+var docdir = path.join(path.dirname(__dirname), 'doc')
+  , filepath = path.join(docdir, 'cli.md')
   , usage = fs.readFileSync(filepath, 'utf8')
+  , opInfo = ''
   ;
 
-var argv = require('optimist')
-  .options({
-    s: {alias: 'share', boolean: true, describe: 'Generate a URL to share this.'},
-    u: {alias: 'url', string: true, describe: 'URL of input data.'},
+var opList = fs.readdirSync(docdir).filter(function(fn) {
+    return fn.indexOf('op-') === 0;
+  }).map(function(fn) {
+    var opName = fn.replace('op-', '').replace('.md', '')
+    return opName;
   })
-  .usage(usage)
-  .demand(1)
-  .argv
 ;
 
+opInfo = opList.join('\n')
+
+opInfo += '\n You can get more info on each command by doing:\n\n';
+opInfo += '    $0 OPERATION -h\n\n';
+
+usage = usage.replace('{{Operations}}', opInfo);
+
+var yargs = require('optimist')
+  .options({
+    s: {alias: 'share', boolean: true, describe: 'Generate a URL to share this.'},
+    h: {alias: 'help', boolean: false, describe: 'Show help (generic or specific operation)'}
+  })
+  .usage(usage)
+  .demand(1, 'Please provide a data source and at least one transform')
+;
+var argv = yargs.argv;
+
+if (argv.h) {
+  if (argv._.length > 0) {
+    var opName = argv._[0];
+    if (opList.indexOf(opName) === -1) {
+      console.log(opName + ' operation is unknown');
+    } else {
+      var fp = path.join(docdir, 'op-' + opName + '.md')
+          , info = fs.readFileSync(fp, 'utf8')
+          ;
+      info = 'Operation: ' + opName + '\n' + info.split('\n').slice(1).join('\n');
+      console.log(info);
+    }
+  } else {
+    console.log(yargs.help());
+  }
+  // exit
+  return;
+}
+
+var stream
+  , pathOrUrl = argv._[0]
+  ;
+if (pathOrUrl.indexOf('http') === 0) {
+  stream = request(pathOrUrl);
+} else if (pathOrUrl === '_') {
+  stream = stdin;
+} else {
+  stream = fs.createReadStream(pathOrUrl);
+}
+
 // cli mode
-var transformStr = argv._
-  .join(' ')
-  .replace(/(^(\/|\s)+|(\/|\s)+$)/g, '')
-  .split('/')
+var transformStr = argv._.slice(1)
   .map(function(item) {
     return item.trim(' ');
   })
@@ -49,5 +95,5 @@ if (argv.share) {
 
 var pipelineSpec = util.parseUrl(transformStr);
 var transformers = TransformOMatic.pipeline(pipelineSpec);
-TransformOMatic.transform(stdout(), transformers, argv.url);
+TransformOMatic.transform(stdout(), transformers, stream);
 
