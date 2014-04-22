@@ -1,18 +1,28 @@
-var fs = require('fs')
-  , express = require('express')
-  , path = require('path')
-  , nunjucks = require('nunjucks')
-  , request = require('request')
-  , marked = require('marked')
-  , _ = require('underscore')
-  ;
+var fs             = require('fs');
+var path           = require('path');
+var nunjucks       = require('nunjucks');
+var request        = require('request');
+var marked         = require('marked');
+var _              = require('underscore');
 
-var util = require('./lib/util')
-  , TransformOMatic = require('./lib/transform')
-  , routes = require('./routes/index')
-  ;
+var util            = require('./lib/util');
+var TransformOMatic = require('./lib/transform');
+var routes          = require('./routes/index');
 
-var app = express();
+// app.js (Express 4.)0
+// TODO: Refactor Routing
+//
+var logger         = require('morgan');
+var bodyParser     = require('body-parser');
+var methodOverride = require('method-override');
+var express        = require('express');
+
+var app            = express();
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(logger('dev'));
+app.use(bodyParser());
+app.use(methodOverride());
 
 //CORS middleware
 var CORSSupport = function(req, res, next) {
@@ -36,7 +46,7 @@ var chromeSpaceReplace = function(req, res, next) {
     var datapipe = parts.shift();
     if (datapipe.indexOf('%20') !== -1) {
       // replace %20s with nbsps
-      datapipe = datapipe.replace(/%20/g, ' ');
+      datapipe = datapipe.replace(/%20/g, ' ');
       parts.unshift(datapipe);
       res.redirect(parts.join('?'));
       return;
@@ -51,17 +61,13 @@ function errorHandler(err, req, res, next) {
   res.render('error', { error: err });
 }
 
-app.configure(function(){
-  app.set('port', process.env.PORT || 5000);
-  app.set('views', __dirname + '/templates');
-  app.use(express.logger('dev'));
-  app.use(chromeSpaceReplace);
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(CORSSupport);
-  app.use(errorHandler);
-  app.use(express.static(path.join(__dirname, 'public')));
-});
+
+app.set('port', process.env.PORT || 5000);
+app.set('views', __dirname + '/templates');
+app.use(chromeSpaceReplace);
+
+app.use(CORSSupport);
+app.use(errorHandler);
 
 var env = new nunjucks.Environment(new nunjucks.FileSystemLoader('views'));
 env.express(app);
