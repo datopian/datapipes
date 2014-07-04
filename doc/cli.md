@@ -28,7 +28,7 @@ Operations
 Examples
 ========
 
-  $0 data.csv head
-  $0 data.csv "delete 2" head 
-  $0 data.csv "/delete 2/head/" 
+    $0 data.csv head
+    $0 data.csv "delete 2" head 
+    $0 data.csv "/delete 2/head/" 
 
