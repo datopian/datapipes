@@ -17,9 +17,9 @@ dp.transform(inUrl, outFile, [
       regex: 'london',
       ignorecase: true
     }
-  }
+  },
   {
-    operator: 'delete'
+    operator: 'delete',
     options: {
       range: '3,5:10'
     }
