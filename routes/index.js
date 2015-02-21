@@ -8,7 +8,8 @@ exports.wizard = function(req, res) {
   if (!req.query.url) {
     res.render('interactive.html', {
       query: {
-        head: 10
+        head: 10,
+        delimiter: ','
       },
       output: 'html'
     });
@@ -20,12 +21,14 @@ exports.wizard = function(req, res) {
   delete tmp.url;
   var output = req.query.output || 'html';
   delete tmp.output;
-  console.log(output);
 
-  var pipes = ['csv'];
+  var pipes = ['csv -d ' + tmp.delimiter];
+  delete tmp.delimiter;
+
   pipes = pipes.concat(_.map(tmp, function(v, k) {
     return k + ' ' + v
   }));
+
   // csv is default output format
   if (output !== 'csv') {
     pipes.push(output);
@@ -34,11 +37,14 @@ exports.wizard = function(req, res) {
 
   var pipeline = req.protocol + '://' + req.get('host') + '/' + pipes + '/' + queryStr;
 
+  var query = _.extend({}, tmp);
+  query.delimiter = req.query.delimiter;
+
   var tmplData = {
     url: req.query.url,
     output: output,
     pipeline: pipeline,
-    query: tmp
+    query: query
   };
 
   res.render('interactive.html', tmplData);

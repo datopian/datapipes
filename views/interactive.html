@@ -25,6 +25,14 @@
         </div>
       </div>
       <div class="form-group">
+        <label for="delimiter" class="col-sm-2 control-label">Delimiter</label>
+        <div class="col-sm-10">
+          <input class="form-control" name="delimiter" value="{{query.delimiter}}"
+            placeholder="Delimiter for columns in your csv e.g. , or ;"
+            />
+        </div>
+      </div>
+      <div class="form-group">
         <label for="head" class="col-sm-2 control-label">Head</label>
         <div class="col-sm-10">
           <input type="number" class="form-control" name="head" value="{{query.head}}"
