@@ -12,7 +12,6 @@ var num_cols = 8;
 var num_blank_rows = 1;
 var num_london_rows = 15; // rows containing the word LONDON
 
-
 describe('GET /', function(){
   it('should respond with html', function(done){
     request

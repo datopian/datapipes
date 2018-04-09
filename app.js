@@ -1,16 +1,14 @@
-var fs = require('fs')
-  , express = require('express')
-  , path = require('path')
-  , nunjucks = require('nunjucks')
-  , request = require('request')
-  , marked = require('marked')
-  , _ = require('underscore')
-  ;
+var fs = require('fs'),
+  express = require('express'),
+  path = require('path'),
+  nunjucks = require('nunjucks'),
+  request = require('request'),
+  marked = require('marked'),
+  _ = require('underscore');
 
-var util = require('./lib/util')
-  , TransformOMatic = require('./lib/transform')
-  , routes = require('./routes/index')
-  ;
+var util = require('./lib/util'),
+  TransformOMatic = require('./lib/transform'),
+  routes = require('./routes/index');
 
 var app = express();
 
@@ -82,16 +80,13 @@ function datapipe(path, query, res) {
     res.setHeader("Content-Type", "text/plain; charset=utf-8");
   }
 
-  var url = query.url
-    , stream
-    ;
-  stream = request(url)
-    .on('error', function(err){
+  var url = query.url;
+  var stream = request(url)
+    .on('error', function(err) {
       var errStr = 'Error with upstream URL: ' + url;
       console.log(errStr);
       res.send(500, errStr);
-    })
-  ;
+    });
   TransformOMatic.transform(res, transformers, stream);
 }
 

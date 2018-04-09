@@ -27,7 +27,7 @@ describe('none', function(){
       done();
     };
 
-    var none = new ops['none']();
+    var none = new ops.none();
     none.write(headerData);
     none.write(data);
     none.end();

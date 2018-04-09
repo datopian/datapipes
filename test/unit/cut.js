@@ -23,7 +23,7 @@ describe('cut', function(){
         done();
       };
 
-      var cut = new ops['cut']([cutStr]);
+      var cut = new ops.cut([cutStr]);
       cut.write(data);
       cut.pipe(out);
     });
@@ -40,7 +40,7 @@ describe('cut', function(){
         done();
       };
 
-      var cut = new ops['cut']([cutStr]);
+      var cut = new ops.cut([cutStr]);
       cut.write(data);
       cut.pipe(out);
     });
@@ -56,7 +56,7 @@ describe('cut', function(){
         done();
       };
 
-      var cut = new ops['cut']([cutStr]);
+      var cut = new ops.cut([cutStr]);
       cut.write(data);
       cut.pipe(out);
     });
@@ -72,7 +72,7 @@ describe('cut', function(){
         done();
       };
 
-      var cut = new ops['cut']([cutStr]);
+      var cut = new ops.cut([cutStr]);
       cut.write(data);
       cut.pipe(out);
     });
@@ -89,7 +89,7 @@ describe('cut', function(){
         done();
       };
 
-      var cut = new ops['cut']([cutStr]);
+      var cut = new ops.cut([cutStr]);
       cut.write(data);
       cut.pipe(out);
     });
@@ -106,7 +106,7 @@ describe('cut', function(){
         done();
       };
 
-      var cut = new ops['cut']([cutStr]);
+      var cut = new ops.cut([cutStr]);
       cut.write(data);
       cut.pipe(out);
     });
@@ -122,7 +122,7 @@ describe('cut', function(){
         done();
       };
 
-      var cut = new ops['cut']([cutStr]);
+      var cut = new ops.cut([cutStr]);
       cut.write(data);
       cut.pipe(out);
     });

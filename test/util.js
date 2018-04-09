@@ -1,20 +1,19 @@
-var util = require('../lib/util')
-  , assert = require('assert')
-  ;
+var util = require('../lib/util'),
+  assert = require('assert');
 
 describe('Library', function() {
   it('parseUrl works', function() {
     ins = [
-      '/'
-      , '/csv/cut 1/'
-      , '/none'
+      '/',
+      '/csv/cut 1/',
+      '/none'
     ];
     exp = [
       [{
         operator: 'none',
         options: ''
-      }]
-      , [
+      }],
+      [
         {
           operator: 'incsv',
           options: ''
@@ -53,4 +52,3 @@ describe('Library', function() {
     assert.deepEqual(out, exp);
   });
 });
-

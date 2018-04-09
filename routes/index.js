@@ -1,8 +1,7 @@
-var fs = require('fs')
-  , path = require('path')
-  , marked = require('marked')
-  , _ = require('underscore')
-  ;
+var fs = require('fs'),
+  path = require('path'),
+  marked = require('marked'),
+  _ = require('underscore');
 
 exports.wizard = function(req, res) {
   if (!req.query.url) {
@@ -26,7 +25,7 @@ exports.wizard = function(req, res) {
   delete tmp.delimiter;
 
   pipes = pipes.concat(_.map(tmp, function(v, k) {
-    return k + ' ' + v
+    return k + ' ' + v;
   }));
 
   // csv is default output format
@@ -49,4 +48,3 @@ exports.wizard = function(req, res) {
 
   res.render('interactive.html', tmplData);
 };
-

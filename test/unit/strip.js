@@ -30,7 +30,7 @@ describe('strip', function(){
         done();
       };
 
-      var strip = new ops['strip']();
+      var strip = new ops.strip();
       strip.write(headerData);
       strip.write(data);
       strip.end();
@@ -54,7 +54,7 @@ describe('strip', function(){
         done();
       };
 
-      var strip = new ops['strip']();
+      var strip = new ops.strip();
       strip.write(headerData);
       strip.write(data);
       strip.end();

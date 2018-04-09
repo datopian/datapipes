@@ -1,28 +1,25 @@
 #!/usr/bin/env node
-var TransformOMatic = require('../lib/transform')
-  , stdout = require('../lib/stdout')
-  , stdin = process.stdin
-  , fs = require('fs')
-  , request = require('request')
-  , path = require('path')
-  , util = require('../lib/util')
-  ;
+var TransformOMatic = require('../lib/transform'),
+  stdout = require('../lib/stdout'),
+  stdin = process.stdin,
+  fs = require('fs'),
+  request = require('request'),
+  path = require('path'),
+  util = require('../lib/util');
 
-var docdir = path.join(path.dirname(__dirname), 'doc')
-  , filepath = path.join(docdir, 'cli.md')
-  , usage = fs.readFileSync(filepath, 'utf8')
-  , opInfo = ''
-  ;
+var docdir = path.join(path.dirname(__dirname), 'doc'),
+  filepath = path.join(docdir, 'cli.md'),
+  usage = fs.readFileSync(filepath, 'utf8'),
+  opInfo = '';
 
 var opList = fs.readdirSync(docdir).filter(function(fn) {
     return fn.indexOf('op-') === 0;
   }).map(function(fn) {
-    var opName = fn.replace('op-', '').replace('.md', '')
+    var opName = fn.replace('op-', '').replace('.md', '');
     return opName;
-  })
-;
+  });
 
-opInfo = opList.join('\n')
+opInfo = opList.join('\n');
 
 opInfo += '\n You can get more info on each command by doing:\n\n';
 opInfo += '    $0 OPERATION -h\n\n';
@@ -45,9 +42,9 @@ if (argv.h) {
     if (opList.indexOf(opName) === -1) {
       console.log(opName + ' operation is unknown');
     } else {
-      var fp = path.join(docdir, 'op-' + opName + '.md')
-          , info = fs.readFileSync(fp, 'utf8')
-          ;
+      var fp = path.join(docdir, 'op-' + opName + '.md'),
+          info = fs.readFileSync(fp, 'utf8');
+
       info = 'Operation: ' + opName + '\n' + info.split('\n').slice(1).join('\n');
       console.log(info);
     }
@@ -58,9 +55,9 @@ if (argv.h) {
   return;
 }
 
-var stream
-  , pathOrUrl = argv._[0]
-  ;
+var stream,
+  pathOrUrl = argv._[0];
+
 if (pathOrUrl.indexOf('http') === 0) {
   stream = request(pathOrUrl);
 } else if (pathOrUrl === '_') {
@@ -74,8 +71,7 @@ var transformStr = argv._.slice(1)
   .map(function(item) {
     return item.trim(' ');
   })
-  .join('/')
-;
+  .join('/');
 
 if (argv.share) {
   var transformUrl = 'http://datapipes.okfnlabs.org/';
@@ -96,4 +92,3 @@ if (argv.share) {
 var pipelineSpec = util.parseUrl(transformStr);
 var transformers = TransformOMatic.pipeline(pipelineSpec);
 TransformOMatic.transform(stdout(), transformers, stream);
-

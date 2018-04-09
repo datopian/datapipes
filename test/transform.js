@@ -1,11 +1,10 @@
-var assert = require('assert')
-  , stream = require('stream')
-  , es = require('event-stream')
-  , concat = require('concat-stream')
+var assert = require('assert'),
+  stream = require('stream'),
+  es = require('event-stream'),
+  concat = require('concat-stream'),
 
-  , transform = require('../lib/transform')
-  , dp = require('../lib/index')
-  ;
+  transform = require('../lib/transform'),
+  dp = require('../lib/index');
 
 function createSavingStream(cb) {
   var s = new stream();
@@ -38,12 +37,11 @@ describe('Library', function() {
     done();
     return;
 
-    var outs = createSavingStream(finished)
-      , data = [
-        [ 1,2 ],
-        [ 3,4 ]
-      ]
-      ;
+    var outs = createSavingStream(finished),
+      data = [
+        [1, 2],
+        [3, 4]
+      ];
     data = data.map(function(row, idx) {
       return {
         index: idx,
@@ -66,4 +64,3 @@ describe('Library', function() {
     }
   });
 });
-
