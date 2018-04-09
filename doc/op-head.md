@@ -16,7 +16,7 @@ Note we allow you to prefix `COUNT` with `-n` to ensure compatability with stand
 
 Return the first 10 rows.
 
-</csv/head/?url=https://raw.github.com/datasets/bond-yields-uk-10y/master/annual.csv>
+[/csv/head/?url=https://raw.github.com/datasets/bond-yields-uk-10y/master/annual.csv](/csv/head/?url=https://raw.github.com/datasets/bond-yields-uk-10y/master/annual.csv)
 
 Return the first 20 rows.
 
