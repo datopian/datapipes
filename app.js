@@ -10,8 +10,6 @@ var util = require('./lib/util'),
   TransformOMatic = require('./lib/transform'),
   routes = require('./routes/index');
 
-var app = express();
-
 //CORS middleware
 var CORSSupport = function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -49,16 +47,6 @@ function errorHandler(err, req, res, next) {
   res.render('error', { error: err });
 }
 
-app.set('port', process.env.PORT || 5000);
-app.set('views', __dirname + '/templates');
-app.use(chromeSpaceReplace);
-app.use(CORSSupport);
-app.use(errorHandler);
-app.use(express.static(path.join(__dirname, 'public')));
-
-var env = new nunjucks.Environment(new nunjucks.FileSystemLoader('views'));
-env.express(app);
-
 function getMarkdownContent(filepath, cb) {
   fs.readFile(filepath, 'utf8', function(err, text) {
     if (err) {
@@ -89,6 +77,17 @@ function datapipe(path, query, res) {
     });
   TransformOMatic.transform(res, transformers, stream);
 }
+
+var app = express();
+app.set('port', process.env.PORT || 5000);
+app.set('views', __dirname + '/templates');
+app.use(chromeSpaceReplace);
+app.use(CORSSupport);
+app.use(errorHandler);
+app.use(express.static(path.join(__dirname, 'public')));
+
+var env = new nunjucks.Environment(new nunjucks.FileSystemLoader('views'));
+env.express(app);
 
 app.get(/\/interactive(\/.*)?/, routes.wizard);
 app.get(/\/wizard(\/.*)?/, routes.wizard);
