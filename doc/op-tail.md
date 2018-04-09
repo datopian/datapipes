@@ -17,7 +17,7 @@ Truncate dataset to its last rows.
 
 Return the last 10 rows.
 
-</csv/tail/?url=https://raw.github.com/datasets/bond-yields-uk-10y/master/annual.csv>
+[/csv/tail/?url=https://raw.github.com/datasets/bond-yields-uk-10y/master/annual.csv](/csv/tail/?url=https://raw.github.com/datasets/bond-yields-uk-10y/master/annual.csv)
 
 Return all rows after the first 5.
 

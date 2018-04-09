@@ -51,17 +51,12 @@ function errorHandler(err, req, res, next) {
   res.render('error', { error: err });
 }
 
-app.configure(function(){
-  app.set('port', process.env.PORT || 5000);
-  app.set('views', __dirname + '/templates');
-  app.use(express.logger('dev'));
-  app.use(chromeSpaceReplace);
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(CORSSupport);
-  app.use(errorHandler);
-  app.use(express.static(path.join(__dirname, 'public')));
-});
+app.set('port', process.env.PORT || 5000);
+app.set('views', __dirname + '/templates');
+app.use(chromeSpaceReplace);
+app.use(CORSSupport);
+app.use(errorHandler);
+app.use(express.static(path.join(__dirname, 'public')));
 
 var env = new nunjucks.Environment(new nunjucks.FileSystemLoader('views'));
 env.express(app);
