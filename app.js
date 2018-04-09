@@ -121,8 +121,8 @@ app.get('/*', function(req, res) {
   }
 });
 
-app.listen(app.get('port'), function() {
+var server = app.listen(app.get('port'), function() {
   console.log("Listening on " + app.get('port'));
 });
 
-exports.app = app;
+module.exports = server;

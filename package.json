@@ -28,7 +28,7 @@
     "npm": "5.6.0"
   },
   "scripts": {
-    "test": "mocha test --exit"
+    "test": "mocha test"
   },
   "bin": {
     "datapipes": "./bin/datapipes"
