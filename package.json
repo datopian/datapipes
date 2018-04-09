@@ -4,15 +4,15 @@
   "author": "Open Knowledge Foundation <labs@okfn.org>",
   "license": "MIT",
   "dependencies": {
-    "express": "<4.16.3",
-    "request": "",
     "csv": "<2.0.0",
+    "event-stream": "",
+    "express": "<4.16.3",
     "marked": "",
     "nunjucks": "",
-    "underscore": "",
     "optimist": "",
+    "request": "",
     "sandbox": "",
-    "event-stream": ""
+    "underscore": ""
   },
   "repository": {
     "type": "git",
