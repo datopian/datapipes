@@ -59,7 +59,7 @@ $ npm install
 Once installed, you can run the tests locally with:
 
 ```bash
-$ make test
+$ npm test
 ```
 
 ### Running
