@@ -3,7 +3,7 @@ var assert = require('assert');
 var csv = require('csv');
 var _ = require('underscore');
 
-var data_url = 'https://raw.github.com/okfn/datapipes/master/test/data/gla.csv';
+var data_url = 'https://raw.githubusercontent.com/okfn/datapipes/master/test/data/gla.csv';
 
 // some facts about our data
 var num_rows = 100;

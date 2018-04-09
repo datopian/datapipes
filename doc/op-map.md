@@ -20,4 +20,4 @@ This [uppercase operator](https://gist.github.com/andylolz/7794290) serves as an
 
 ### Examples
 
-[/csv/map $map/html?map=https://gist.github.com/andylolz/7794290/raw/8e88a5daac9a6496a8397dad99e14f18ed5ab378/uppercase.js&url=https://raw.github.com/okfn/datapipes/master/test/data/gla.csv](/csv/map%20$map/html?map=https://gist.github.com/andylolz/7794290/raw/8e88a5daac9a6496a8397dad99e14f18ed5ab378/uppercase.js&url=https://raw.github.com/okfn/datapipes/master/test/data/gla.csv)
+[/csv/map $map/html?map=https://gist.github.com/andylolz/7794290/raw/8e88a5daac9a6496a8397dad99e14f18ed5ab378/uppercase.js&url=https://raw.githubusercontent.com/okfn/datapipes/master/test/data/gla.csv](/csv/map%20$map/html?map=https://gist.github.com/andylolz/7794290/raw/8e88a5daac9a6496a8397dad99e14f18ed5ab378/uppercase.js&url=https://raw.githubusercontent.com/okfn/datapipes/master/test/data/gla.csv)

@@ -28,10 +28,10 @@ Once installed, `datapipes` will be available on the command line:
 See the help for usage instructions, but to give a quick taster:
 
     # head (first 10 rows) of this file
-    datapipes https://raw.github.com/datasets/browser-stats/master/data.csv head
+    datapipes https://raw.githubusercontent.com/datasets/browser-stats/c2709fe7/data.csv head
 
     # search for occurrences of London (ignore case) and show first 10 results
-    datapipes https://raw.github.com/rgrp/dataset-gla/master/data/all.csv "grep -i london" head
+    datapipes https://raw.githubusercontent.com/rgrp/dataset-gla/75b56891/data/all.csv "grep -i london" head
 
 ## Usage - Library
 

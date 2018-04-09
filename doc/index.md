@@ -27,9 +27,9 @@ To illustrate here's an example which shows the power of DataPipes. It shows
 DataPipes being used to clean up and display a raw spending data CSV file from
 the Greater London Authority.
 
-[http://datapipes.okfnlabs.org/csv/head -n 50/cut 0/delete 1:7/grep -i London/html?url=https&#58;//raw.github.com/okfn/datapipes/master/test/data/gla.csv][ex]
+[http://datapipes.okfnlabs.org/csv/head -n 50/cut 0/delete 1:7/grep -i London/html?url=https&#58;//raw.githubusercontent.com/okfn/datapipes/master/test/data/gla.csv][ex]
 
-[ex]: /csv/head%20-n%2050/cut%200/delete%201:7/grep%20-i%20London/html?url=https://raw.github.com/okfn/datapipes/master/test/data/gla.csv
+[ex]: /csv/head%20-n%2050/cut%200/delete%201:7/grep%20-i%20London/html?url=https://raw.githubusercontent.com/okfn/datapipes/master/test/data/gla.csv
 
 This does the following:
 
@@ -42,7 +42,7 @@ This does the following:
 
 Here's what the output looks like:
 
-[<img src="http://webshot.okfnlabs.org/api/generate?url=http%3A%2F%2Fdatapipes.okfnlabs.org%2Fcsv%2Fhead%2520-n%252050%2Fcut%25200%2Fdelete%25201%3A7%2Fgrep%2520-i%2520London%2Fhtml%3Furl%3Dhttps%3A%2F%2Fraw.github.com%2Fokfn%2Fdatapipes%2Fmaster%2Ftest%2Fdata%2Fgla.csv&width=800&height=300" style="width: 100%;" />][ex]
+[<img src="http://webshot.okfnlabs.org/api/generate?url=http%3A%2F%2Fdatapipes.okfnlabs.org%2Fcsv%2Fhead%2520-n%252050%2Fcut%25200%2Fdelete%25201%3A7%2Fgrep%2520-i%2520London%2Fhtml%3Furl%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2Fokfn%2Fdatapipes%2Fmaster%2Ftest%2Fdata%2Fgla.csv&width=800&height=300" style="width: 100%;" />][ex]
 
 <h2 id="api">API</h2>
 
