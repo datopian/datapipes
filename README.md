@@ -11,7 +11,7 @@ DataPipes can be used:
 * As a Node JS library - see below
 
 [![Build
-Status](https://travis-ci.org/okfn/datapipes.png)](https://travis-ci.org/okfn/datapipes)
+Status](https://api.travis-ci.org/okfn/datapipes.svg)](https://travis-ci.org/okfn/datapipes)
 
 ## Install
 
