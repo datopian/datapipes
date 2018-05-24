@@ -10,6 +10,11 @@
 
   <link rel="stylesheet" href="/css/style.css" />
   <link rel="shortcut icon" href="/favicon.ico"/>
+  
+  <!-- Consent manager -->
+  <script>var okiConsent = {analyticsTrackingID: 'UA-33874954-19'}</script>
+  <script src="https://a.okfn.org/html/oki/consent/assets/js/consent.js"></script>
+  
 </head>
 <body>
 <div class="container">
@@ -30,6 +35,8 @@
         Knowledge Foundation Labs</a>
       &ndash;
       <a href="http://github.com/okfn/datapipes">Source Code</a>
+      &ndash;
+      <a href="https://okfn.org/privacy-policy/">Privacy policy</a>
     </p>
     <p>
       <a href="http://opendefinition.org/ossd/" title="Open Online Software Service">
@@ -41,15 +48,6 @@
 
 </div><!-- /container -->
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-33874954-19', 'okfnlabs.org');
-  ga('send', 'pageview');
-</script>
 {% block extra_js %}{% endblock %}
 </body>
 </html>
