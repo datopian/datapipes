@@ -1,6 +1,6 @@
 {
   "name": "datapipes",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "author": "Open Knowledge Foundation <labs@okfn.org>",
   "license": "MIT",
   "dependencies": {
