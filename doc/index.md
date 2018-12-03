@@ -27,7 +27,7 @@ To illustrate here's an example which shows the power of DataPipes. It shows
 DataPipes being used to clean up and display a raw spending data CSV file from
 the Greater London Authority.
 
-[http://datapipes.okfnlabs.org/csv/head -n 50/cut 0/delete 1:7/grep -i London/html?url=https&#58;//raw.githubusercontent.com/okfn/datapipes/master/test/data/gla.csv][ex]
+[https://datapipes.okfnlabs.org/csv/head -n 50/cut 0/delete 1:7/grep -i London/html?url=https&#58;//raw.githubusercontent.com/okfn/datapipes/master/test/data/gla.csv][ex]
 
 [ex]: /csv/head%20-n%2050/cut%200/delete%201:7/grep%20-i%20London/html?url=https://raw.githubusercontent.com/okfn/datapipes/master/test/data/gla.csv
 
@@ -78,7 +78,7 @@ Some characters can’t be used in a URL path because of [restrictions][ietf]. I
 
     /csv/grep $dt/html/?dt=\d{2}-\d{2}-\d{4}&url={source-url}
 
-[ietf]: http://tools.ietf.org/html/rfc3986
+[ietf]: https://tools.ietf.org/html/rfc3986
 
 ### CORS and JS web apps
 

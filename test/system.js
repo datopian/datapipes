@@ -50,7 +50,7 @@ describe('Setup', function(){
   });
 
   // describe('Chrome space replace', function(){
-  //   var url = '/csv%20-H/head?url=http://www.biglotteryfund.org.uk/-/media/Files/Research%20Documents/aOpenDataFiles/BIGGrantOpenData2004_05.csv';
+  //   var url = '/csv%20-H/head?url=https://www.biglotteryfund.org.uk/-/media/Files/Research%20Documents/aOpenDataFiles/BIGGrantOpenData2004_05.csv';
   //   it('should fix the %20 in the path, but not break the query string', function(done){
   //     request(app)
   //       .get(url)

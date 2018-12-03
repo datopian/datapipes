@@ -74,7 +74,7 @@ var transformStr = argv._.slice(1)
   .join('/');
 
 if (argv.share) {
-  var transformUrl = 'http://datapipes.okfnlabs.org/';
+  var transformUrl = 'https://datapipes.okfnlabs.org/';
   transformUrl += encodeURI(transformStr);
   transformUrl += '?url=';
   transformUrl += argv.url;

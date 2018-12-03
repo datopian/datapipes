@@ -6,7 +6,7 @@ like CSVs in a streaming, connectable "pipe-like" manner.
 
 DataPipes can be used:
 
-* Online at <http://datapipes.okfnlabs.org/>
+* Online at <https://datapipes.okfnlabs.org/>
 * Via a command line interface - see below
 * As a Node JS library - see below
 
