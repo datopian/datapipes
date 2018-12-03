@@ -42,7 +42,7 @@ This does the following:
 
 Here's what the output looks like:
 
-[<img src="http://webshot.okfnlabs.org/api/generate?url=http%3A%2F%2Fdatapipes.okfnlabs.org%2Fcsv%2Fhead%2520-n%252050%2Fcut%25200%2Fdelete%25201%3A7%2Fgrep%2520-i%2520London%2Fhtml%3Furl%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2Fokfn%2Fdatapipes%2Fmaster%2Ftest%2Fdata%2Fgla.csv&width=800&height=300" style="width: 100%;" />][ex]
+[<img src="https://webshot.okfnlabs.org/api/generate?url=http%3A%2F%2Fdatapipes.okfnlabs.org%2Fcsv%2Fhead%2520-n%252050%2Fcut%25200%2Fdelete%25201%3A7%2Fgrep%2520-i%2520London%2Fhtml%3Furl%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2Fokfn%2Fdatapipes%2Fmaster%2Ftest%2Fdata%2Fgla.csv&width=800&height=300" style="width: 100%;" />][ex]
 
 <h2 id="api">API</h2>
 
