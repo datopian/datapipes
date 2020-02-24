@@ -512,6 +512,7 @@ table .counter, table tr:target .counter {
   background-image: none;
   border: none;
   text-align: right;
+  width: 1ch;
 }
 
 table .counter a {
