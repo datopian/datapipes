@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>
+      Home - Data Pipes
+    </title>
+    <meta name="author" content="Open Knowledge Foundation Labs" />
+    <meta
+      name="description"
+      content="Data Pipes - Streaming Online Data Processing and Transformations"
+    />
+
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="shortcut icon" href="../favicon.ico" />
+
+    <!-- Consent manager -->
+    <script>
+      var okiConsent = { analyticsTrackingID: "UA-33874954-19" };
+    </script>
+    <script src="https://a.okfn.org/html/oki/consent/assets/js/consent.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>
+          <a href="../index.html">Data Pipes</a>
+        </h1>
+        <a href="https://okfnlabs.org/"
+          ><img
+            src="https://assets.okfn.org/p/labs/img/logo-flask.png"
+            style="height: 50px; margin-top: 10px;"
+        /></a>
+      </div>
+
+      <div class="content">
+        <h2 id="none-aka-raw">none (aka raw)</h2>
+        <p>No transform of the data. Still useful as:</p>
+        <ul>
+          <li>CORS support (you can access a random CSV file from JS)</li>
+          <li>
+            Simple plain text style view (quick and dirty view of the file)
+          </li>
+        </ul>
+        <h3 id="usage">Usage</h3>
+        <pre><code>none</code></pre>
+        <h3 id="examples">Examples</h3>
+        <p>
+          <a
+            href="index.html@url=https%253A%252F%252Fraw.githubusercontent.com%252Fdatasets%252Fbond-yields-uk-10y%252F9e921283%252Fdata%252Fannual.csv"
+            >/none/?url=https://raw.githubusercontent.com/datasets/bond-yields-uk-10y/9e921283/data/annual.csv</a
+          >
+        </p>
+      </div>
+
+      <div class="footer">
+        <p>
+          This service is run by the
+          <a href="http://okfnlabs.org">Open Knowledge Foundation Labs</a>
+          &ndash;
+          <a href="https://github.com/okfn/datapipes">Source Code</a>
+          &ndash;
+          <a href="https://okfn.org/privacy-policy/">Privacy policy</a>
+        </p>
+        <p>
+          <a
+            href="https://opendefinition.org/ossd/"
+            title="Open Online Software Service"
+          >
+            <img
+              src="https://assets.okfn.org/images/ok_buttons/os_80x15_orange_grey.png"
+              alt=""
+              border=""
+            />
+          </a>
+        </p>
+        <div class="feedback">
+          <a href="https://github.com/okfn/datapipes/issues" target="_blank"
+            >Feedback</a
+          >
+        </div>
+      </div>
+    </div>
+    <!-- /container -->
+  </body>
+</html>

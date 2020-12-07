@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>
+      Home - Data Pipes
+    </title>
+    <meta name="author" content="Open Knowledge Foundation Labs" />
+    <meta
+      name="description"
+      content="Data Pipes - Streaming Online Data Processing and Transformations"
+    />
+
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="shortcut icon" href="../favicon.ico" />
+
+    <!-- Consent manager -->
+    <script>
+      var okiConsent = { analyticsTrackingID: "UA-33874954-19" };
+    </script>
+    <script src="https://a.okfn.org/html/oki/consent/assets/js/consent.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>
+          <a href="../index.html">Data Pipes</a>
+        </h1>
+        <a href="https://okfnlabs.org/"
+          ><img
+            src="https://assets.okfn.org/p/labs/img/logo-flask.png"
+            style="height: 50px; margin-top: 10px;"
+        /></a>
+      </div>
+
+      <div class="content">
+        <h2 id="tail">tail</h2>
+        <p>Truncate dataset to its last rows.</p>
+        <h3 id="usage">Usage</h3>
+        <pre><code>tail [-n COUNT]
+
+-n COUNT
+    Number of rows to truncate to. If this option is
+    omitted, it defaults to 10.
+
+    A leading + sign means this number is relative to the
+    first row. Otherwise it is relative to the last row.</code></pre>
+        <h3 id="examples">Examples</h3>
+        <p>Return the last 10 rows.</p>
+        <p>
+          <a
+            href="../csv/tail/index.html@url=https%253A%252F%252Fraw.githubusercontent.com%252Fdatasets%252Fbond-yields-uk-10y%252F9e921283%252Fdata%252Fannual.csv"
+            >/csv/tail/?url=https://raw.githubusercontent.com/datasets/bond-yields-uk-10y/9e921283/data/annual.csv</a
+          >
+        </p>
+        <p>Return all rows after the first 5.</p>
+        <p>
+          [/csv/tail -n
+          +5/?url=https://raw.githubusercontent.com/datasets/bond-yields-uk-10y/9e921283/data/annual.csv](/csv/tail
+          -n
+          +5/?url=https://raw.githubusercontent.com/datasets/bond-yields-uk-10y/9e921283/data/annual.csv)
+        </p>
+      </div>
+
+      <div class="footer">
+        <p>
+          This service is run by the
+          <a href="http://okfnlabs.org">Open Knowledge Foundation Labs</a>
+          &ndash;
+          <a href="https://github.com/okfn/datapipes">Source Code</a>
+          &ndash;
+          <a href="https://okfn.org/privacy-policy/">Privacy policy</a>
+        </p>
+        <p>
+          <a
+            href="https://opendefinition.org/ossd/"
+            title="Open Online Software Service"
+          >
+            <img
+              src="https://assets.okfn.org/images/ok_buttons/os_80x15_orange_grey.png"
+              alt=""
+              border=""
+            />
+          </a>
+        </p>
+        <div class="feedback">
+          <a href="https://github.com/okfn/datapipes/issues" target="_blank"
+            >Feedback</a
+          >
+        </div>
+      </div>
+    </div>
+    <!-- /container -->
+  </body>
+</html>

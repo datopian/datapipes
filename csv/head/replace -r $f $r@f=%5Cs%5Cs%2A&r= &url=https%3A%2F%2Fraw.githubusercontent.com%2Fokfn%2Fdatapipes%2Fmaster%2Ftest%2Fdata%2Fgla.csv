@@ -1,0 +1,11 @@
+,Report of all payments made by GLA & GLA Land & Property for value equal to or greater than � 250.00 Excl. VAT,,,,,,
+,ReportingPeriod:,12,,,,,
+,StartDate:,"3rdFebruary,2013",,,,,
+,EndDate:,"2ndMarch,2013",,,,,
+,FinancialYear:,2012/13,,,,,
+,,,,,,,
+,VendorID,VendorName,CostElement,ExpenditureAccountCodeDescription,DocumentNo,Amount,ClearingDate
+,18000063,CIRCLEANGLIALIMITED,544076,HSGGrantstoRegisteredProviders,1900017038,"4,007,633.00",06Feb2013
+,18000050,ONEHOUSINGGROUPLIMITED,544076,HSGGrantstoRegisteredProviders,1900017214,"3,047,294.00",01Mar2013
+,18000010,NOTTINGHILLHOUSINGTRUST,544076,HSGGrantstoRegisteredProviders,1900017060,"2,850,000.00",07Feb2013
+,18000078,BERKELEYPARTNERSHIPHOMESLIMITED,544078,HSGGrantstoNon-RegisteredProviders,1900017134,"2,453,235.00",13Feb2013

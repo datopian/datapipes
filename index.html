@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title> 
+    Home - Data Pipes
+  </title>
+  <meta name="author" content="Open Knowledge Foundation Labs" />
+  <meta name="description" content="Data Pipes - Streaming Online Data Processing and Transformations" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="shortcut icon" href="favicon.ico"/>
+  
+  <!-- Consent manager -->
+  <script>var okiConsent = {analyticsTrackingID: 'UA-33874954-19'}</script>
+  <script src="https://a.okfn.org/html/oki/consent/assets/js/consent.js"></script>
+  
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>
+      <a href="index.html">Data Pipes</a>
+    </h1>
+    <a href="https://okfnlabs.org/"><img src="https://assets.okfn.org/p/labs/img/logo-flask.png" style="height: 50px; margin-top: 10px;" /></a>
+  </div>
+
+  <div class="content">
+    
+  <h1 id="shareable-simple-data-transformations">Shareable Simple Data Transformations</h1>
+<p>Data Pipes is an online service for doing <strong>simple data transformations</strong> on tabular
+data – deleting rows and columns, find and replace, filtering, viewing as HTML.</p>
+<p>Even better you can <strong>connect these transformations</strong> together Unix pipes style
+to make more complex transformations (for example, first delete a column, then
+do a find and replace).</p>
+<p>You can do all of this in your browser <strong>without having to install anything</strong>
+and to <strong>share your data and pipeline</strong> all you need to do is copy and paste a
+URL.</p>
+<h3 id="quick-start">Quick start</h3>
+<ul>
+<li><a href="html/index.html">View a CSV</a> &ndash; turn a CSV into a nice online HTML table in seconds</li>
+<li><a href="wizard/index.html">Pipeline Wizard</a> &ndash; create your own Data Pipeline interactively</li>
+<li><a href="index.html#doc">Find out more</a> &ndash; including full docs of the API</li>
+</ul>
+<p><a name="doc"></a></p>
+<h2 id="example">Example</h2>
+<p>To illustrate here&#39;s an example which shows the power of DataPipes. It shows
+DataPipes being used to clean up and display a raw spending data CSV file from
+the Greater London Authority.</p>
+<p><a href="csv/head&#32;-n&#32;50/cut&#32;0/delete&#32;1%253A7/grep&#32;-i&#32;London/html@url=https%253A%252F%252Fraw.githubusercontent.com%252Fokfn%252Fdatapipes%252Fmaster%252Ftest%252Fdata%252Fgla.csv.html">https://datapipes.okfnlabs.org/csv/head -n 50/cut 0/delete 1:7/grep -i London/html?url=https&#58;//raw.githubusercontent.com/okfn/datapipes/master/test/data/gla.csv</a></p>
+<p>This does the following:</p>
+<ul>
+<li>parses the incoming url as CSV</li>
+<li>slices out the first 50 rows (using <a href="head/index.html">head</a>)</li>
+<li>deletes the first column (using <a href="cut/index.html">cut</a>)</li>
+<li>deletes rows 1-5 (using <a href="delete/index.html">delete</a>)</li>
+<li>then selects those rows with London (case-insensitive) in them (using <a href="grep/index.html">grep</a>)</li>
+<li>finally transforms the output to an HTML table (using <a href="html/index.html">html</a>)</li>
+</ul>
+<p>Here&#39;s what the output looks like:</p>
+<p><a href="csv/head&#32;-n&#32;50/cut&#32;0/delete&#32;1%253A7/grep&#32;-i&#32;London/html@url=https%253A%252F%252Fraw.githubusercontent.com%252Fokfn%252Fdatapipes%252Fmaster%252Ftest%252Fdata%252Fgla.csv.html"><img src="img/example.png" style="width: 100%;" /></a></p>
+<h2 id="api">API</h2>
+
+<p>The basic API is of the form:</p>
+<pre><code>/csv/{transform} {args}/?url={source-url}</code></pre><p>For example, here is a head operation which shows first n rows or a file (default case with no arguments will show first 10 lines):</p>
+<pre><code>/csv/head/?url={source-url}</code></pre><p>With arguments (showing first 20 rows):</p>
+<pre><code>/csv/head -n 20/?url={source-url}</code></pre><h3 id="piping">Piping</h3>
+<p>You can also do <strong>piping</strong>, that is pass output of one transformation as input to another:</p>
+<pre><code>/csv/{trans1} {args}/{trans2} {args}/.../?url={source-url}</code></pre><h3 id="input-formats">Input Formats</h3>
+<p>At present we only support CSV but we are considering support for JSON, plain text and RSS.</p>
+<p><em>If you are interested in <a href="https://github.com/okfn/datapipes/issues/16">JSON support then vote here</a>)</em></p>
+<h3 id="query-string-substitution">Query string substitution</h3>
+<p>Some characters can’t be used in a URL path because of <a href="https://tools.ietf.org/html/rfc3986">restrictions</a>. If this is a limitation (for instance if you need to use backslashes in your <code>grep</code> regex) variables can be defined in the query string and substituted in. E.g.:</p>
+<pre><code>/csv/grep $dt/html/?dt=\d{2}-\d{2}-\d{4}&amp;url={source-url}</code></pre><h3 id="cors-and-js-web-apps">CORS and JS web apps</h3>
+<p>CORS is supported so you can use this from pure JS web apps.</p>
+<h2 id="transform-operations">Transform Operations</h2>
+<p>The basic operations are inspired by unix-style commands such <code>head</code>, <code>cut</code>, <code>grep</code>, <code>sed</code> but really anything a map function can do could be supported. (<a href="https://github.com/okfn/datapipes/issues">Suggest new operations here</a>).</p>
+<ul>
+<li><a href="none/index.html">none</a> (aka <code>raw</code>) = no transform but file parsed (useful with CORS)</li>
+<li><a href="csv/index.html">csv</a> = parse / render csv</li>
+<li><a href="head/index.html">head</a> = take only first X rows</li>
+<li><a href="tail/index.html">tail</a> = take only last X rows</li>
+<li><a href="delete/index.html">delete</a> = delete rows</li>
+<li><a href="strip/index.html">strip</a> = delete all blank rows</li>
+<li><a href="grep/index.html">grep</a> = filter rows based on pattern matching</li>
+<li><a href="cut/index.html">cut</a> = select / delete columns</li>
+<li><a href="replace/index.html">replace</a> = find and replace (not yet implemented)</li>
+<li><a href="html/index.html">html</a> = render as viewable HTML table</li>
+</ul>
+<h2 id="contributing">Contributing</h2>
+
+<p>Under the hood Data Pipes is a simple open-source node.js webapp living <a href="https://github.com/okfn/datapipes">here on github</a>.</p>
+<p>It&#39;s super easy to contribute and here are some of the <a href="https://github.com/okfn/datapipes/issues">current issues</a>.</p>
+
+
+  </div>
+
+  <div class="footer">
+    <p>
+      This service is run by the <a href="http://okfnlabs.org">Open
+        Knowledge Foundation Labs</a>
+      &ndash;
+      <a href="https://github.com/okfn/datapipes">Source Code</a>
+      &ndash;
+      <a href="https://okfn.org/privacy-policy/">Privacy policy</a>
+    </p>
+    <p>
+      <a href="https://opendefinition.org/ossd/" title="Open Online Software Service">
+        <img src="https://assets.okfn.org/images/ok_buttons/os_80x15_orange_grey.png" alt="" border="" />
+      </a>
+    </p>
+    <div class="feedback"><a href="https://github.com/okfn/datapipes/issues" target="_blank">Feedback</a></div>
+  </div>
+
+</div><!-- /container -->
+
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>
+      Home - Data Pipes
+    </title>
+    <meta name="author" content="Open Knowledge Foundation Labs" />
+    <meta
+      name="description"
+      content="Data Pipes - Streaming Online Data Processing and Transformations"
+    />
+
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="shortcut icon" href="../favicon.ico" />
+
+    <!-- Consent manager -->
+    <script>
+      var okiConsent = { analyticsTrackingID: "UA-33874954-19" };
+    </script>
+    <script src="https://a.okfn.org/html/oki/consent/assets/js/consent.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>
+          <a href="../index.html">Data Pipes</a>
+        </h1>
+        <a href="https://okfnlabs.org/"
+          ><img
+            src="https://assets.okfn.org/p/labs/img/logo-flask.png"
+            style="height: 50px; margin-top: 10px;"
+        /></a>
+      </div>
+
+      <div class="content">
+        <h2 id="cut">cut</h2>
+        <p>Remove specified columns from data.</p>
+        <h3 id="usage">Usage</h3>
+        <pre><code>cut [--complement] [RANGE]
+
+--complement
+    Keep the specified columns, and delete the rest.
+
+RANGE
+    Comma separated column indices (0 based). Ranges can
+    also be specified with a hyphen.</code></pre>
+        <h3 id="examples">Examples</h3>
+        <p>Delete the columns 0 and 3 of a CSV file:</p>
+        <!-- The link is broken when going to the live version at
+http://datapipes.okfnlabs.org/csv/csv%20-t/?url=http://static.london.gov.uk/gla/expenditure/docs/2012-13-P12-250.csv -->
+        <p>
+          <a
+            href="http://127.0.0.1:8080/csv/cut%200,3/?url=http://static.london.gov.uk/gla/expenditure/docs/2012-13-P12-250.csv"
+            >/csv/cut
+            0,3/?url=http://static.london.gov.uk/gla/expenditure/docs/2012-13-P12-250.csv</a
+          >
+        </p>
+        <p>Delete the columns 1,3 and 5 to 10 of a CSV file:</p>
+        <!-- The link is broken when going to the live version at
+http://datapipes.okfnlabs.org/csv/csv%20-t/?url=http://static.london.gov.uk/gla/expenditure/docs/2012-13-P12-250.csv -->
+        <p>
+          <a
+            href="http://127.0.0.1:8080/csv/cut%201,3,5:10/?url=http://static.london.gov.uk/gla/expenditure/docs/2012-13-P12-250.csv"
+            >/csv/cut
+            1,3,5:10/?url=http://static.london.gov.uk/gla/expenditure/docs/2012-13-P12-250.csv</a
+          >
+        </p>
+      </div>
+
+      <div class="footer">
+        <p>
+          This service is run by the
+          <a href="http://okfnlabs.org">Open Knowledge Foundation Labs</a>
+          &ndash;
+          <a href="https://github.com/okfn/datapipes">Source Code</a>
+          &ndash;
+          <a href="https://okfn.org/privacy-policy/">Privacy policy</a>
+        </p>
+        <p>
+          <a
+            href="https://opendefinition.org/ossd/"
+            title="Open Online Software Service"
+          >
+            <img
+              src="https://assets.okfn.org/images/ok_buttons/os_80x15_orange_grey.png"
+              alt=""
+              border=""
+            />
+          </a>
+        </p>
+        <div class="feedback">
+          <a href="https://github.com/okfn/datapipes/issues" target="_blank"
+            >Feedback</a
+          >
+        </div>
+      </div>
+    </div>
+    <!-- /container -->
+  </body>
+</html>
