@@ -1,3 +1,9 @@
+## :warning: Deprecation notice
+
+**The datapipes website is now archived and read-only.** The `gh-pages` branch hosts the content of the static version of the website, which is now available at [datapipes.datopian.com](https://datapipes.datopian.com/).
+
+## datapipes
+
 A node library, command line tool and webapp to provide "pipe-able" Unix-Style
 data transformations on row-based data like CSVs.
 
