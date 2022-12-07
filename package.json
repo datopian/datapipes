@@ -6,7 +6,7 @@
   "dependencies": {
     "csv": "^0.3.7",
     "event-stream": "3.3.4",
-    "express": "<4.16.3",
+    "express": "<4.17.4",
     "marked": "",
     "nunjucks": "",
     "optimist": "",
